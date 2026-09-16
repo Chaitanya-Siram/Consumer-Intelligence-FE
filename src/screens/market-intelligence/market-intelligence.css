@@ -1,0 +1,4 @@
+/* Market Intelligence lens — Inter and JetBrains Mono are already loaded
+   globally (src/index.css); Barlow Condensed is this lens's own display
+   face, following the same per-lens-extra-font convention as brand-intel.css. */
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&display=swap');

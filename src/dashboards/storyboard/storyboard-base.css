@@ -1,0 +1,69 @@
+/* ============================================================
+   STORYBOARD BASE — shared by every lens.
+   Only rules that are identical across all four pages belong here; anything
+   a page styles differently lives in that page's own scoped stylesheet.
+   `.sb-lens` is the common root class the shell always applies.
+   ============================================================ */
+/* ============================================================
+   PORT HELPERS — not in the source page.
+   `.sb-state` is deliberately unscoped: it renders while loading or on error,
+   before the `.sb-lens` root exists.
+   ============================================================ */
+/* Fallback tokens, for pages that declare no :root of their own — Network Map has
+   none, and without these the shared helpers resolve to nothing.
+
+   `:where()` is load-bearing: it contributes ZERO specificity. A lens's own token
+   block sits on the SAME element (`class="sb-lens sb-trend"`) with the same plain
+   class specificity, so without :where() the winner would be decided by stylesheet
+   load order — which silently repainted every lens in the base palette. */
+:where(.sb-lens){
+  --bg:#FAFBFD;--bg2:#F4F6FB;--card:#FFFFFF;--line:#EAEEF5;
+  --ink:#0E1320;--ink2:#374151;--ink3:#6B7280;--ink4:#9CA3AF;
+  --pos:#10B981;--neu:#F59E0B;--neg:#EF4444;
+  --brand-1:#702082;--brand-2:#9333ea;--brand-3:#c026d3;
+  --r:18px;--r-sm:12px;
+}
+:where([data-theme="dark"] .sb-lens){
+  --bg:#0B0F1A;--bg2:#111726;--card:#151C2C;--line:#232B3D;
+  --ink:#E9EDF5;--ink2:#B7C0D1;--ink3:#8A94A8;--ink4:#6B7488;
+  --brand-1:#A855F7;--brand-2:#C084FC;--brand-3:#E879F9;
+}
+.sb-state{padding:56px 24px;text-align:center;font:500 14px 'Inter',sans-serif;color:#6B7280;}
+.sb-state--error{color:#EF4444;}
+[data-theme="dark"] /* Fallback tokens, for pages that declare no :root of their own — Network Map has
+   none, and without these the shared helpers resolve to nothing.
+
+   `:where()` is load-bearing: it contributes ZERO specificity. A lens's own token
+   block sits on the SAME element (`class="sb-lens sb-trend"`) with the same plain
+   class specificity, so without :where() the winner would be decided by stylesheet
+   load order — which silently repainted every lens in the base palette. */
+:where(.sb-lens){
+  --bg:#FAFBFD;--bg2:#F4F6FB;--card:#FFFFFF;--line:#EAEEF5;
+  --ink:#0E1320;--ink2:#374151;--ink3:#6B7280;--ink4:#9CA3AF;
+  --pos:#10B981;--neu:#F59E0B;--neg:#EF4444;
+  --brand-1:#702082;--brand-2:#9333ea;--brand-3:#c026d3;
+  --r:18px;--r-sm:12px;
+}
+:where([data-theme="dark"] .sb-lens){
+  --bg:#0B0F1A;--bg2:#111726;--card:#151C2C;--line:#232B3D;
+  --ink:#E9EDF5;--ink2:#B7C0D1;--ink3:#8A94A8;--ink4:#6B7488;
+  --brand-1:#A855F7;--brand-2:#C084FC;--brand-3:#E879F9;
+}
+.sb-state{color:#8A94A8;}
+
+/* Every storyboard renders inside the app shell's content area, on a tinted
+   body — so it reads as one rounded card. `overflow:hidden` can't go on the
+   `.sb-lens` root (each lens has a `position:sticky` nav bar that would stop
+   sticking), so the panel carries the radius and the edge children round to
+   match: the top nav on top, the footer on the bottom. */
+.sb-lens{border-radius:18px;}
+.sb-lens .nav-wrap,
+.sb-lens .topbar,
+.sb-lens .topnav{border-radius:18px 18px 0 0;}
+.sb-lens .foot,
+.sb-lens .page-footer{border-radius:0 0 18px 18px;overflow:hidden;}
+
+.sb-lens .sb-back{background:transparent;border:1px solid var(--line);color:var(--ink2);font:600 12px 'Inter',sans-serif;padding:7px 12px;border-radius:9px;cursor:pointer;margin-right:14px;transition:all .2s;}
+.sb-lens .sb-back:hover{background:rgba(112,32,130,.06);color:var(--ink);}
+.sb-lens .sb-muted{color:var(--ink4);font-style:italic;}
+.sb-lens .sb-chart-empty{padding:40px;text-align:center;color:var(--ink4);font-size:12px;}

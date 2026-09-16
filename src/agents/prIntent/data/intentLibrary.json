@@ -1,0 +1,3434 @@
+{
+  "mediaMeasurement": {
+    "label": "Media Measurement",
+    "intents": [
+      {
+        "id": "MM-001",
+        "domain": "mediaMeasurement",
+        "name": "Overall Media Coverage",
+        "kpi": "Media Measurement",
+        "subKpi": "Coverage Volume",
+        "personas": [
+          "All"
+        ],
+        "triggerPatterns": [
+          "how many mentions",
+          "how many mentions did we get?",
+          "how much coverage",
+          "how much coverage did we receive?",
+          "how much media coverage did we generate?",
+          "total coverage"
+        ],
+        "requiredFilters": [
+          "Brand",
+          "brand",
+          "date",
+          "date range"
+        ],
+        "dataSources": [
+          "News",
+          "print",
+          "blogs",
+          "social"
+        ],
+        "apiQuery": "GET /coverage/summary",
+        "calculation": "Count relevant unique mentions",
+        "answerTemplate": "\"Your brand received X mentions, up/down Y% vs previous period.\"",
+        "chartHint": "KPI + line",
+        "evidence": "Article IDs + top sources",
+        "followUp": [
+          "What drove the change?"
+        ],
+        "action": [
+          "Investigate drivers"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "MM-002",
+        "domain": "mediaMeasurement",
+        "name": "Coverage Trend",
+        "kpi": "Media Measurement",
+        "subKpi": "Volume Trend",
+        "personas": [
+          "PR Executive",
+          "Manager"
+        ],
+        "triggerPatterns": [
+          "coverage increasing",
+          "coverage trend",
+          "how has coverage changed?",
+          "is coverage increasing?",
+          "media trend",
+          "show our media trend"
+        ],
+        "requiredFilters": [
+          "Brand",
+          "brand",
+          "date",
+          "date range",
+          "granularity",
+          "interval"
+        ],
+        "dataSources": [
+          "All media"
+        ],
+        "apiQuery": "GET /coverage/trend",
+        "calculation": "Period-wise count",
+        "answerTemplate": "\"Coverage increased from X to Y...\"",
+        "chartHint": "Line",
+        "evidence": "Period data",
+        "followUp": [
+          "Why did coverage change?"
+        ],
+        "action": [
+          "Analyze spikes"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "MM-003",
+        "domain": "mediaMeasurement",
+        "name": "Coverage Growth",
+        "kpi": "Media Measurement",
+        "subKpi": "% Change",
+        "personas": [
+          "Manager",
+          "CCO"
+        ],
+        "triggerPatterns": [
+          "coverage growth",
+          "did coverage increase",
+          "did our coverage increase?",
+          "how much did coverage grow?"
+        ],
+        "requiredFilters": [
+          "Current + comparison period",
+          "brand",
+          "periods"
+        ],
+        "dataSources": [
+          "All media"
+        ],
+        "apiQuery": "GET /coverage/compare",
+        "calculation": "(current-prior)/prior",
+        "answerTemplate": "\"Coverage grew X%...\"",
+        "chartHint": "KPI",
+        "evidence": "Comparison periods",
+        "followUp": [
+          "What caused growth?",
+          "What caused the growth?"
+        ],
+        "action": [
+          "Replicate drivers"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "MM-004",
+        "domain": "mediaMeasurement",
+        "name": "Media Reach",
+        "kpi": "Media Measurement",
+        "subKpi": "Potential Reach",
+        "personas": [
+          "All"
+        ],
+        "triggerPatterns": [
+          "audience reach",
+          "how many people could have seen our coverage?",
+          "media reach",
+          "potential audience",
+          "what was our media reach?"
+        ],
+        "requiredFilters": [
+          "Brand",
+          "brand",
+          "date"
+        ],
+        "dataSources": [
+          "Media source metadata"
+        ],
+        "apiQuery": "GET /reach/summary",
+        "calculation": "Sum/weighted reach",
+        "answerTemplate": "\"Potential media reach was X...\"",
+        "chartHint": "KPI + trend",
+        "evidence": "Source reach metadata",
+        "followUp": [
+          "Which outlets drove reach?"
+        ],
+        "action": [
+          "Prioritize reach"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "MM-005",
+        "domain": "mediaMeasurement",
+        "name": "Reach Efficiency",
+        "kpi": "Media Measurement",
+        "subKpi": "Average Reach",
+        "personas": [
+          "Manager"
+        ],
+        "triggerPatterns": [
+          "average reach",
+          "reach per article",
+          "what is our average reach per article?"
+        ],
+        "requiredFilters": [
+          "Brand",
+          "brand",
+          "date",
+          "period"
+        ],
+        "dataSources": [
+          "News",
+          "media"
+        ],
+        "apiQuery": "GET /reach/efficiency",
+        "calculation": "Reach / relevant mentions",
+        "answerTemplate": "\"Average reach per article was X.\"",
+        "chartHint": "Bar/KPI",
+        "evidence": "Article/source data",
+        "followUp": [
+          "Which articles had highest reach?",
+          "Which stories drove it?"
+        ],
+        "action": [
+          "Optimize media mix"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "MM-006",
+        "domain": "mediaMeasurement",
+        "name": "Media Quality",
+        "kpi": "Media Measurement",
+        "subKpi": "Source Quality",
+        "personas": [
+          "PR Executive"
+        ],
+        "triggerPatterns": [
+          "are we getting quality coverage?",
+          "quality coverage",
+          "quality of media",
+          "which publications covered us?"
+        ],
+        "requiredFilters": [
+          "Brand",
+          "brand",
+          "date",
+          "geography",
+          "period"
+        ],
+        "dataSources": [
+          "Media metadata"
+        ],
+        "apiQuery": "GET /media/quality",
+        "calculation": "Tier/authority distribution",
+        "answerTemplate": "\"X% of coverage came from high-authority media.\"",
+        "chartHint": "Bar",
+        "evidence": "Source metadata",
+        "followUp": [
+          "Which outlets matter most?",
+          "Which outlets should we target?"
+        ],
+        "action": [
+          "Strengthen relationships"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "MM-007",
+        "domain": "mediaMeasurement",
+        "name": "Tier-1 Coverage",
+        "kpi": "Media Measurement",
+        "subKpi": "Premium Media",
+        "personas": [
+          "PR Manager",
+          "Agency"
+        ],
+        "triggerPatterns": [
+          "how much tier-1 coverage did we receive?",
+          "premium media",
+          "tier 1",
+          "top publications"
+        ],
+        "requiredFilters": [
+          "Brand",
+          "brand",
+          "date",
+          "period",
+          "tier"
+        ],
+        "dataSources": [
+          "Media classification"
+        ],
+        "apiQuery": "GET /media/tier",
+        "calculation": "Tier-1 / total",
+        "answerTemplate": "\"Tier-1 media represented X%...\"",
+        "chartHint": "KPI + bar",
+        "evidence": "Article/source IDs",
+        "followUp": [
+          "Which tier-1 outlets covered us?",
+          "Which tier-1 outlets?"
+        ],
+        "action": [
+          "Target priority media"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "MM-008",
+        "domain": "mediaMeasurement",
+        "name": "Top Publications",
+        "kpi": "Media Measurement",
+        "subKpi": "Top Sources",
+        "personas": [
+          "All"
+        ],
+        "triggerPatterns": [
+          "outlets",
+          "publications",
+          "top media",
+          "which publications talked about us most?",
+          "who covered us the most?"
+        ],
+        "requiredFilters": [
+          "Brand",
+          "N",
+          "brand",
+          "date",
+          "period"
+        ],
+        "dataSources": [
+          "Media source"
+        ],
+        "apiQuery": "GET /sources/top",
+        "calculation": "Count/rank",
+        "answerTemplate": "\"Top outlets were...\"",
+        "chartHint": "Horizontal bar",
+        "evidence": "Source IDs",
+        "followUp": [
+          "Which had highest reach?",
+          "Which outlets have highest reach?"
+        ],
+        "action": [
+          "Outreach"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "MM-009",
+        "domain": "mediaMeasurement",
+        "name": "Top Journalists",
+        "kpi": "Media Measurement",
+        "subKpi": "Journalist Coverage",
+        "personas": [
+          "PR Executive"
+        ],
+        "triggerPatterns": [
+          "top journalists",
+          "which journalists covered us?",
+          "who covers us",
+          "who writes about us most?"
+        ],
+        "requiredFilters": [
+          "Brand",
+          "N",
+          "brand",
+          "date",
+          "period"
+        ],
+        "dataSources": [
+          "Article author data"
+        ],
+        "apiQuery": "GET /authors/top",
+        "calculation": "Author mention/rank",
+        "answerTemplate": "\"The leading journalists were...\"",
+        "chartHint": "Bar",
+        "evidence": "Article IDs",
+        "followUp": [
+          "Who has the highest influence?",
+          "Who is most influential?"
+        ],
+        "action": [
+          "Media engagement"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "MM-010",
+        "domain": "mediaMeasurement",
+        "name": "Media Type Mix",
+        "kpi": "Media Measurement",
+        "subKpi": "Media Type",
+        "personas": [
+          "All"
+        ],
+        "triggerPatterns": [
+          "media channels",
+          "online vs social",
+          "online vs social vs print?",
+          "where are we getting coverage?"
+        ],
+        "requiredFilters": [
+          "Brand",
+          "brand",
+          "date",
+          "period"
+        ],
+        "dataSources": [
+          "All media"
+        ],
+        "apiQuery": "GET /media/type-breakdown",
+        "calculation": "Distribution by media type",
+        "answerTemplate": "\"Online represented X%, social Y%...\"",
+        "chartHint": "Donut",
+        "evidence": "Article/source IDs",
+        "followUp": [
+          "Which channel performs best?"
+        ],
+        "action": [
+          "Optimize channel"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "MM-011",
+        "domain": "mediaMeasurement",
+        "name": "Geographic Coverage",
+        "kpi": "Media Measurement",
+        "subKpi": "Market Coverage",
+        "personas": [
+          "Global PR"
+        ],
+        "triggerPatterns": [
+          "countries",
+          "markets",
+          "regions",
+          "where are we getting coverage?",
+          "which countries are talking about us?"
+        ],
+        "requiredFilters": [
+          "Brand",
+          "brand",
+          "date",
+          "geography",
+          "period"
+        ],
+        "dataSources": [
+          "Media geo metadata"
+        ],
+        "apiQuery": "GET /coverage/geography",
+        "calculation": "Coverage by geography",
+        "answerTemplate": "\"The US generated X% of coverage...\"",
+        "chartHint": "Map/bar",
+        "evidence": "Geographic source metadata",
+        "followUp": [
+          "Which markets are underperforming?",
+          "Which markets are weak?"
+        ],
+        "action": [
+          "Localize PR"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "MM-012",
+        "domain": "mediaMeasurement",
+        "name": "Coverage Spike",
+        "kpi": "Media Measurement",
+        "subKpi": "Event Detection",
+        "personas": [
+          "PR Manager"
+        ],
+        "triggerPatterns": [
+          "sudden increase",
+          "what caused this sudden increase?",
+          "why did coverage spike",
+          "why did coverage spike?"
+        ],
+        "requiredFilters": [
+          "Brand",
+          "brand",
+          "date window"
+        ],
+        "dataSources": [
+          "Articles + events"
+        ],
+        "apiQuery": "GET /coverage/anomalies",
+        "calculation": "Anomaly detection + story clustering",
+        "answerTemplate": "\"The spike was primarily caused by...\"",
+        "chartHint": "Line + stories",
+        "evidence": "Supporting articles",
+        "followUp": [
+          "Was the spike positive or negative?",
+          "Was the spike positive?"
+        ],
+        "action": [
+          "Amplify/mitigate"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "MM-013",
+        "domain": "mediaMeasurement",
+        "name": "Coverage Decline",
+        "kpi": "Media Measurement",
+        "subKpi": "Volume Drop",
+        "personas": [
+          "PR Manager"
+        ],
+        "triggerPatterns": [
+          "decline",
+          "why are we getting less coverage?",
+          "why did coverage decline?",
+          "why did coverage drop"
+        ],
+        "requiredFilters": [
+          "Brand",
+          "brand",
+          "comparison period",
+          "periods"
+        ],
+        "dataSources": [
+          "All media"
+        ],
+        "apiQuery": "GET /coverage/anomalies",
+        "calculation": "Volume delta + driver analysis",
+        "answerTemplate": "\"Coverage declined X%, primarily because...\"",
+        "chartHint": "Line",
+        "evidence": "Comparison articles",
+        "followUp": [
+          "Which outlets declined?"
+        ],
+        "action": [
+          "Reassess strategy"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "MM-014",
+        "domain": "mediaMeasurement",
+        "name": "Earned Media",
+        "kpi": "Media Measurement",
+        "subKpi": "Earned Coverage",
+        "personas": [
+          "PR Manager"
+        ],
+        "triggerPatterns": [
+          "earned coverage",
+          "earned media",
+          "how much earned media did we generate?"
+        ],
+        "requiredFilters": [
+          "Brand",
+          "brand",
+          "date",
+          "period"
+        ],
+        "dataSources": [
+          "News",
+          "social"
+        ],
+        "apiQuery": "GET /coverage/earned",
+        "calculation": "Earned mentions / total",
+        "answerTemplate": "\"Earned media contributed X%...\"",
+        "chartHint": "KPI + trend",
+        "evidence": "Earned article IDs",
+        "followUp": [
+          "What generated earned coverage?"
+        ],
+        "action": [
+          "Replicate"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "MM-015",
+        "domain": "mediaMeasurement",
+        "name": "Share of Voice",
+        "kpi": "Media Measurement",
+        "subKpi": "SOV",
+        "personas": [
+          "Agency",
+          "Manager"
+        ],
+        "triggerPatterns": [
+          "how visible are we vs competitors?",
+          "share of voice",
+          "sov",
+          "visibility vs competitors",
+          "what is our share of voice?"
+        ],
+        "requiredFilters": [
+          "Brand + competitors",
+          "brand",
+          "competitors",
+          "date",
+          "period"
+        ],
+        "dataSources": [
+          "News",
+          "social"
+        ],
+        "apiQuery": "GET /competitive/sov",
+        "calculation": "Brand mentions / category mentions",
+        "answerTemplate": "\"Your SOV is X%, ranking #Y...\"",
+        "chartHint": "Bar",
+        "evidence": "Brand/competitor article IDs",
+        "followUp": [
+          "Who gained SOV?",
+          "Who gained share?"
+        ],
+        "action": [
+          "Competitive response"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "MM-016",
+        "domain": "mediaMeasurement",
+        "name": "Coverage by Theme",
+        "kpi": "Media Measurement",
+        "subKpi": "Theme Volume",
+        "personas": [
+          "All"
+        ],
+        "triggerPatterns": [
+          "what are the biggest topics?",
+          "what are we being talked about for?"
+        ],
+        "requiredFilters": [
+          "Brand",
+          "period"
+        ],
+        "dataSources": [
+          "NLP themes"
+        ],
+        "apiQuery": null,
+        "calculation": "Mentions grouped by theme",
+        "answerTemplate": "Top themes",
+        "chartHint": "Bar chart/word cloud",
+        "evidence": null,
+        "followUp": [
+          "Which themes are growing?"
+        ],
+        "action": [
+          "Focus messaging"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "MM-017",
+        "domain": "mediaMeasurement",
+        "name": "Coverage by Campaign",
+        "kpi": "Media Measurement",
+        "subKpi": "Campaign Coverage",
+        "personas": [
+          "Agency",
+          "Manager"
+        ],
+        "triggerPatterns": [
+          "how much coverage did the campaign generate?"
+        ],
+        "requiredFilters": [
+          "Campaign",
+          "period"
+        ],
+        "dataSources": [
+          "Articles + campaign tags"
+        ],
+        "apiQuery": null,
+        "calculation": "Campaign-linked mentions",
+        "answerTemplate": "Campaign volume",
+        "chartHint": "KPI + trend",
+        "evidence": null,
+        "followUp": [
+          "What messages appeared?"
+        ],
+        "action": [
+          "Evaluate campaign"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "MM-018",
+        "domain": "mediaMeasurement",
+        "name": "Coverage by Executive",
+        "kpi": "Media Measurement",
+        "subKpi": "Executive Visibility",
+        "personas": [
+          "Corporate Comms"
+        ],
+        "triggerPatterns": [
+          "how visible is our ceo?",
+          "which spokesperson gets coverage?"
+        ],
+        "requiredFilters": [
+          "Person",
+          "period"
+        ],
+        "dataSources": [
+          "Articles",
+          "entities"
+        ],
+        "apiQuery": null,
+        "calculation": "Mentions/quotes by person",
+        "answerTemplate": "Executive visibility",
+        "chartHint": "Bar/trend",
+        "evidence": null,
+        "followUp": [
+          "What sentiment surrounds them?"
+        ],
+        "action": [
+          "Build spokesperson strategy"
+        ],
+        "kpiCombination": []
+      }
+    ]
+  },
+  "prImpact": {
+    "label": "PR Impact",
+    "intents": [
+      {
+        "id": "PI-001",
+        "domain": "prImpact",
+        "name": "Overall PR Impact",
+        "kpi": "PR Impact",
+        "subKpi": "PR Impact Score",
+        "personas": [
+          "Manager",
+          "CCO"
+        ],
+        "triggerPatterns": [
+          "how effective",
+          "how effective was our pr?",
+          "impact score",
+          "pr impact",
+          "what is our pr impact?"
+        ],
+        "requiredFilters": [
+          "Brand",
+          "brand",
+          "date",
+          "period"
+        ],
+        "dataSources": [
+          "Media + AI enrichment"
+        ],
+        "apiQuery": "GET /impact/summary",
+        "calculation": "Composite PR Impact Score",
+        "answerTemplate": "\"PR Impact Score is X, up/down Y%...\"",
+        "chartHint": "KPI + trend",
+        "evidence": "Top contributing stories",
+        "followUp": [
+          "What drives it?",
+          "What is driving the score?"
+        ],
+        "action": [
+          "Focus drivers"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "PI-002",
+        "domain": "prImpact",
+        "name": "Impact Trend",
+        "kpi": "PR Impact",
+        "subKpi": "Score Trend",
+        "personas": [
+          "All"
+        ],
+        "triggerPatterns": [
+          "impact trend",
+          "improving impact",
+          "is our pr impact improving?"
+        ],
+        "requiredFilters": [
+          "Brand",
+          "brand",
+          "date",
+          "period"
+        ],
+        "dataSources": [
+          "Impact data"
+        ],
+        "apiQuery": "GET /impact/trend",
+        "calculation": "Period score",
+        "answerTemplate": "\"Impact increased from X to Y.\"",
+        "chartHint": "Line",
+        "evidence": "Period scores",
+        "followUp": [
+          "Why did impact change?",
+          "Why?"
+        ],
+        "action": [
+          "Investigate"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "PI-003",
+        "domain": "prImpact",
+        "name": "Impact Drivers",
+        "kpi": "PR Impact",
+        "subKpi": "Driver Analysis",
+        "personas": [
+          "Manager"
+        ],
+        "triggerPatterns": [
+          "impact drivers",
+          "what drives impact",
+          "what is driving our pr impact?"
+        ],
+        "requiredFilters": [
+          "Brand",
+          "brand",
+          "date",
+          "period"
+        ],
+        "dataSources": [
+          "Reach",
+          "prominence",
+          "spokesperson",
+          "sentiment"
+        ],
+        "apiQuery": "GET /impact/drivers",
+        "calculation": "Component contribution",
+        "answerTemplate": "\"The largest drivers were...\"",
+        "chartHint": "Contribution bar",
+        "evidence": "Story IDs",
+        "followUp": [
+          "Which stories drive it?",
+          "Which story mattered most?"
+        ],
+        "action": [
+          "Optimize drivers"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "PI-004",
+        "domain": "prImpact",
+        "name": "Brand Prominence",
+        "kpi": "PR Impact",
+        "subKpi": "Prominence",
+        "personas": [
+          "PR Manager"
+        ],
+        "triggerPatterns": [
+          "are we just being mentioned?",
+          "brand prominence",
+          "is our brand prominent in coverage?",
+          "main focus",
+          "prominent coverage"
+        ],
+        "requiredFilters": [
+          "Brand",
+          "brand",
+          "date",
+          "period"
+        ],
+        "dataSources": [
+          "Articles"
+        ],
+        "apiQuery": "GET /impact/prominence",
+        "calculation": "Prominent mentions / relevant mentions",
+        "answerTemplate": "\"Brand prominence was X%...\"",
+        "chartHint": "KPI + trend",
+        "evidence": "Article IDs",
+        "followUp": [
+          "Which outlets provide prominence?",
+          "Which outlets?"
+        ],
+        "action": [
+          "Improve positioning"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "PI-005",
+        "domain": "prImpact",
+        "name": "Spokesperson Impact",
+        "kpi": "PR Impact",
+        "subKpi": "Executive Impact",
+        "personas": [
+          "Corporate Comms"
+        ],
+        "triggerPatterns": [
+          "ceo impact",
+          "spokesperson impact",
+          "which spokesperson has the biggest impact?"
+        ],
+        "requiredFilters": [
+          "Person",
+          "date",
+          "period",
+          "person"
+        ],
+        "dataSources": [
+          "Articles + quotes"
+        ],
+        "apiQuery": "GET /impact/spokespersons",
+        "calculation": "Reach + prominence + sentiment",
+        "answerTemplate": "\"X generated the strongest spokesperson impact.\"",
+        "chartHint": "Bar",
+        "evidence": "Quotes/article IDs",
+        "followUp": [
+          "Which topics suit them?",
+          "Who should speak next?"
+        ],
+        "action": [
+          "Spokesperson strategy"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "PI-006",
+        "domain": "prImpact",
+        "name": "Story Impact Ranking",
+        "kpi": "PR Impact",
+        "subKpi": "Story Score",
+        "personas": [
+          "All"
+        ],
+        "triggerPatterns": [
+          "highest impact stories",
+          "which stories had the biggest pr impact?"
+        ],
+        "requiredFilters": [
+          "Brand",
+          "N",
+          "brand",
+          "date",
+          "period"
+        ],
+        "dataSources": [
+          "Article data"
+        ],
+        "apiQuery": "GET /impact/stories",
+        "calculation": "Story impact score",
+        "answerTemplate": "\"The highest-impact stories were...\"",
+        "chartHint": "Ranked bar/cards",
+        "evidence": "Story IDs",
+        "followUp": [
+          "Why were these impactful?",
+          "Why were they impactful?"
+        ],
+        "action": [
+          "Replicate"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "PI-007",
+        "domain": "prImpact",
+        "name": "Campaign Impact",
+        "kpi": "PR Impact",
+        "subKpi": "Campaign Score",
+        "personas": [
+          "Agency"
+        ],
+        "triggerPatterns": [
+          "campaign pr impact",
+          "which campaign generated the most impact?"
+        ],
+        "requiredFilters": [
+          "Campaigns",
+          "campaign",
+          "date",
+          "period"
+        ],
+        "dataSources": [
+          "Campaign + media data"
+        ],
+        "apiQuery": "GET /campaign/impact",
+        "calculation": "Aggregate impact",
+        "answerTemplate": "\"Campaign generated an impact score of X.\"",
+        "chartHint": "KPI + bar",
+        "evidence": "Campaign story IDs",
+        "followUp": [
+          "What drove it?",
+          "Which message drove impact?"
+        ],
+        "action": [
+          "Scale"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "PI-008",
+        "domain": "prImpact",
+        "name": "Reach-Impact Gap",
+        "kpi": "PR Impact",
+        "subKpi": "Efficiency Gap",
+        "personas": [
+          "Manager"
+        ],
+        "triggerPatterns": [
+          "high reach low impact",
+          "we got huge reach but low impact. why?"
+        ],
+        "requiredFilters": [
+          "Brand",
+          "brand",
+          "date",
+          "period"
+        ],
+        "dataSources": [
+          "Reach + impact"
+        ],
+        "apiQuery": "GET /impact/efficiency",
+        "calculation": "Reach vs impact normalization",
+        "answerTemplate": "\"High reach did not translate into impact because...\"",
+        "chartHint": "Scatter",
+        "evidence": "Article IDs",
+        "followUp": [
+          "Which stories caused gap?",
+          "Which stories caused this?"
+        ],
+        "action": [
+          "Improve quality"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "PI-009",
+        "domain": "prImpact",
+        "name": "Quality Impact",
+        "kpi": "PR Impact",
+        "subKpi": "Quality Coverage",
+        "personas": [
+          "Manager"
+        ],
+        "triggerPatterns": [
+          "high impact low reach",
+          "which low-reach stories had high impact?"
+        ],
+        "requiredFilters": [
+          "Brand",
+          "brand",
+          "date",
+          "period"
+        ],
+        "dataSources": [
+          "Media + impact"
+        ],
+        "apiQuery": "GET /impact/efficiency",
+        "calculation": "Impact/reach relationship",
+        "answerTemplate": "\"These stories generated disproportionate impact.\"",
+        "chartHint": "Scatter",
+        "evidence": "Story IDs",
+        "followUp": [
+          "Which outlets produced them?",
+          "Which outlets?"
+        ],
+        "action": [
+          "Build relationships"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "PI-010",
+        "domain": "prImpact",
+        "name": "Sentiment Impact",
+        "kpi": "PR Impact",
+        "subKpi": "Sentiment Contribution",
+        "personas": [
+          "All"
+        ],
+        "triggerPatterns": [
+          "how is sentiment affecting pr impact?",
+          "sentiment affecting impact"
+        ],
+        "requiredFilters": [
+          "Brand",
+          "brand",
+          "date",
+          "period"
+        ],
+        "dataSources": [
+          "Sentiment + impact"
+        ],
+        "apiQuery": "GET /impact/sentiment-drivers",
+        "calculation": "Sentiment contribution",
+        "answerTemplate": "\"Negative sentiment reduced impact primarily through...\"",
+        "chartHint": "Bar",
+        "evidence": "Negative article IDs",
+        "followUp": [
+          "Which themes drive negative impact?",
+          "Which themes?"
+        ],
+        "action": [
+          "Address issues"
+        ],
+        "kpiCombination": []
+      }
+    ]
+  },
+  "narrativeIntelligence": {
+    "label": "Narrative Intelligence",
+    "intents": [
+      {
+        "id": "NI-001",
+        "domain": "narrativeIntelligence",
+        "name": "Dominant Narratives",
+        "kpi": "Narrative Intelligence",
+        "subKpi": "Dominant Narratives",
+        "personas": [
+          "All"
+        ],
+        "triggerPatterns": [
+          "dominant narratives",
+          "what are people saying",
+          "what are people saying about us?",
+          "what are the dominant narratives?"
+        ],
+        "requiredFilters": [
+          "Brand",
+          "brand",
+          "date",
+          "period"
+        ],
+        "dataSources": [
+          "Articles + NLP"
+        ],
+        "apiQuery": "GET /narratives/top",
+        "calculation": "Narrative clustering/ranking",
+        "answerTemplate": "\"The dominant narratives were...\"",
+        "chartHint": "Bar/cards",
+        "evidence": "Representative story IDs",
+        "followUp": [
+          "Which is growing?",
+          "Which narratives are growing?"
+        ],
+        "action": [
+          "Prioritize"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "NI-002",
+        "domain": "narrativeIntelligence",
+        "name": "Message Congruence",
+        "kpi": "Narrative Intelligence",
+        "subKpi": "Congruence Score",
+        "personas": [
+          "Manager",
+          "CCO"
+        ],
+        "triggerPatterns": [
+          "are our messages landing?",
+          "did media get our message",
+          "is media communicating what we intended?",
+          "messages landing"
+        ],
+        "requiredFilters": [
+          "Brand",
+          "brand",
+          "campaign",
+          "date",
+          "intended messages",
+          "messages",
+          "period"
+        ],
+        "dataSources": [
+          "Campaign",
+          "message + media"
+        ],
+        "apiQuery": "GET /narrative/congruence",
+        "calculation": "Semantic similarity",
+        "answerTemplate": "\"Message Congruence is X%...\"",
+        "chartHint": "Donut + comparison",
+        "evidence": "Intended message + articles",
+        "followUp": [
+          "Which messages are missing?",
+          "Which messages missed?"
+        ],
+        "action": [
+          "Reinforce"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "NI-003",
+        "domain": "narrativeIntelligence",
+        "name": "Message Adoption",
+        "kpi": "Narrative Intelligence",
+        "subKpi": "Message Penetration",
+        "personas": [
+          "PR Manager"
+        ],
+        "triggerPatterns": [
+          "which messages are being picked up?",
+          "which messages picked up"
+        ],
+        "requiredFilters": [
+          "Message",
+          "date",
+          "message",
+          "period"
+        ],
+        "dataSources": [
+          "Media + NLP"
+        ],
+        "apiQuery": "GET /narrative/messages",
+        "calculation": "Message coverage penetration",
+        "answerTemplate": "\"Message A appeared in X%...\"",
+        "chartHint": "Bar",
+        "evidence": "Article IDs",
+        "followUp": [
+          "Which outlets adopted it?",
+          "Which outlets picked them up?"
+        ],
+        "action": [
+          "Amplify"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "NI-004",
+        "domain": "narrativeIntelligence",
+        "name": "Message Gap",
+        "kpi": "Narrative Intelligence",
+        "subKpi": "Intended vs Observed",
+        "personas": [
+          "Manager"
+        ],
+        "triggerPatterns": [
+          "gap between message and media",
+          "what is the gap between our message and media narrative?"
+        ],
+        "requiredFilters": [
+          "Brand",
+          "campaign",
+          "messages"
+        ],
+        "dataSources": [
+          "Media + campaign brief"
+        ],
+        "apiQuery": "GET /narrative/gap",
+        "calculation": "Intended vs observed semantic gap",
+        "answerTemplate": "\"The largest gap is...\"",
+        "chartHint": "Comparison bar",
+        "evidence": "Brief + articles",
+        "followUp": [
+          "Why is there a gap?",
+          "Why?"
+        ],
+        "action": [
+          "Adjust messaging"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "NI-005",
+        "domain": "narrativeIntelligence",
+        "name": "Missed Messages",
+        "kpi": "Narrative Intelligence",
+        "subKpi": "Message Omission",
+        "personas": [
+          "PR Executive"
+        ],
+        "triggerPatterns": [
+          "messages not appearing",
+          "which messages aren't appearing?"
+        ],
+        "requiredFilters": [
+          "Campaign",
+          "campaign",
+          "date",
+          "message",
+          "messages",
+          "period"
+        ],
+        "dataSources": [
+          "Media + message taxonomy"
+        ],
+        "apiQuery": "GET /narrative/missed",
+        "calculation": "Intended messages absent/low penetration",
+        "answerTemplate": "\"These messages received limited pickup...\"",
+        "chartHint": "Bar",
+        "evidence": "Supporting articles",
+        "followUp": [
+          "Which outlets missed them?",
+          "Why missed?"
+        ],
+        "action": [
+          "Reinforce"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "NI-006",
+        "domain": "narrativeIntelligence",
+        "name": "Emerging Narratives",
+        "kpi": "Narrative Intelligence",
+        "subKpi": "Narrative Detection",
+        "personas": [
+          "PR Manager"
+        ],
+        "triggerPatterns": [
+          "emerging topics",
+          "new narratives",
+          "what new narratives are emerging?"
+        ],
+        "requiredFilters": [
+          "Brand",
+          "brand",
+          "recent period"
+        ],
+        "dataSources": [
+          "News",
+          "social + NLP"
+        ],
+        "apiQuery": "GET /narratives/emerging",
+        "calculation": "New cluster + growth",
+        "answerTemplate": "\"Three narratives are emerging...\"",
+        "chartHint": "Line/bar",
+        "evidence": "Cluster stories",
+        "followUp": [
+          "Is it a risk?"
+        ],
+        "action": [
+          "Monitor"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "NI-007",
+        "domain": "narrativeIntelligence",
+        "name": "Unintended Narratives",
+        "kpi": "Narrative Intelligence",
+        "subKpi": "Narrative Drift",
+        "personas": [
+          "CCO"
+        ],
+        "triggerPatterns": [
+          "unexpected narrative",
+          "unintended story",
+          "what are people saying that we didn't intend?"
+        ],
+        "requiredFilters": [
+          "Brand",
+          "brand",
+          "campaign"
+        ],
+        "dataSources": [
+          "Media + NLP"
+        ],
+        "apiQuery": "GET /narratives/unintended",
+        "calculation": "Narrative outside intended taxonomy",
+        "answerTemplate": "\"Media is introducing...\"",
+        "chartHint": "Narrative cards",
+        "evidence": "Representative articles",
+        "followUp": [
+          "Is it harmful?",
+          "Is this harmful?"
+        ],
+        "action": [
+          "Counter/clarify"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "NI-008",
+        "domain": "narrativeIntelligence",
+        "name": "Narrative Momentum",
+        "kpi": "Narrative Intelligence",
+        "subKpi": "Momentum",
+        "personas": [
+          "Manager"
+        ],
+        "triggerPatterns": [
+          "gaining momentum",
+          "trending narrative",
+          "which narratives are gaining momentum?"
+        ],
+        "requiredFilters": [
+          "Brand",
+          "brand",
+          "date",
+          "period"
+        ],
+        "dataSources": [
+          "Time-series NLP"
+        ],
+        "apiQuery": "GET /narratives/momentum",
+        "calculation": "Velocity + reach",
+        "answerTemplate": "\"Narrative X is accelerating...\"",
+        "chartHint": "Line",
+        "evidence": "Story cluster",
+        "followUp": [
+          "Why is it accelerating?",
+          "Why?"
+        ],
+        "action": [
+          "Amplify/mitigate"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "NI-009",
+        "domain": "narrativeIntelligence",
+        "name": "Narrative Ownership",
+        "kpi": "Narrative Intelligence",
+        "subKpi": "Topic Ownership",
+        "personas": [
+          "Agency",
+          "Manager"
+        ],
+        "triggerPatterns": [
+          "what topics do we own",
+          "which topics do competitors own?",
+          "which topics do we own?"
+        ],
+        "requiredFilters": [
+          "Brand + competitors",
+          "brand + competitors"
+        ],
+        "dataSources": [
+          "Media + NLP"
+        ],
+        "apiQuery": "GET /narratives/ownership",
+        "calculation": "Narrative SOV",
+        "answerTemplate": "\"You lead on X but trail on Y.\"",
+        "chartHint": "Bar",
+        "evidence": "Brand/competitor stories",
+        "followUp": [
+          "Where are we losing?",
+          "Where can we win?"
+        ],
+        "action": [
+          "Own narrative"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "NI-010",
+        "domain": "narrativeIntelligence",
+        "name": "Narrative Sentiment",
+        "kpi": "Narrative Intelligence",
+        "subKpi": "Theme Sentiment",
+        "personas": [
+          "All"
+        ],
+        "triggerPatterns": [
+          "narrative",
+          "sentiment by theme",
+          "which narratives are positive or negative?"
+        ],
+        "requiredFilters": [
+          "Brand",
+          "brand",
+          "date",
+          "period"
+        ],
+        "dataSources": [
+          "NLP sentiment + themes"
+        ],
+        "apiQuery": "GET /narratives/sentiment",
+        "calculation": "Sentiment by narrative",
+        "answerTemplate": "\"The most negative narrative is...\"",
+        "chartHint": "Bar/heatmap",
+        "evidence": "Story IDs",
+        "followUp": [
+          "What's causing negativity?",
+          "What's driving it?"
+        ],
+        "action": [
+          "Address"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "NI-011",
+        "domain": "narrativeIntelligence",
+        "name": "Campaign Narrative",
+        "kpi": "Narrative Intelligence",
+        "subKpi": "Campaign Story",
+        "personas": [
+          "Agency"
+        ],
+        "triggerPatterns": [
+          "campaign narrative",
+          "media story",
+          "what story did the media tell about our campaign?"
+        ],
+        "requiredFilters": [
+          "Campaign",
+          "campaign",
+          "date"
+        ],
+        "dataSources": [
+          "Campaign + media"
+        ],
+        "apiQuery": "GET /campaign/narratives",
+        "calculation": "Campaign clustering",
+        "answerTemplate": "\"The media framed the campaign around...\"",
+        "chartHint": "Narrative cards",
+        "evidence": "Campaign story IDs",
+        "followUp": [
+          "Did it match intent?",
+          "Did it match our message?"
+        ],
+        "action": [
+          "Refine"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "NI-012",
+        "domain": "narrativeIntelligence",
+        "name": "Narrative Shift",
+        "kpi": "Narrative Intelligence",
+        "subKpi": "Period/Competitor",
+        "personas": [
+          "Manager"
+        ],
+        "triggerPatterns": [
+          "how has our narrative changed?",
+          "how narrative changed"
+        ],
+        "requiredFilters": [
+          "Brand",
+          "competitors",
+          "periods"
+        ],
+        "dataSources": [
+          "NLP + media"
+        ],
+        "apiQuery": "GET /narratives/compare",
+        "calculation": "Distribution/semantic shift",
+        "answerTemplate": "\"Narrative focus shifted from X to Y.\"",
+        "chartHint": "Line/bar",
+        "evidence": "Period story clusters",
+        "followUp": [
+          "What caused shift?",
+          "What caused the shift?"
+        ],
+        "action": [
+          "Update strategy"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "PE-001",
+        "domain": "narrativeIntelligence",
+        "name": "Executive Visibility",
+        "kpi": "People",
+        "subKpi": "Media Visibility",
+        "personas": [
+          "Corporate Comms"
+        ],
+        "triggerPatterns": [
+          "how visible is our ceo?"
+        ],
+        "requiredFilters": [
+          "Person",
+          "period"
+        ],
+        "dataSources": [
+          "Articles"
+        ],
+        "apiQuery": null,
+        "calculation": "Mentions + reach",
+        "answerTemplate": "Visibility",
+        "chartHint": "Trend/bar",
+        "evidence": null,
+        "followUp": [
+          "Is sentiment positive?"
+        ],
+        "action": [
+          "Increase/decrease visibility"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "PE-002",
+        "domain": "narrativeIntelligence",
+        "name": "Spokesperson Performance",
+        "kpi": "People",
+        "subKpi": "Impact",
+        "personas": [
+          "Manager"
+        ],
+        "triggerPatterns": [
+          "which spokesperson performs best?"
+        ],
+        "requiredFilters": [
+          "People",
+          "period"
+        ],
+        "dataSources": [
+          "Articles + quotes"
+        ],
+        "apiQuery": null,
+        "calculation": "Impact score",
+        "answerTemplate": "Ranking",
+        "chartHint": "Bar",
+        "evidence": null,
+        "followUp": [
+          "Which topics suit them?"
+        ],
+        "action": [
+          "Assign spokesperson"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "PE-003",
+        "domain": "narrativeIntelligence",
+        "name": "Executive Sentiment",
+        "kpi": "People",
+        "subKpi": "Sentiment",
+        "personas": [
+          "Corporate Comms"
+        ],
+        "triggerPatterns": [
+          "what is the sentiment around our ceo?"
+        ],
+        "requiredFilters": [
+          "Person",
+          "period"
+        ],
+        "dataSources": [
+          "Sentiment"
+        ],
+        "apiQuery": null,
+        "calculation": "Sentiment distribution",
+        "answerTemplate": "Sentiment",
+        "chartHint": "Donut/trend",
+        "evidence": null,
+        "followUp": [
+          "What drives negativity?"
+        ],
+        "action": [
+          "Prepare response"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "PE-004",
+        "domain": "narrativeIntelligence",
+        "name": "Executive Narrative",
+        "kpi": "People",
+        "subKpi": "Narrative Association",
+        "personas": [
+          "CCO"
+        ],
+        "triggerPatterns": [
+          "what narratives is our ceo associated with?"
+        ],
+        "requiredFilters": [
+          "Person",
+          "period"
+        ],
+        "dataSources": [
+          "NLP"
+        ],
+        "apiQuery": null,
+        "calculation": "Themes around person",
+        "answerTemplate": "Top narratives",
+        "chartHint": "Theme chart",
+        "evidence": null,
+        "followUp": [
+          "Is positioning aligned?"
+        ],
+        "action": [
+          "Refine positioning"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "PE-005",
+        "domain": "narrativeIntelligence",
+        "name": "Journalist Relationship",
+        "kpi": "People",
+        "subKpi": "Journalist Influence",
+        "personas": [
+          "PR Executive"
+        ],
+        "triggerPatterns": [
+          "which journalists matter most to us?"
+        ],
+        "requiredFilters": [
+          "Brand",
+          "period"
+        ],
+        "dataSources": [
+          "Articles + outlet data"
+        ],
+        "apiQuery": null,
+        "calculation": "Frequency + reach + influence",
+        "answerTemplate": "Ranked journalist list",
+        "chartHint": "Table/bar",
+        "evidence": null,
+        "followUp": [
+          "Which are strategic targets?"
+        ],
+        "action": [
+          "Prioritize outreach"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "ST-001",
+        "domain": "narrativeIntelligence",
+        "name": "Top Stories",
+        "kpi": "Story Intelligence",
+        "subKpi": "Top Stories",
+        "personas": [
+          "All"
+        ],
+        "triggerPatterns": [
+          "what are our biggest stories?"
+        ],
+        "requiredFilters": [
+          "Brand",
+          "period"
+        ],
+        "dataSources": [
+          "Articles"
+        ],
+        "apiQuery": null,
+        "calculation": "Rank by selected metric",
+        "answerTemplate": "Top stories",
+        "chartHint": "Story cards",
+        "evidence": null,
+        "followUp": [
+          "Why is this important?"
+        ],
+        "action": [
+          "Review/highlight"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "ST-002",
+        "domain": "narrativeIntelligence",
+        "name": "Story Impact",
+        "kpi": "Story Intelligence",
+        "subKpi": "Impact",
+        "personas": [
+          "Manager"
+        ],
+        "triggerPatterns": [
+          "which story had the most impact?"
+        ],
+        "requiredFilters": [
+          "Brand",
+          "period"
+        ],
+        "dataSources": [
+          "Story + impact"
+        ],
+        "apiQuery": null,
+        "calculation": "Impact ranking",
+        "answerTemplate": "Top story",
+        "chartHint": "Story card",
+        "evidence": null,
+        "followUp": [
+          "What made it impactful?"
+        ],
+        "action": [
+          "Replicate"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "ST-003",
+        "domain": "narrativeIntelligence",
+        "name": "Story Momentum",
+        "kpi": "Story Intelligence",
+        "subKpi": "Momentum",
+        "personas": [
+          "PR Manager"
+        ],
+        "triggerPatterns": [
+          "which story is gaining momentum?"
+        ],
+        "requiredFilters": [
+          "Brand",
+          "recent period"
+        ],
+        "dataSources": [
+          "Time-series articles"
+        ],
+        "apiQuery": null,
+        "calculation": "Velocity + reach",
+        "answerTemplate": "Rising stories",
+        "chartHint": "Trend",
+        "evidence": null,
+        "followUp": [
+          "Could this become a crisis?"
+        ],
+        "action": [
+          "Monitor"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "ST-004",
+        "domain": "narrativeIntelligence",
+        "name": "Story Sentiment",
+        "kpi": "Story Intelligence",
+        "subKpi": "Sentiment",
+        "personas": [
+          "All"
+        ],
+        "triggerPatterns": [
+          "which stories are most negative?"
+        ],
+        "requiredFilters": [
+          "Brand",
+          "period"
+        ],
+        "dataSources": [
+          "Sentiment"
+        ],
+        "apiQuery": null,
+        "calculation": "Sentiment ranking",
+        "answerTemplate": "Negative stories",
+        "chartHint": "Story list",
+        "evidence": null,
+        "followUp": [
+          "What theme is causing it?"
+        ],
+        "action": [
+          "Review response"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "ST-005",
+        "domain": "narrativeIntelligence",
+        "name": "Similar Stories",
+        "kpi": "Story Intelligence",
+        "subKpi": "Story Cluster",
+        "personas": [
+          "Analyst"
+        ],
+        "triggerPatterns": [
+          "what other stories are related to this?"
+        ],
+        "requiredFilters": [
+          "Story ID"
+        ],
+        "dataSources": [
+          "Story embeddings"
+        ],
+        "apiQuery": null,
+        "calculation": "Semantic similarity",
+        "answerTemplate": "Similar stories",
+        "chartHint": "Cluster/list",
+        "evidence": null,
+        "followUp": [
+          "Is the narrative spreading?"
+        ],
+        "action": [
+          "Track story cluster"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "ST-006",
+        "domain": "narrativeIntelligence",
+        "name": "Story Evolution",
+        "kpi": "Story Intelligence",
+        "subKpi": "Narrative Evolution",
+        "personas": [
+          "Manager"
+        ],
+        "triggerPatterns": [
+          "how has this story evolved?"
+        ],
+        "requiredFilters": [
+          "Story cluster"
+        ],
+        "dataSources": [
+          "Articles + timeline"
+        ],
+        "apiQuery": null,
+        "calculation": "Chronological narrative analysis",
+        "answerTemplate": "Story evolution",
+        "chartHint": "Timeline",
+        "evidence": null,
+        "followUp": [
+          "Who changed the narrative?"
+        ],
+        "action": [
+          "Identify intervention point"
+        ],
+        "kpiCombination": []
+      }
+    ]
+  },
+  "reputationIndex": {
+    "label": "Reputation Index",
+    "intents": [
+      {
+        "id": "RI-001",
+        "domain": "reputationIndex",
+        "name": "Reputation Score",
+        "kpi": "Reputation Index",
+        "subKpi": "Reputation Score",
+        "personas": [
+          "CCO",
+          "Manager"
+        ],
+        "triggerPatterns": [
+          "how healthy is our reputation?",
+          "reputation health",
+          "reputation index",
+          "what is our reputation index?"
+        ],
+        "requiredFilters": [
+          "Brand",
+          "brand",
+          "date",
+          "period"
+        ],
+        "dataSources": [
+          "Media + sentiment + narrative + impact"
+        ],
+        "apiQuery": "GET /reputation/summary",
+        "calculation": "Reputation Index",
+        "answerTemplate": "\"Reputation Index is X...\"",
+        "chartHint": "KPI + trend",
+        "evidence": "Driver stories",
+        "followUp": [
+          "What is driving it?",
+          "What's driving it?"
+        ],
+        "action": [
+          "Address drivers"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "RI-002",
+        "domain": "reputationIndex",
+        "name": "Reputation Trend",
+        "kpi": "Reputation Index",
+        "subKpi": "Trend",
+        "personas": [
+          "All"
+        ],
+        "triggerPatterns": [
+          "is our reputation improving?",
+          "reputation declining",
+          "reputation improving"
+        ],
+        "requiredFilters": [
+          "Brand",
+          "brand",
+          "date",
+          "period"
+        ],
+        "dataSources": [
+          "Reputation data"
+        ],
+        "apiQuery": "GET /reputation/trend",
+        "calculation": "Period change",
+        "answerTemplate": "\"Reputation moved X points...\"",
+        "chartHint": "Line",
+        "evidence": "Period evidence",
+        "followUp": [
+          "Why did it change?",
+          "Why?"
+        ],
+        "action": [
+          "Investigate"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "RI-003",
+        "domain": "reputationIndex",
+        "name": "Reputation Drivers",
+        "kpi": "Reputation Index",
+        "subKpi": "Driver Analysis",
+        "personas": [
+          "CCO"
+        ],
+        "triggerPatterns": [
+          "what drives reputation",
+          "what is driving our reputation?"
+        ],
+        "requiredFilters": [
+          "Brand",
+          "brand",
+          "date",
+          "period"
+        ],
+        "dataSources": [
+          "Themes",
+          "sentiment",
+          "impact"
+        ],
+        "apiQuery": "GET /reputation/drivers",
+        "calculation": "Weighted contribution",
+        "answerTemplate": "\"The biggest positive/negative drivers are...\"",
+        "chartHint": "Driver bar",
+        "evidence": "Supporting stories",
+        "followUp": [
+          "Which matters most?",
+          "Which story has biggest effect?"
+        ],
+        "action": [
+          "Prioritize"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "RI-004",
+        "domain": "reputationIndex",
+        "name": "Reputation Risk",
+        "kpi": "Reputation Index",
+        "subKpi": "Risk",
+        "personas": [
+          "CCO",
+          "Crisis Team"
+        ],
+        "triggerPatterns": [
+          "biggest reputation risks",
+          "what are our biggest reputation risks?"
+        ],
+        "requiredFilters": [
+          "Brand",
+          "brand",
+          "recent date",
+          "recent period"
+        ],
+        "dataSources": [
+          "News",
+          "social + NLP"
+        ],
+        "apiQuery": "GET /reputation/risks",
+        "calculation": "Risk = momentum \u00d7 reach \u00d7 negativity \u00d7 prominence",
+        "answerTemplate": "\"The highest-risk issue is...\"",
+        "chartHint": "Risk matrix",
+        "evidence": "Story clusters",
+        "followUp": [
+          "What should we do?",
+          "Which requires immediate action?"
+        ],
+        "action": [
+          "Escalate"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "RI-005",
+        "domain": "reputationIndex",
+        "name": "Reputation Opportunity",
+        "kpi": "Reputation Index",
+        "subKpi": "Opportunity",
+        "personas": [
+          "PR Manager"
+        ],
+        "triggerPatterns": [
+          "reputation opportunities",
+          "where can we improve our reputation?"
+        ],
+        "requiredFilters": [
+          "Brand",
+          "brand",
+          "date",
+          "period"
+        ],
+        "dataSources": [
+          "Themes + narratives"
+        ],
+        "apiQuery": "GET /reputation/opportunities",
+        "calculation": "Positive momentum + strategic relevance",
+        "answerTemplate": "\"The strongest opportunity is...\"",
+        "chartHint": "Opportunity cards",
+        "evidence": "Positive story IDs",
+        "followUp": [
+          "How can we amplify?",
+          "What message can we use?"
+        ],
+        "action": [
+          "Activate"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "RI-006",
+        "domain": "reputationIndex",
+        "name": "Reputation by Market",
+        "kpi": "Reputation Index",
+        "subKpi": "Geography",
+        "personas": [
+          "Global PR"
+        ],
+        "triggerPatterns": [
+          "reputation by country",
+          "where is our reputation strongest?"
+        ],
+        "requiredFilters": [
+          "Brand",
+          "date",
+          "geography",
+          "market",
+          "period"
+        ],
+        "dataSources": [
+          "Media + geography"
+        ],
+        "apiQuery": "GET /reputation/geography",
+        "calculation": "Index by market",
+        "answerTemplate": "\"Reputation is strongest in...\"",
+        "chartHint": "Bar/map",
+        "evidence": "Market articles",
+        "followUp": [
+          "Which markets need attention?",
+          "Why is market X weak?"
+        ],
+        "action": [
+          "Localize"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "RI-007",
+        "domain": "reputationIndex",
+        "name": "Reputation by Theme",
+        "kpi": "Reputation Index",
+        "subKpi": "Theme Reputation",
+        "personas": [
+          "All"
+        ],
+        "triggerPatterns": [
+          "reputation themes",
+          "which topics affect our reputation?"
+        ],
+        "requiredFilters": [
+          "Brand",
+          "brand",
+          "date",
+          "period"
+        ],
+        "dataSources": [
+          "Themes + sentiment"
+        ],
+        "apiQuery": "GET /reputation/themes",
+        "calculation": "Theme-level reputation score",
+        "answerTemplate": "\"Product quality is currently...\"",
+        "chartHint": "Bar",
+        "evidence": "Theme story IDs",
+        "followUp": [
+          "Which theme is most important?",
+          "Which theme matters most?"
+        ],
+        "action": [
+          "Messaging"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "RI-008",
+        "domain": "reputationIndex",
+        "name": "Reputation Event Impact",
+        "kpi": "Reputation Index",
+        "subKpi": "Stakeholder",
+        "personas": [
+          "CCO"
+        ],
+        "triggerPatterns": [
+          "what caused reputation change",
+          "which audiences are affecting our reputation?"
+        ],
+        "requiredFilters": [
+          "Stakeholder",
+          "date",
+          "event",
+          "period"
+        ],
+        "dataSources": [
+          "Available audience",
+          "source metadata"
+        ],
+        "apiQuery": "GET /reputation/events",
+        "calculation": "Pre/post event delta",
+        "answerTemplate": "\"The decline followed...\"",
+        "chartHint": "Timeline",
+        "evidence": "Event stories",
+        "followUp": [
+          "Has it recovered?",
+          "Which stakeholder needs attention?"
+        ],
+        "action": [
+          "Response"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "RI-009",
+        "domain": "reputationIndex",
+        "name": "Reputation Recovery",
+        "kpi": "Reputation Index",
+        "subKpi": "Event Impact",
+        "personas": [
+          "CCO"
+        ],
+        "triggerPatterns": [
+          "has reputation recovered",
+          "what caused the reputation change?"
+        ],
+        "requiredFilters": [
+          "Brand",
+          "date",
+          "event window",
+          "issue"
+        ],
+        "dataSources": [
+          "News",
+          "social + event detection"
+        ],
+        "apiQuery": "GET /reputation/recovery",
+        "calculation": "Current vs pre-event baseline",
+        "answerTemplate": "\"Reputation has recovered X%...\"",
+        "chartHint": "Line",
+        "evidence": "Event + current stories",
+        "followUp": [
+          "How long did impact last?",
+          "What remains?"
+        ],
+        "action": [
+          "Continue recovery"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "RI-010",
+        "domain": "reputationIndex",
+        "name": "Reputation Benchmark",
+        "kpi": "Reputation Index",
+        "subKpi": "Recovery",
+        "personas": [
+          "Crisis",
+          "PR Manager"
+        ],
+        "triggerPatterns": [
+          "has our reputation recovered from the issue?",
+          "reputation vs competitors"
+        ],
+        "requiredFilters": [
+          "Issue",
+          "brand",
+          "competitors",
+          "event",
+          "period"
+        ],
+        "dataSources": [
+          "Reputation time series"
+        ],
+        "apiQuery": "GET /reputation/benchmark",
+        "calculation": "Normalized index comparison",
+        "answerTemplate": "\"You rank #X...\"",
+        "chartHint": "Bar",
+        "evidence": "Comparative evidence",
+        "followUp": [
+          "What remains unresolved?",
+          "Why is competitor ahead?"
+        ],
+        "action": [
+          "Close gap"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "RK-001",
+        "domain": "reputationIndex",
+        "name": "Emerging Risk",
+        "kpi": "Reputation Risk",
+        "subKpi": "Risk Detection",
+        "personas": [
+          "CCO"
+        ],
+        "triggerPatterns": [
+          "are there emerging reputation risks?"
+        ],
+        "requiredFilters": [
+          "Brand",
+          "recent period"
+        ],
+        "dataSources": [
+          "News + social"
+        ],
+        "apiQuery": null,
+        "calculation": "Negative momentum + reach + prominence",
+        "answerTemplate": "Ranked risks",
+        "chartHint": "Risk cards",
+        "evidence": null,
+        "followUp": [
+          "Which needs action first?"
+        ],
+        "action": [
+          "Escalate"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "RK-002",
+        "domain": "reputationIndex",
+        "name": "Crisis Signal",
+        "kpi": "Reputation Risk",
+        "subKpi": "Crisis Detection",
+        "personas": [
+          "Crisis Team"
+        ],
+        "triggerPatterns": [
+          "is there an emerging crisis?"
+        ],
+        "requiredFilters": [
+          "Brand",
+          "recent period"
+        ],
+        "dataSources": [
+          "News",
+          "social"
+        ],
+        "apiQuery": null,
+        "calculation": "Volume velocity + sentiment + narrative clustering",
+        "answerTemplate": "Crisis signal assessment",
+        "chartHint": "Risk gauge/timeline",
+        "evidence": null,
+        "followUp": [
+          "What is driving it?"
+        ],
+        "action": [
+          "Activate crisis workflow"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "RK-003",
+        "domain": "reputationIndex",
+        "name": "Negative Momentum",
+        "kpi": "Reputation Risk",
+        "subKpi": "Momentum",
+        "personas": [
+          "PR Manager"
+        ],
+        "triggerPatterns": [
+          "which negative issue is growing fastest?"
+        ],
+        "requiredFilters": [
+          "Brand",
+          "period"
+        ],
+        "dataSources": [
+          "News",
+          "social"
+        ],
+        "apiQuery": null,
+        "calculation": "Negative narrative velocity",
+        "answerTemplate": "Top growing issues",
+        "chartHint": "Line/bar",
+        "evidence": null,
+        "followUp": [
+          "Why is it spreading?"
+        ],
+        "action": [
+          "Mitigate"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "RK-004",
+        "domain": "reputationIndex",
+        "name": "Reputation Threat",
+        "kpi": "Reputation Risk",
+        "subKpi": "Threat Assessment",
+        "personas": [
+          "CCO"
+        ],
+        "triggerPatterns": [
+          "what poses the biggest threat to our reputation?"
+        ],
+        "requiredFilters": [
+          "Brand"
+        ],
+        "dataSources": [
+          "All intelligence"
+        ],
+        "apiQuery": null,
+        "calculation": "Weighted risk score",
+        "answerTemplate": "Threat ranking",
+        "chartHint": "Risk matrix",
+        "evidence": null,
+        "followUp": [
+          "What should we do?"
+        ],
+        "action": [
+          "Response plan"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "RK-005",
+        "domain": "reputationIndex",
+        "name": "Crisis Evolution",
+        "kpi": "Reputation Risk",
+        "subKpi": "Issue Lifecycle",
+        "personas": [
+          "Crisis Team"
+        ],
+        "triggerPatterns": [
+          "how is the crisis evolving?"
+        ],
+        "requiredFilters": [
+          "Issue"
+        ],
+        "dataSources": [
+          "News",
+          "social"
+        ],
+        "apiQuery": null,
+        "calculation": "Timeline + sentiment + narrative",
+        "answerTemplate": "Crisis trajectory",
+        "chartHint": "Line/timeline",
+        "evidence": null,
+        "followUp": [
+          "Has it peaked?"
+        ],
+        "action": [
+          "Adapt response"
+        ],
+        "kpiCombination": []
+      }
+    ]
+  },
+  "competitiveIntelligence": {
+    "label": "Competitive Intelligence",
+    "intents": [
+      {
+        "id": "CI-001",
+        "domain": "competitiveIntelligence",
+        "name": "Competitive SOV",
+        "kpi": "Competitive PR",
+        "subKpi": "Share of Voice",
+        "personas": [
+          "Agency",
+          "Manager"
+        ],
+        "triggerPatterns": [
+          "compare share of voice",
+          "how do we compare with competitors?"
+        ],
+        "requiredFilters": [
+          "Brand + competitors",
+          "brand",
+          "competitors",
+          "date",
+          "period"
+        ],
+        "dataSources": [
+          "Media"
+        ],
+        "apiQuery": "GET /competitive/sov",
+        "calculation": "SOV",
+        "answerTemplate": "\"Brand A leads with X%...\"",
+        "chartHint": "Bar",
+        "evidence": "Comparative articles",
+        "followUp": [
+          "Who gained SOV?",
+          "Who gained?"
+        ],
+        "action": [
+          "Competitive response"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "CI-002",
+        "domain": "competitiveIntelligence",
+        "name": "Competitive Impact",
+        "kpi": "Competitive PR",
+        "subKpi": "PR Impact Benchmark",
+        "personas": [
+          "Manager"
+        ],
+        "triggerPatterns": [
+          "competitor pr impact",
+          "who has stronger pr impact?"
+        ],
+        "requiredFilters": [
+          "Brand + competitors",
+          "competitors",
+          "date"
+        ],
+        "dataSources": [
+          "Impact data"
+        ],
+        "apiQuery": "GET /competitive/impact",
+        "calculation": "Normalized impact",
+        "answerTemplate": "\"You rank #X in PR impact.\"",
+        "chartHint": "Bar",
+        "evidence": "Impact stories",
+        "followUp": [
+          "Why are they ahead?",
+          "Why?"
+        ],
+        "action": [
+          "Benchmark"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "CI-003",
+        "domain": "competitiveIntelligence",
+        "name": "Competitive Narrative",
+        "kpi": "Competitive PR",
+        "subKpi": "Reputation Benchmark",
+        "personas": [
+          "CCO"
+        ],
+        "triggerPatterns": [
+          "competitor narratives",
+          "how does our reputation compare?"
+        ],
+        "requiredFilters": [
+          "Brand + competitors",
+          "competitors",
+          "date"
+        ],
+        "dataSources": [
+          "Reputation data"
+        ],
+        "apiQuery": "GET /competitive/narratives",
+        "calculation": "Narrative SOV",
+        "answerTemplate": "\"Competitor X owns...\"",
+        "chartHint": "Bar",
+        "evidence": "Narrative clusters",
+        "followUp": [
+          "What drives the gap?",
+          "Which can we challenge?"
+        ],
+        "action": [
+          "Narrative strategy"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "CI-004",
+        "domain": "competitiveIntelligence",
+        "name": "Competitive Messages",
+        "kpi": "Competitive PR",
+        "subKpi": "Narrative Ownership",
+        "personas": [
+          "Manager"
+        ],
+        "triggerPatterns": [
+          "competitor messaging",
+          "which narratives do competitors own?"
+        ],
+        "requiredFilters": [
+          "Brand + competitors",
+          "competitor",
+          "date"
+        ],
+        "dataSources": [
+          "NLP + media"
+        ],
+        "apiQuery": "GET /competitive/messages",
+        "calculation": "Message/theme extraction",
+        "answerTemplate": "\"Competitor X is emphasizing...\"",
+        "chartHint": "Theme cards",
+        "evidence": "Articles",
+        "followUp": [
+          "Is it resonating?",
+          "Which should we own?"
+        ],
+        "action": [
+          "Differentiate"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "CI-005",
+        "domain": "competitiveIntelligence",
+        "name": "Competitive Sentiment",
+        "kpi": "Competitive PR",
+        "subKpi": "Message Analysis",
+        "personas": [
+          "PR Manager"
+        ],
+        "triggerPatterns": [
+          "competitor sentiment",
+          "what are competitors communicating?"
+        ],
+        "requiredFilters": [
+          "Competitor",
+          "competitors",
+          "date",
+          "period"
+        ],
+        "dataSources": [
+          "Media + NLP"
+        ],
+        "apiQuery": "GET /competitive/sentiment",
+        "calculation": "Sentiment comparison",
+        "answerTemplate": "\"Your positive coverage is X vs Y...\"",
+        "chartHint": "Bar",
+        "evidence": "Sentiment-tagged articles",
+        "followUp": [
+          "Are these messages working?",
+          "What's driving gap?"
+        ],
+        "action": [
+          "Improve"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "CI-006",
+        "domain": "competitiveIntelligence",
+        "name": "Competitive Gap",
+        "kpi": "Competitive PR",
+        "subKpi": "Performance Gap",
+        "personas": [
+          "CCO"
+        ],
+        "triggerPatterns": [
+          "where are we behind",
+          "where are we behind competitors?"
+        ],
+        "requiredFilters": [
+          "Brand + competitors",
+          "brand",
+          "competitors",
+          "date"
+        ],
+        "dataSources": [
+          "All KPIs"
+        ],
+        "apiQuery": "GET /competitive/gaps",
+        "calculation": "Multi-KPI variance",
+        "answerTemplate": "\"Largest gaps are...\"",
+        "chartHint": "Benchmark table/bar",
+        "evidence": "KPI evidence",
+        "followUp": [
+          "What should we fix first?"
+        ],
+        "action": [
+          "Prioritize"
+        ],
+        "kpiCombination": []
+      }
+    ]
+  },
+  "campaign": {
+    "label": "Campaign Intelligence",
+    "intents": [
+      {
+        "id": "CA-001",
+        "domain": "campaign",
+        "name": "Campaign Performance",
+        "kpi": "Campaign",
+        "subKpi": "Overall Performance",
+        "personas": [
+          "Agency",
+          "Manager"
+        ],
+        "triggerPatterns": [
+          "campaign performance",
+          "did campaign work",
+          "did the campaign work?",
+          "how did the campaign perform?"
+        ],
+        "requiredFilters": [
+          "Campaign",
+          "campaign",
+          "date",
+          "period"
+        ],
+        "dataSources": [
+          "Campaign + media"
+        ],
+        "apiQuery": "GET /campaign/summary",
+        "calculation": "Multi-KPI scorecard",
+        "answerTemplate": "\"Campaign performance was...\"",
+        "chartHint": "Scorecard",
+        "evidence": "Campaign stories",
+        "followUp": [
+          "What worked?"
+        ],
+        "action": [
+          "Replicate"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "CA-002",
+        "domain": "campaign",
+        "name": "Campaign Coverage",
+        "kpi": "Campaign",
+        "subKpi": "Coverage",
+        "personas": [
+          "PR Executive"
+        ],
+        "triggerPatterns": [
+          "campaign coverage",
+          "how much coverage did the campaign generate?"
+        ],
+        "requiredFilters": [
+          "Campaign",
+          "campaign",
+          "date"
+        ],
+        "dataSources": [
+          "Media"
+        ],
+        "apiQuery": "GET /campaign/coverage",
+        "calculation": "Mention count",
+        "answerTemplate": "\"Campaign generated X mentions.\"",
+        "chartHint": "KPI + line",
+        "evidence": "Story IDs",
+        "followUp": [
+          "Which outlets covered it?",
+          "Which outlets?"
+        ],
+        "action": [
+          "Follow-up"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "CA-003",
+        "domain": "campaign",
+        "name": "Campaign Reach",
+        "kpi": "Campaign",
+        "subKpi": "Reach",
+        "personas": [
+          "Manager"
+        ],
+        "triggerPatterns": [
+          "campaign reach",
+          "how many people did the campaign reach?"
+        ],
+        "requiredFilters": [
+          "Campaign",
+          "campaign",
+          "date"
+        ],
+        "dataSources": [
+          "Media reach"
+        ],
+        "apiQuery": "GET /campaign/reach",
+        "calculation": "Aggregate reach",
+        "answerTemplate": "\"Campaign reached X potential audience.\"",
+        "chartHint": "KPI",
+        "evidence": "Source evidence",
+        "followUp": [
+          "What drove reach?",
+          "Which stories drove reach?"
+        ],
+        "action": [
+          "Amplify"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "CA-004",
+        "domain": "campaign",
+        "name": "Campaign Congruence",
+        "kpi": "Campaign",
+        "subKpi": "PR Impact",
+        "personas": [
+          "Manager"
+        ],
+        "triggerPatterns": [
+          "did campaign message land",
+          "what was the campaign's pr impact?"
+        ],
+        "requiredFilters": [
+          "Campaign",
+          "campaign",
+          "intended messages"
+        ],
+        "dataSources": [
+          "Impact"
+        ],
+        "apiQuery": "GET /campaign/congruence",
+        "calculation": "Semantic congruence",
+        "answerTemplate": "\"Message Congruence was X%.\"",
+        "chartHint": "Donut",
+        "evidence": "Brief + articles",
+        "followUp": [
+          "What drove impact?",
+          "Which message missed?"
+        ],
+        "action": [
+          "Adjust"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "CA-005",
+        "domain": "campaign",
+        "name": "Campaign Comparison",
+        "kpi": "Campaign",
+        "subKpi": "Message Congruence",
+        "personas": [
+          "Manager"
+        ],
+        "triggerPatterns": [
+          "compare campaigns",
+          "did the campaign communicate our intended message?"
+        ],
+        "requiredFilters": [
+          "Campaign + intended messages",
+          "campaigns",
+          "periods"
+        ],
+        "dataSources": [
+          "Campaign + media NLP"
+        ],
+        "apiQuery": "GET /campaign/compare",
+        "calculation": "KPI comparison",
+        "answerTemplate": "\"Campaign A outperformed B because...\"",
+        "chartHint": "Bar",
+        "evidence": "Campaign evidence",
+        "followUp": [
+          "Which message missed?",
+          "Why?"
+        ],
+        "action": [
+          "Apply learnings"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "CA-006",
+        "domain": "campaign",
+        "name": "Campaign Sentiment",
+        "kpi": "Campaign",
+        "subKpi": "Sentiment",
+        "personas": [
+          "All"
+        ],
+        "triggerPatterns": [
+          "was the campaign coverage positive?"
+        ],
+        "requiredFilters": [
+          "Campaign"
+        ],
+        "dataSources": [
+          "Sentiment"
+        ],
+        "apiQuery": null,
+        "calculation": "Sentiment distribution",
+        "answerTemplate": "Positive/neutral/negative",
+        "chartHint": "Donut/bar",
+        "evidence": null,
+        "followUp": [
+          "What caused negativity?"
+        ],
+        "action": [
+          "Address concerns"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "CA-007",
+        "domain": "campaign",
+        "name": "Campaign Comparison",
+        "kpi": "Campaign",
+        "subKpi": "Benchmark",
+        "personas": [
+          "Agency"
+        ],
+        "triggerPatterns": [
+          "which campaign performed better?"
+        ],
+        "requiredFilters": [
+          "Campaigns"
+        ],
+        "dataSources": [
+          "Campaign data"
+        ],
+        "apiQuery": null,
+        "calculation": "KPI comparison",
+        "answerTemplate": "Winner + reasons",
+        "chartHint": "Bar",
+        "evidence": null,
+        "followUp": [
+          "Why did it win?"
+        ],
+        "action": [
+          "Apply learnings"
+        ],
+        "kpiCombination": []
+      }
+    ]
+  },
+  "executiveCrossKpi": {
+    "label": "Executive & Cross-KPI",
+    "intents": [
+      {
+        "id": "CX-001",
+        "domain": "executiveCrossKpi",
+        "name": "Volume vs Impact Gap",
+        "kpi": "Media + PR Impact",
+        "subKpi": null,
+        "personas": [],
+        "triggerPatterns": [
+          "lots of coverage but low impact",
+          "we have high coverage but low impact. why?"
+        ],
+        "requiredFilters": [
+          "brand",
+          "date"
+        ],
+        "dataSources": [],
+        "apiQuery": "GET /diagnostics/volume-impact",
+        "calculation": "Volume vs normalized impact",
+        "answerTemplate": "\"Coverage is high, but impact is lower because...\"",
+        "chartHint": "Scatter",
+        "evidence": "High-volume/low-impact stories",
+        "followUp": [
+          "Which stories?"
+        ],
+        "action": [
+          "Improve quality"
+        ],
+        "kpiCombination": [
+          "Media Measurement",
+          "PR Impact"
+        ]
+      },
+      {
+        "id": "CX-002",
+        "domain": "executiveCrossKpi",
+        "name": "Coverage vs Reputation Gap",
+        "kpi": "Media + Reputation",
+        "subKpi": null,
+        "personas": [],
+        "triggerPatterns": [
+          "coverage up but reputation down",
+          "we have huge reach but low pr impact. why?"
+        ],
+        "requiredFilters": [
+          "brand",
+          "date"
+        ],
+        "dataSources": [],
+        "apiQuery": "GET /diagnostics/coverage-reputation",
+        "calculation": "Coverage delta vs reputation delta",
+        "answerTemplate": "\"Visibility increased, but reputation declined because...\"",
+        "chartHint": "Line",
+        "evidence": "Negative narrative evidence",
+        "followUp": [
+          "Which issue?"
+        ],
+        "action": [
+          "Address reputation drivers"
+        ],
+        "kpiCombination": [
+          "Reach",
+          "PR Impact"
+        ]
+      },
+      {
+        "id": "CX-003",
+        "domain": "executiveCrossKpi",
+        "name": "Message vs Media Gap",
+        "kpi": "Narrative + Congruence",
+        "subKpi": null,
+        "personas": [],
+        "triggerPatterns": [
+          "are journalists actually saying what we want them to say?",
+          "media isn't saying what we said"
+        ],
+        "requiredFilters": [
+          "campaign",
+          "messages"
+        ],
+        "dataSources": [],
+        "apiQuery": "GET /diagnostics/message-gap",
+        "calculation": "Intended vs observed narratives",
+        "answerTemplate": "\"The largest message gap is...\"",
+        "chartHint": "Comparison",
+        "evidence": "Brief + stories",
+        "followUp": [
+          "Why missed?"
+        ],
+        "action": [
+          "Correct messaging"
+        ],
+        "kpiCombination": [
+          "Narrative",
+          "Message Congruence"
+        ]
+      },
+      {
+        "id": "CX-004",
+        "domain": "executiveCrossKpi",
+        "name": "Impact vs Reputation",
+        "kpi": "Impact + Reputation",
+        "subKpi": null,
+        "personas": [],
+        "triggerPatterns": [
+          "pr impact improving but reputation flat",
+          "what narratives are affecting our reputation?"
+        ],
+        "requiredFilters": [
+          "brand",
+          "date"
+        ],
+        "dataSources": [],
+        "apiQuery": "GET /diagnostics/impact-reputation",
+        "calculation": "Impact/reputation relationship",
+        "answerTemplate": "\"Higher impact isn't translating because...\"",
+        "chartHint": "Line",
+        "evidence": "Impact stories + themes",
+        "followUp": [
+          "What should change?"
+        ],
+        "action": [
+          "Shift strategy"
+        ],
+        "kpiCombination": [
+          "Reputation",
+          "Narrative"
+        ]
+      },
+      {
+        "id": "CX-005",
+        "domain": "executiveCrossKpi",
+        "name": "Negative Narrative Risk",
+        "kpi": "Narrative + Reputation",
+        "subKpi": null,
+        "personas": [],
+        "triggerPatterns": [
+          "negative narrative gaining momentum",
+          "why is coverage increasing but reputation declining?"
+        ],
+        "requiredFilters": [
+          "brand",
+          "recent period"
+        ],
+        "dataSources": [],
+        "apiQuery": "GET /diagnostics/narrative-risk",
+        "calculation": "Momentum \u00d7 reach \u00d7 negativity",
+        "answerTemplate": "\"Narrative X is the most significant emerging risk.\"",
+        "chartHint": "Risk matrix",
+        "evidence": "Story cluster",
+        "followUp": [
+          "Has it reached competitors?"
+        ],
+        "action": [
+          "Activate risk response"
+        ],
+        "kpiCombination": [
+          "Media",
+          "Reputation"
+        ]
+      },
+      {
+        "id": "CX-006",
+        "domain": "executiveCrossKpi",
+        "name": "Full PR Health",
+        "kpi": "All 4 KPIs",
+        "subKpi": null,
+        "personas": [],
+        "triggerPatterns": [
+          "are our pr efforts improving reputation?",
+          "overall pr health"
+        ],
+        "requiredFilters": [
+          "brand",
+          "date"
+        ],
+        "dataSources": [],
+        "apiQuery": "GET /diagnostics/pr-health",
+        "calculation": "Composite diagnostic",
+        "answerTemplate": "\"Overall PR health is...\"",
+        "chartHint": "KPI scorecard",
+        "evidence": "Multi-source evidence",
+        "followUp": [
+          "What should we prioritize?"
+        ],
+        "action": [
+          "Strategic action plan"
+        ],
+        "kpiCombination": [
+          "PR Impact",
+          "Reputation"
+        ]
+      },
+      {
+        "id": "CX-007",
+        "domain": "executiveCrossKpi",
+        "name": "Competitor Narrative Gap",
+        "kpi": null,
+        "subKpi": null,
+        "personas": [],
+        "triggerPatterns": [
+          "what narratives are competitors owning that we aren't?"
+        ],
+        "requiredFilters": [],
+        "dataSources": [],
+        "apiQuery": null,
+        "calculation": "Narrative SOV comparison",
+        "answerTemplate": "Competitive narrative gaps",
+        "chartHint": null,
+        "evidence": null,
+        "followUp": [],
+        "action": [],
+        "kpiCombination": [
+          "Narrative",
+          "Competitive"
+        ]
+      },
+      {
+        "id": "CX-008",
+        "domain": "executiveCrossKpi",
+        "name": "Campaign Effectiveness",
+        "kpi": null,
+        "subKpi": null,
+        "personas": [],
+        "triggerPatterns": [
+          "did our campaign actually work?"
+        ],
+        "requiredFilters": [],
+        "dataSources": [],
+        "apiQuery": null,
+        "calculation": "Multi-KPI campaign evaluation",
+        "answerTemplate": "Overall campaign diagnosis",
+        "chartHint": null,
+        "evidence": null,
+        "followUp": [],
+        "action": [],
+        "kpiCombination": [
+          "Coverage",
+          "Impact",
+          "Congruence",
+          "Reputation"
+        ]
+      },
+      {
+        "id": "CX-009",
+        "domain": "executiveCrossKpi",
+        "name": "Negative Narrative Risk",
+        "kpi": null,
+        "subKpi": null,
+        "personas": [],
+        "triggerPatterns": [
+          "which narrative could become a reputation problem?"
+        ],
+        "requiredFilters": [],
+        "dataSources": [],
+        "apiQuery": null,
+        "calculation": "Momentum \u00d7 reach \u00d7 sentiment \u00d7 prominence",
+        "answerTemplate": "Emerging reputation threat",
+        "chartHint": null,
+        "evidence": null,
+        "followUp": [],
+        "action": [],
+        "kpiCombination": [
+          "Narrative",
+          "Reputation Risk"
+        ]
+      },
+      {
+        "id": "CX-010",
+        "domain": "executiveCrossKpi",
+        "name": "PR Strategy Diagnosis",
+        "kpi": null,
+        "subKpi": null,
+        "personas": [],
+        "triggerPatterns": [
+          "are we doing the right pr activities?"
+        ],
+        "requiredFilters": [],
+        "dataSources": [],
+        "apiQuery": null,
+        "calculation": "Multi-KPI strategic assessment",
+        "answerTemplate": "Strengths, weaknesses and priorities",
+        "chartHint": null,
+        "evidence": null,
+        "followUp": [],
+        "action": [],
+        "kpiCombination": [
+          "All KPIs"
+        ]
+      },
+      {
+        "id": "EX-001",
+        "domain": "executiveCrossKpi",
+        "name": "Executive Summary",
+        "kpi": "Cross-KPI",
+        "subKpi": "Overall Performance",
+        "personas": [
+          "CCO"
+        ],
+        "triggerPatterns": [
+          "give me a pr summary",
+          "how did we perform",
+          "how did we perform?",
+          "summarize pr"
+        ],
+        "requiredFilters": [
+          "Period",
+          "brand",
+          "date"
+        ],
+        "dataSources": [
+          "All KPIs"
+        ],
+        "apiQuery": "GET /executive/summary",
+        "calculation": "Multi-KPI reasoning",
+        "answerTemplate": "\"PR performance was driven by...\"",
+        "chartHint": "KPI cards",
+        "evidence": "Top supporting stories",
+        "followUp": [
+          "What needs attention?"
+        ],
+        "action": [
+          "Prioritized actions"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "EX-002",
+        "domain": "executiveCrossKpi",
+        "name": "Key Wins",
+        "kpi": "Cross-KPI",
+        "subKpi": "Positive Drivers",
+        "personas": [
+          "CCO"
+        ],
+        "triggerPatterns": [
+          "biggest pr wins",
+          "what were our biggest pr wins?"
+        ],
+        "requiredFilters": [
+          "Period",
+          "brand",
+          "date"
+        ],
+        "dataSources": [
+          "All"
+        ],
+        "apiQuery": "GET /executive/wins",
+        "calculation": "Positive impact ranking",
+        "answerTemplate": "\"Top wins were...\"",
+        "chartHint": "Story cards",
+        "evidence": "Story IDs",
+        "followUp": [
+          "Why successful?",
+          "Why were they successful?"
+        ],
+        "action": [
+          "Replicate"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "EX-003",
+        "domain": "executiveCrossKpi",
+        "name": "Key Risks",
+        "kpi": "Cross-KPI",
+        "subKpi": "Negative Drivers",
+        "personas": [
+          "CCO"
+        ],
+        "triggerPatterns": [
+          "what should i worry about",
+          "what should i worry about?"
+        ],
+        "requiredFilters": [
+          "Period",
+          "brand",
+          "date"
+        ],
+        "dataSources": [
+          "All"
+        ],
+        "apiQuery": "GET /executive/risks",
+        "calculation": "Risk ranking",
+        "answerTemplate": "\"The top risks are...\"",
+        "chartHint": "Risk cards",
+        "evidence": "Risk stories",
+        "followUp": [
+          "What action should we take?",
+          "What requires action?"
+        ],
+        "action": [
+          "Escalate"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "EX-004",
+        "domain": "executiveCrossKpi",
+        "name": "Strategic Recommendation",
+        "kpi": "Cross-KPI",
+        "subKpi": "Change Analysis",
+        "personas": [
+          "Manager"
+        ],
+        "triggerPatterns": [
+          "what changed this month?",
+          "what should we do next"
+        ],
+        "requiredFilters": [
+          "Current + previous period",
+          "brand",
+          "date"
+        ],
+        "dataSources": [
+          "All"
+        ],
+        "apiQuery": "GET /executive/recommendations",
+        "calculation": "KPI + narrative + risk reasoning",
+        "answerTemplate": "\"Prioritize these three actions...\"",
+        "chartHint": "Action cards",
+        "evidence": "Supporting evidence",
+        "followUp": [
+          "Expected impact?",
+          "Why did it change?"
+        ],
+        "action": [
+          "Execute"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "EX-005",
+        "domain": "executiveCrossKpi",
+        "name": "Performance Diagnosis",
+        "kpi": "Cross-KPI",
+        "subKpi": "Root Cause",
+        "personas": [
+          "Manager"
+        ],
+        "triggerPatterns": [
+          "why is our pr performance declining?"
+        ],
+        "requiredFilters": [
+          "Brand",
+          "period"
+        ],
+        "dataSources": [
+          "All KPIs"
+        ],
+        "apiQuery": null,
+        "calculation": "Correlation + driver analysis",
+        "answerTemplate": "Root causes",
+        "chartHint": "Driver chart",
+        "evidence": null,
+        "followUp": [
+          "Which issue matters most?"
+        ],
+        "action": [
+          "Correct root cause"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "EX-006",
+        "domain": "executiveCrossKpi",
+        "name": "Strategic Recommendation",
+        "kpi": "Cross-KPI",
+        "subKpi": "Recommendations",
+        "personas": [
+          "CCO"
+        ],
+        "triggerPatterns": [
+          "what should we do next?"
+        ],
+        "requiredFilters": [
+          "Brand",
+          "period"
+        ],
+        "dataSources": [
+          "All KPIs"
+        ],
+        "apiQuery": null,
+        "calculation": "Rules + AI reasoning",
+        "answerTemplate": "Prioritized actions",
+        "chartHint": "Action cards",
+        "evidence": null,
+        "followUp": [
+          "What is the expected impact?"
+        ],
+        "action": [
+          "Execute priorities"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "EX-007",
+        "domain": "executiveCrossKpi",
+        "name": "CEO Briefing",
+        "kpi": "Cross-KPI",
+        "subKpi": "Executive Brief",
+        "personas": [
+          "CCO"
+        ],
+        "triggerPatterns": [
+          "give me a ceo-ready briefing"
+        ],
+        "requiredFilters": [
+          "Period"
+        ],
+        "dataSources": [
+          "All"
+        ],
+        "apiQuery": null,
+        "calculation": "Executive synthesis",
+        "answerTemplate": "Concise leadership briefing",
+        "chartHint": "Brief + KPIs",
+        "evidence": null,
+        "followUp": [
+          "Give me supporting stories"
+        ],
+        "action": [
+          "Prepare executive communication"
+        ],
+        "kpiCombination": []
+      },
+      {
+        "id": "EX-008",
+        "domain": "executiveCrossKpi",
+        "name": "Board Briefing",
+        "kpi": "Cross-KPI",
+        "subKpi": "Strategic Performance",
+        "personas": [
+          "CCO",
+          "Agency"
+        ],
+        "triggerPatterns": [
+          "what should i present to the board?"
+        ],
+        "requiredFilters": [
+          "Quarter"
+        ],
+        "dataSources": [
+          "All"
+        ],
+        "apiQuery": null,
+        "calculation": "KPI + trend + risk synthesis",
+        "answerTemplate": "Board-level summary",
+        "chartHint": "KPI dashboard",
+        "evidence": null,
+        "followUp": [
+          "What evidence supports this?"
+        ],
+        "action": [
+          "Include source-backed insights"
+        ],
+        "kpiCombination": []
+      }
+    ]
+  }
+}

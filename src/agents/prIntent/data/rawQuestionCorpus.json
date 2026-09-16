@@ -1,0 +1,1216 @@
+{
+  "mediaMeasurement": [
+    {
+      "question": "How much media coverage did we receive?",
+      "section": "A. Overall Media Coverage"
+    },
+    {
+      "question": "How many total mentions did we get?",
+      "section": "A. Overall Media Coverage"
+    },
+    {
+      "question": "How many articles mentioned our brand?",
+      "section": "A. Overall Media Coverage"
+    },
+    {
+      "question": "How much coverage did we generate this month?",
+      "section": "A. Overall Media Coverage"
+    },
+    {
+      "question": "How has our media coverage changed over time?",
+      "section": "A. Overall Media Coverage"
+    },
+    {
+      "question": "What is our total media volume this month?",
+      "section": "A. Overall Media Coverage"
+    },
+    {
+      "question": "How does this month's coverage compare with last month?",
+      "section": "A. Overall Media Coverage"
+    },
+    {
+      "question": "How does our coverage compare with the same period last year?",
+      "section": "A. Overall Media Coverage"
+    },
+    {
+      "question": "What was our highest coverage day?",
+      "section": "A. Overall Media Coverage"
+    },
+    {
+      "question": "What caused the spike in coverage?",
+      "section": "A. Overall Media Coverage"
+    },
+    {
+      "question": "What were the major stories driving our coverage?",
+      "section": "A. Overall Media Coverage"
+    },
+    {
+      "question": "Which events generated the most coverage?",
+      "section": "A. Overall Media Coverage"
+    },
+    {
+      "question": "What percentage of coverage was earned versus other media?",
+      "section": "A. Overall Media Coverage"
+    },
+    {
+      "question": "How much organic media coverage did we receive?",
+      "section": "A. Overall Media Coverage"
+    },
+    {
+      "question": "What percentage of our coverage was positive, neutral and negative?",
+      "section": "A. Overall Media Coverage"
+    },
+    {
+      "question": "What are the biggest changes in our media coverage?",
+      "section": "A. Overall Media Coverage"
+    },
+    {
+      "question": "Are we gaining or losing media visibility?",
+      "section": "A. Overall Media Coverage"
+    },
+    {
+      "question": "Is our media presence improving?",
+      "section": "A. Overall Media Coverage"
+    },
+    {
+      "question": "What does our coverage trend look like?",
+      "section": "A. Overall Media Coverage"
+    },
+    {
+      "question": "Summarize our media performance for this period.",
+      "section": "A. Overall Media Coverage"
+    },
+    {
+      "question": "How many people potentially saw our coverage?",
+      "section": "B. Media Reach & Visibility"
+    },
+    {
+      "question": "What is our total media reach?",
+      "section": "B. Media Reach & Visibility"
+    },
+    {
+      "question": "Which stories generated the highest reach?",
+      "section": "B. Media Reach & Visibility"
+    },
+    {
+      "question": "Which media outlets contributed the most reach?",
+      "section": "B. Media Reach & Visibility"
+    },
+    {
+      "question": "What percentage of our coverage came from high-reach publications?",
+      "section": "B. Media Reach & Visibility"
+    },
+    {
+      "question": "Which publications are giving us the most visibility?",
+      "section": "B. Media Reach & Visibility"
+    },
+    {
+      "question": "Which outlets have the highest audience reach for our brand?",
+      "section": "B. Media Reach & Visibility"
+    },
+    {
+      "question": "What is our average reach per article?",
+      "section": "B. Media Reach & Visibility"
+    },
+    {
+      "question": "How has media reach changed over time?",
+      "section": "B. Media Reach & Visibility"
+    },
+    {
+      "question": "Which campaign generated the highest reach?",
+      "section": "B. Media Reach & Visibility"
+    },
+    {
+      "question": "Which announcement generated the most visibility?",
+      "section": "B. Media Reach & Visibility"
+    },
+    {
+      "question": "Which journalists generated the highest-reach stories about us?",
+      "section": "B. Media Reach & Visibility"
+    },
+    {
+      "question": "Which markets generated the highest media reach?",
+      "section": "B. Media Reach & Visibility"
+    },
+    {
+      "question": "Which media channels are driving our visibility?",
+      "section": "B. Media Reach & Visibility"
+    },
+    {
+      "question": "Are we getting enough coverage from high-authority publications?",
+      "section": "B. Media Reach & Visibility"
+    },
+    {
+      "question": "Which are our top media sources?",
+      "section": "C. Media Quality"
+    },
+    {
+      "question": "Which publications covered us the most?",
+      "section": "C. Media Quality"
+    },
+    {
+      "question": "Which publications gave us the strongest coverage?",
+      "section": "C. Media Quality"
+    },
+    {
+      "question": "Which outlets have the highest media authority?",
+      "section": "C. Media Quality"
+    },
+    {
+      "question": "Are we receiving coverage from tier-1 publications?",
+      "section": "C. Media Quality"
+    },
+    {
+      "question": "What percentage of coverage came from tier-1 media?",
+      "section": "C. Media Quality"
+    },
+    {
+      "question": "Which outlets consistently cover our brand?",
+      "section": "C. Media Quality"
+    },
+    {
+      "question": "Which outlets should our PR team build stronger relationships with?",
+      "section": "C. Media Quality"
+    },
+    {
+      "question": "Which media outlets are underperforming compared with previous periods?",
+      "section": "C. Media Quality"
+    },
+    {
+      "question": "What are our strongest media relationships?",
+      "section": "C. Media Quality"
+    },
+    {
+      "question": "Which journalists are covering us most frequently?",
+      "section": "C. Media Quality"
+    },
+    {
+      "question": "Who are the most influential journalists talking about our brand?",
+      "section": "C. Media Quality"
+    },
+    {
+      "question": "Which publications are most influential in our industry?",
+      "section": "C. Media Quality"
+    },
+    {
+      "question": "Are our media mentions coming from credible sources?",
+      "section": "C. Media Quality"
+    },
+    {
+      "question": "How has the quality of our media coverage changed?",
+      "section": "C. Media Quality"
+    },
+    {
+      "question": "What percentage of our coverage came from online media?",
+      "section": "D. Media Type & Channel"
+    },
+    {
+      "question": "How much print coverage did we receive?",
+      "section": "D. Media Type & Channel"
+    },
+    {
+      "question": "How much social media coverage did we receive?",
+      "section": "D. Media Type & Channel"
+    },
+    {
+      "question": "How much blog and forum coverage did we receive?",
+      "section": "D. Media Type & Channel"
+    },
+    {
+      "question": "Which media channel generated the most coverage?",
+      "section": "D. Media Type & Channel"
+    },
+    {
+      "question": "Which media channel generated the highest reach?",
+      "section": "D. Media Type & Channel"
+    },
+    {
+      "question": "Which channel generated the most positive coverage?",
+      "section": "D. Media Type & Channel"
+    },
+    {
+      "question": "How does our performance differ across media channels?",
+      "section": "D. Media Type & Channel"
+    },
+    {
+      "question": "What is our online versus social media visibility?",
+      "section": "D. Media Type & Channel"
+    },
+    {
+      "question": "Which channel should we focus on more?",
+      "section": "D. Media Type & Channel"
+    },
+    {
+      "question": "Where are we getting the most media coverage?",
+      "section": "E. Geography"
+    },
+    {
+      "question": "Which countries are talking about our brand?",
+      "section": "E. Geography"
+    },
+    {
+      "question": "Which regions have the highest media reach?",
+      "section": "E. Geography"
+    },
+    {
+      "question": "Which markets have the most positive coverage?",
+      "section": "E. Geography"
+    },
+    {
+      "question": "Which markets have the most negative coverage?",
+      "section": "E. Geography"
+    },
+    {
+      "question": "How does our media performance differ by country?",
+      "section": "E. Geography"
+    },
+    {
+      "question": "Which markets are under-covered?",
+      "section": "E. Geography"
+    },
+    {
+      "question": "Which regions should our PR team prioritize?",
+      "section": "E. Geography"
+    },
+    {
+      "question": "Where is our reputation strongest?",
+      "section": "E. Geography"
+    },
+    {
+      "question": "Where are we facing reputation challenges?",
+      "section": "E. Geography"
+    },
+    {
+      "question": "How many articles did we get?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "Who talked about us?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "Which news sites mentioned us?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "Was the coverage good or bad?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "What were people saying about us?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "What were the biggest stories?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "Which story got the most attention?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "Which article reached the most people?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "Who was talking positively about us?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "Who was talking negatively about us?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "Why did our coverage increase?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "Why did our coverage decrease?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "What caused this spike?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "What should I show my manager?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "Which stories should I highlight?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "Which journalists should I follow up with?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "Which media outlets are important for us?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "Are we doing better than our competitors?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "What are people talking about most?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "What should I be worried about?",
+      "section": "C. Reputation Risk"
+    }
+  ],
+  "prImpact": [
+    {
+      "question": "What is our PR Impact Score?",
+      "section": "A. Overall PR Impact"
+    },
+    {
+      "question": "How did our PR Impact perform this month?",
+      "section": "A. Overall PR Impact"
+    },
+    {
+      "question": "Has our PR Impact Score improved?",
+      "section": "A. Overall PR Impact"
+    },
+    {
+      "question": "What is driving our PR Impact Score?",
+      "section": "A. Overall PR Impact"
+    },
+    {
+      "question": "What is hurting our PR Impact Score?",
+      "section": "A. Overall PR Impact"
+    },
+    {
+      "question": "Which stories had the highest PR impact?",
+      "section": "A. Overall PR Impact"
+    },
+    {
+      "question": "Which stories had the lowest PR impact?",
+      "section": "A. Overall PR Impact"
+    },
+    {
+      "question": "Which campaigns generated the highest PR impact?",
+      "section": "A. Overall PR Impact"
+    },
+    {
+      "question": "Which announcements had the greatest PR impact?",
+      "section": "A. Overall PR Impact"
+    },
+    {
+      "question": "How does our PR impact compare with last month?",
+      "section": "A. Overall PR Impact"
+    },
+    {
+      "question": "How does our PR impact compare with last year?",
+      "section": "A. Overall PR Impact"
+    },
+    {
+      "question": "Which PR activities are contributing most to impact?",
+      "section": "A. Overall PR Impact"
+    },
+    {
+      "question": "Are we generating high-impact coverage or just high-volume coverage?",
+      "section": "A. Overall PR Impact"
+    },
+    {
+      "question": "Is our media coverage translating into meaningful PR impact?",
+      "section": "A. Overall PR Impact"
+    },
+    {
+      "question": "Summarize our PR impact performance.",
+      "section": "A. Overall PR Impact"
+    },
+    {
+      "question": "How prominent is our brand in the coverage?",
+      "section": "B. Brand Prominence"
+    },
+    {
+      "question": "How often is our brand the main focus of an article?",
+      "section": "B. Brand Prominence"
+    },
+    {
+      "question": "What percentage of coverage prominently features our brand?",
+      "section": "B. Brand Prominence"
+    },
+    {
+      "question": "Which stories gave our brand the strongest prominence?",
+      "section": "B. Brand Prominence"
+    },
+    {
+      "question": "Are we being mentioned prominently or just in passing?",
+      "section": "B. Brand Prominence"
+    },
+    {
+      "question": "How has brand prominence changed over time?",
+      "section": "B. Brand Prominence"
+    },
+    {
+      "question": "Which publications give us the strongest brand prominence?",
+      "section": "B. Brand Prominence"
+    },
+    {
+      "question": "Which campaigns generated the highest brand prominence?",
+      "section": "B. Brand Prominence"
+    },
+    {
+      "question": "Which competitors have stronger brand prominence?",
+      "section": "B. Brand Prominence"
+    },
+    {
+      "question": "How can we improve our brand prominence?",
+      "section": "B. Brand Prominence"
+    },
+    {
+      "question": "Which executives are generating the most media impact?",
+      "section": "C. Spokesperson Impact"
+    },
+    {
+      "question": "Which spokesperson received the most coverage?",
+      "section": "C. Spokesperson Impact"
+    },
+    {
+      "question": "Which spokesperson has the highest media visibility?",
+      "section": "C. Spokesperson Impact"
+    },
+    {
+      "question": "Which spokesperson generates the most positive coverage?",
+      "section": "C. Spokesperson Impact"
+    },
+    {
+      "question": "Which executives are quoted most frequently?",
+      "section": "C. Spokesperson Impact"
+    },
+    {
+      "question": "Which spokesperson has the strongest media presence?",
+      "section": "C. Spokesperson Impact"
+    },
+    {
+      "question": "Which executives are associated with the strongest narratives?",
+      "section": "C. Spokesperson Impact"
+    },
+    {
+      "question": "How has our CEO's media visibility changed?",
+      "section": "C. Spokesperson Impact"
+    },
+    {
+      "question": "Which spokesperson generated the highest-reach stories?",
+      "section": "C. Spokesperson Impact"
+    },
+    {
+      "question": "Which executives should have greater media visibility?",
+      "section": "C. Spokesperson Impact"
+    },
+    {
+      "question": "What is our overall media sentiment?",
+      "section": "D. Sentiment & Impact"
+    },
+    {
+      "question": "How much positive coverage did we receive?",
+      "section": "D. Sentiment & Impact"
+    },
+    {
+      "question": "How much negative coverage did we receive?",
+      "section": "D. Sentiment & Impact"
+    },
+    {
+      "question": "What is driving negative sentiment?",
+      "section": "D. Sentiment & Impact"
+    },
+    {
+      "question": "What is driving positive sentiment?",
+      "section": "D. Sentiment & Impact"
+    },
+    {
+      "question": "Which stories are damaging our PR impact?",
+      "section": "D. Sentiment & Impact"
+    },
+    {
+      "question": "Which stories are improving our PR impact?",
+      "section": "D. Sentiment & Impact"
+    },
+    {
+      "question": "Which themes have the strongest positive sentiment?",
+      "section": "D. Sentiment & Impact"
+    },
+    {
+      "question": "Which themes have the strongest negative sentiment?",
+      "section": "D. Sentiment & Impact"
+    },
+    {
+      "question": "How has sentiment changed over time?",
+      "section": "D. Sentiment & Impact"
+    }
+  ],
+  "narrativeIntelligence": [
+    {
+      "question": "How well are our communications messages appearing in the media?",
+      "section": "A. Message Congruence"
+    },
+    {
+      "question": "What is our Message Congruence Score?",
+      "section": "A. Message Congruence"
+    },
+    {
+      "question": "Are the media communicating our intended messages?",
+      "section": "A. Message Congruence"
+    },
+    {
+      "question": "Which of our key messages are landing?",
+      "section": "A. Message Congruence"
+    },
+    {
+      "question": "Which messages are not landing?",
+      "section": "A. Message Congruence"
+    },
+    {
+      "question": "What percentage of coverage aligns with our intended narrative?",
+      "section": "A. Message Congruence"
+    },
+    {
+      "question": "Where is there a gap between our intended message and media narrative?",
+      "section": "A. Message Congruence"
+    },
+    {
+      "question": "What messages are being amplified by the media?",
+      "section": "A. Message Congruence"
+    },
+    {
+      "question": "What messages are being ignored?",
+      "section": "A. Message Congruence"
+    },
+    {
+      "question": "What messages are being distorted?",
+      "section": "A. Message Congruence"
+    },
+    {
+      "question": "Which media outlets are most aligned with our messaging?",
+      "section": "A. Message Congruence"
+    },
+    {
+      "question": "Which outlets are interpreting our message differently?",
+      "section": "A. Message Congruence"
+    },
+    {
+      "question": "Which journalists are reinforcing our intended narrative?",
+      "section": "A. Message Congruence"
+    },
+    {
+      "question": "Which narratives are emerging that we did not communicate?",
+      "section": "A. Message Congruence"
+    },
+    {
+      "question": "What unintended narratives are emerging around our brand?",
+      "section": "A. Message Congruence"
+    },
+    {
+      "question": "What are the dominant narratives around our brand?",
+      "section": "B. Narrative Analysis"
+    },
+    {
+      "question": "What are the top themes associated with our brand?",
+      "section": "B. Narrative Analysis"
+    },
+    {
+      "question": "What are people talking about when they mention us?",
+      "section": "B. Narrative Analysis"
+    },
+    {
+      "question": "Which themes are gaining momentum?",
+      "section": "B. Narrative Analysis"
+    },
+    {
+      "question": "Which themes are declining?",
+      "section": "B. Narrative Analysis"
+    },
+    {
+      "question": "What new narratives are emerging?",
+      "section": "B. Narrative Analysis"
+    },
+    {
+      "question": "What narratives are becoming dominant?",
+      "section": "B. Narrative Analysis"
+    },
+    {
+      "question": "Which narratives are positive?",
+      "section": "B. Narrative Analysis"
+    },
+    {
+      "question": "Which narratives are negative?",
+      "section": "B. Narrative Analysis"
+    },
+    {
+      "question": "Which narratives could become a reputation risk?",
+      "section": "B. Narrative Analysis"
+    },
+    {
+      "question": "What is the media saying about our brand that we are not saying ourselves?",
+      "section": "B. Narrative Analysis"
+    },
+    {
+      "question": "What is the biggest gap between our PR strategy and media conversation?",
+      "section": "B. Narrative Analysis"
+    },
+    {
+      "question": "What are journalists focusing on instead of our intended message?",
+      "section": "B. Narrative Analysis"
+    },
+    {
+      "question": "Which topics are we successfully owning?",
+      "section": "B. Narrative Analysis"
+    },
+    {
+      "question": "Which topics are our competitors owning?",
+      "section": "B. Narrative Analysis"
+    },
+    {
+      "question": "Did our campaign message reach the media?",
+      "section": "C. Campaign / Launch Message Analysis"
+    },
+    {
+      "question": "Did the media pick up our campaign's key messages?",
+      "section": "C. Campaign / Launch Message Analysis"
+    },
+    {
+      "question": "Which campaign messages performed best?",
+      "section": "C. Campaign / Launch Message Analysis"
+    },
+    {
+      "question": "Which campaign messages were missed?",
+      "section": "C. Campaign / Launch Message Analysis"
+    },
+    {
+      "question": "How closely did media coverage reflect our campaign objectives?",
+      "section": "C. Campaign / Launch Message Analysis"
+    },
+    {
+      "question": "What was the dominant media narrative around our campaign?",
+      "section": "C. Campaign / Launch Message Analysis"
+    },
+    {
+      "question": "What unintended narrative emerged from the campaign?",
+      "section": "C. Campaign / Launch Message Analysis"
+    },
+    {
+      "question": "Which media outlets amplified our campaign message?",
+      "section": "C. Campaign / Launch Message Analysis"
+    },
+    {
+      "question": "Which journalists reinforced our campaign positioning?",
+      "section": "C. Campaign / Launch Message Analysis"
+    },
+    {
+      "question": "Did our campaign create the narrative we intended?",
+      "section": "C. Campaign / Launch Message Analysis"
+    },
+    {
+      "question": "What should we change in our next campaign based on media response?",
+      "section": "C. Campaign / Launch Message Analysis"
+    }
+  ],
+  "reputationIndex": [
+    {
+      "question": "What is our Reputation Index?",
+      "section": "A. Overall Reputation"
+    },
+    {
+      "question": "How healthy is our brand reputation?",
+      "section": "A. Overall Reputation"
+    },
+    {
+      "question": "Has our reputation improved or declined?",
+      "section": "A. Overall Reputation"
+    },
+    {
+      "question": "What is driving our Reputation Index?",
+      "section": "A. Overall Reputation"
+    },
+    {
+      "question": "What is hurting our reputation?",
+      "section": "A. Overall Reputation"
+    },
+    {
+      "question": "What is strengthening our reputation?",
+      "section": "A. Overall Reputation"
+    },
+    {
+      "question": "How does our reputation compare with last month?",
+      "section": "A. Overall Reputation"
+    },
+    {
+      "question": "How does our reputation compare with last year?",
+      "section": "A. Overall Reputation"
+    },
+    {
+      "question": "What are the biggest reputation risks right now?",
+      "section": "A. Overall Reputation"
+    },
+    {
+      "question": "What are the biggest reputation opportunities?",
+      "section": "A. Overall Reputation"
+    },
+    {
+      "question": "What are the key factors influencing our reputation?",
+      "section": "A. Overall Reputation"
+    },
+    {
+      "question": "What is the overall health of our reputation?",
+      "section": "A. Overall Reputation"
+    },
+    {
+      "question": "Summarize our reputation performance.",
+      "section": "A. Overall Reputation"
+    },
+    {
+      "question": "Give me an executive summary of our reputation.",
+      "section": "A. Overall Reputation"
+    },
+    {
+      "question": "What are the biggest drivers of our reputation?",
+      "section": "B. Reputation Drivers"
+    },
+    {
+      "question": "Which themes are improving our reputation?",
+      "section": "B. Reputation Drivers"
+    },
+    {
+      "question": "Which themes are damaging our reputation?",
+      "section": "B. Reputation Drivers"
+    },
+    {
+      "question": "Which stakeholders are influencing our reputation?",
+      "section": "B. Reputation Drivers"
+    },
+    {
+      "question": "Which media outlets are influencing our reputation?",
+      "section": "B. Reputation Drivers"
+    },
+    {
+      "question": "Which executives are influencing our reputation?",
+      "section": "B. Reputation Drivers"
+    },
+    {
+      "question": "Which stories have changed our reputation the most?",
+      "section": "B. Reputation Drivers"
+    },
+    {
+      "question": "What events caused the biggest reputation change?",
+      "section": "B. Reputation Drivers"
+    },
+    {
+      "question": "Which issues are most closely associated with our reputation?",
+      "section": "B. Reputation Drivers"
+    },
+    {
+      "question": "What is the biggest reputation issue we need to address?",
+      "section": "B. Reputation Drivers"
+    },
+    {
+      "question": "Are there any emerging reputation risks?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "What are the biggest negative narratives around our brand?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "Which negative themes are gaining momentum?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "Is there an emerging crisis around our brand?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "Which issue has the potential to become a crisis?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "Which negative stories are spreading fastest?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "Which stories have unusually high reach or engagement?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "What reputation risks should our communications team monitor?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "Which negative narratives require immediate attention?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "What should our PR team respond to first?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "What reputation risks are increasing compared with last week?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "Are any previously minor issues becoming major reputation risks?",
+      "section": "C. Reputation Risk"
+    }
+  ],
+  "competitiveIntelligence": [
+    {
+      "question": "What is our Share of Voice?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "How does our Share of Voice compare with competitors?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "Who has the highest media visibility?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "Which competitor is gaining the most coverage?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "Which competitor is losing media visibility?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "How does our media reach compare with competitors?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "How does our sentiment compare with competitors?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "Which competitor gets more positive coverage than us?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "Which competitor has stronger media prominence?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "Which competitor has stronger PR impact?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "What narratives are competitors owning?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "Which themes are competitors associated with?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "Which competitor has the strongest narrative positioning?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "What messages are competitors successfully communicating?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "Where are we losing narrative share to competitors?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "Which topics can we potentially own?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "Which competitor has stronger Message Congruence?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "How does our Reputation Index compare with competitors?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "What can we learn from our competitors' PR performance?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "Give me a competitive PR benchmark.",
+      "section": "C. Reputation Risk"
+    }
+  ],
+  "campaign": [
+    {
+      "question": "How did our campaign perform?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "How much coverage did the campaign generate?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "What was the campaign's media reach?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "What was the campaign's PR Impact Score?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "What was the sentiment around the campaign?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "What were the top themes around the campaign?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "Did the campaign achieve its intended message?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "What was the campaign's Message Congruence Score?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "Which media outlets covered the campaign?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "Which journalists covered the campaign?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "Which stories performed best?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "What were the strongest campaign narratives?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "What negative narratives emerged?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "What did the media misunderstand about the campaign?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "What should we repeat in the next campaign?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "What should we change in the next campaign?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "Was this campaign more successful than our previous campaign?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "Compare the performance of our campaigns.",
+      "section": "C. Reputation Risk"
+    }
+  ],
+  "executiveCrossKpi": [
+    {
+      "question": "Give me a summary of our PR performance.",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "What should I know about our media performance this month?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "What changed this month?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "What are the three biggest PR developments?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "What are our biggest PR wins?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "What are our biggest PR risks?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "What should I be concerned about?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "What should my communications team focus on?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "What requires immediate attention?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "Where are we performing well?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "Where are we underperforming?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "What are the biggest opportunities for us?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "Which stories should I read first?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "Which issues could affect our reputation?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "How are we performing against our PR objectives?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "Are our communications efforts working?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "Is our PR investment generating impact?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "What should we do differently next month?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "Give me five actions for the communications team.",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "Prepare a CEO-level PR briefing.",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "How did our client's PR performance change this month?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "Give me the client's monthly PR summary.",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "What are the client's biggest media wins?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "What are the client's biggest reputation risks?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "What should I include in the client report?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "What are the key insights I should present to the client?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "What changed since the last client review?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "Which stories should I highlight in the client presentation?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "What should the client know about their competitors?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "How did the client perform against competitors?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "What are the client's strongest narratives?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "Which messages are not landing?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "What recommendations should I give the client?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "What are the top three recommendations for the client?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "Create a client-ready PR performance summary.",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "Which media relationships are driving our results?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "Which journalists should we prioritize?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "Which publications should we target next?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "Which stories generated the strongest engagement?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "Which narratives should we amplify?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "Which negative narratives should we address?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "Which spokesperson should lead the response?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "Which topics should our CEO speak about?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "What media opportunities are emerging?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "What are the biggest gaps in our media strategy?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "Which markets need greater media attention?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "Which campaigns are generating the strongest returns?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "Which PR activities are producing the highest impact?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "What should we prioritize for the next quarter?",
+      "section": "C. Reputation Risk"
+    },
+    {
+      "question": "What should our PR strategy focus on next?",
+      "section": "C. Reputation Risk"
+    }
+  ]
+}

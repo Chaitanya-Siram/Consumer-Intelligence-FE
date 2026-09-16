@@ -1,0 +1,92 @@
+name: Deployment to dev
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: Build and Deploy
+
+jobs:
+  build:
+    name: Build and Deploy
+    runs-on: ubuntu-latest
+    environment: dev
+    timeout-minutes: 15 # Set job timeout to 15 minutes
+
+    env:
+      NODE_VERSION: ${{ vars.NODE_VERSION }}
+      S3_BUCKET: ${{ vars.S3_BUCKET }}
+      CDN_DISTRIBUTION_ID: ${{ vars.CDN_DISTRIBUTION_ID }}
+      AWS_REGION: ${{ vars.AWS_REGION }}
+      VITE_PEXELS_API_KEY: ${{ vars.VITE_PEXELS_API_KEY }}
+      VITE_API_BASE_URL: ${{ vars.VITE_API_BASE_URL }}
+      VITE_AZURE_OPENAI_ENDPOINT: ${{ vars.VITE_AZURE_OPENAI_ENDPOINT }}
+      VITE_AZURE_OPENAI_API_KEY: ${{ vars.VITE_AZURE_OPENAI_API_KEY }}
+      VITE_AZURE_OPENAI_API_VERSION: ${{ vars.VITE_AZURE_OPENAI_API_VERSION }}
+      VITE_AZURE_OPENAI_MODEL: ${{ vars.VITE_AZURE_OPENAI_MODEL }}
+      VITE_USE_AZURE_PROXY: ${{ vars.VITE_USE_AZURE_PROXY}}
+      DISABLE_ESLINT_PLUGIN: true
+      CI: false
+
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Install Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Get Yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        id: yarn-cache
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      - name: Yarn install
+        run: yarn --prefer-offline
+
+      - name: Build
+        run: yarn build
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Deploy
+        run: |
+          aws s3 rm s3://${{ env.S3_BUCKET }}/ --recursive
+          aws s3 cp dist s3://${{ env.S3_BUCKET }} --cache-control 'public, max-age=31104000' --recursive
+          # Delete all .map files inside static/js/ folder
+          aws s3 rm s3://${{ env.S3_BUCKET }}/static/js/ --recursive --exclude "*" --include "*.map"
+          aws configure set preview.cloudfront true
+          aws cloudfront create-invalidation --distribution-id ${{ env.CDN_DISTRIBUTION_ID }} --paths "/*"
+          echo "Running script..."
+          sleep 65  # Simulating a long-running process that exceeds 15 minutes
+  notify:
+    if: failure() || success()
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Send notification to Microsoft Teams
+        uses: thechetantalwar/teams-notify@v2
+        with:
+          teams_webhook_url: ${{ secrets.TEAM_HOOK }}
+          message: 'GitHub Action Build Number: ${{ github.run_number }}, Build & Deploy status: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}. Pushed by: ${{ github.actor }} at ${{ github.event.head_commit.timestamp }}. Deployment: ${{ needs.build.result }}.'
