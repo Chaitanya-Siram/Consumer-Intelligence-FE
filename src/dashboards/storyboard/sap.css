@@ -1,0 +1,279 @@
+/* Shifting Audience Priorities — blocks unique to this storyboard.
+   Inherits every token and base class from tei.css via the `.sb-tei` scope;
+   these rules only add the gauge, tiles, band meter and benchmark bars. */
+
+.sb-tei .lead {
+  margin: 0 0 16px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text-2, inherit);
+}
+.sb-tei .lead b {
+  color: var(--c1);
+  font-weight: 700;
+}
+
+/* ---- gauge ------------------------------------------------------------ */
+.sb-tei .gauge {
+  display: grid;
+  gap: 8px;
+  justify-items: center;
+  text-align: center;
+}
+.sb-tei .gauge svg {
+  width: 100%;
+  max-width: 320px;
+  height: auto;
+  overflow: visible;
+}
+.sb-tei .gauge-track {
+  fill: none;
+  stroke: var(--line, rgba(127, 127, 127, 0.25));
+  stroke-width: 16;
+  stroke-linecap: round;
+}
+.sb-tei .gauge-fill {
+  fill: none;
+  stroke: var(--c1);
+  stroke-width: 16;
+  stroke-linecap: round;
+}
+.sb-tei .gauge-prior circle {
+  fill: var(--bg-card, #fff);
+  stroke: var(--c2);
+  stroke-width: 3;
+}
+.sb-tei .gauge-value {
+  font-size: 40px;
+  font-weight: 800;
+  fill: currentColor;
+}
+.sb-tei .gauge-label {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  fill: var(--text-muted, #94a3b8);
+}
+.sb-tei .gauge-min,
+.sb-tei .gauge-max {
+  font-size: 11px;
+  fill: var(--text-muted, #94a3b8);
+}
+.sb-tei .gauge-meta {
+  display: grid;
+  gap: 8px;
+  justify-items: center;
+}
+.sb-tei .gauge-sub {
+  font-size: 13px;
+  color: var(--text-muted, #94a3b8);
+}
+.sb-tei .gauge-note {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.55;
+  max-width: 44ch;
+}
+
+/* ---- parameter list --------------------------------------------------- */
+.sb-tei .params {
+  display: grid;
+  gap: 12px;
+}
+.sb-tei .param {
+  display: grid;
+  grid-template-columns: 34px 1fr;
+  gap: 12px;
+  align-items: start;
+  padding-top: 12px;
+  border-top: 1px solid var(--line, rgba(127, 127, 127, 0.2));
+}
+.sb-tei .param:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+.sb-tei .param-n {
+  font-size: 12px;
+  color: var(--c1);
+  padding-top: 3px;
+}
+.sb-tei .param h5 {
+  margin: 0 0 4px;
+  font-size: 14px;
+  font-weight: 700;
+}
+.sb-tei .param p {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--text-2, inherit);
+}
+
+/* ---- tracking tiles --------------------------------------------------- */
+.sb-tei .tiles {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+@media (max-width: 900px) {
+  .sb-tei .tiles {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 520px) {
+  .sb-tei .tiles {
+    grid-template-columns: 1fr;
+  }
+}
+.sb-tei .tile {
+  border: 1px solid var(--line, rgba(127, 127, 127, 0.2));
+  border-radius: 16px;
+  padding: 18px 18px 16px;
+  background: var(--bg-card, transparent);
+  display: grid;
+  gap: 10px;
+}
+.sb-tei .tile-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted, #94a3b8);
+}
+.sb-tei .tile-ico {
+  display: inline-grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--c1) 14%, transparent);
+  color: var(--c1);
+  font-size: 14px;
+}
+.sb-tei .tile-val {
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 1;
+}
+.sb-tei .tile-val small {
+  font-size: 13px;
+  font-weight: 600;
+  margin-left: 6px;
+  color: var(--text-muted, #94a3b8);
+}
+.sb-tei .tile-trend {
+  font-size: 13px;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+.sb-tei .tile .arrow {
+  font-size: 10px;
+}
+.sb-tei .tile.dir-up .tile-trend {
+  color: var(--pos);
+}
+.sb-tei .tile.dir-down .tile-trend {
+  color: var(--neg);
+}
+.sb-tei .tile.dir-flat .tile-trend {
+  color: var(--text-muted, #94a3b8);
+}
+
+/* ---- band meter ------------------------------------------------------- */
+.sb-tei .meter {
+  display: grid;
+  gap: 12px;
+}
+.sb-tei .meter-top {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+.sb-tei .meter-score {
+  font-size: 44px;
+  font-weight: 800;
+  line-height: 1;
+}
+.sb-tei .meter-track {
+  position: relative;
+  display: flex;
+  height: 14px;
+  border-radius: 999px;
+  overflow: visible;
+}
+.sb-tei .meter-track .band {
+  height: 100%;
+  opacity: 0.75;
+}
+.sb-tei .meter-track .band:first-child {
+  border-radius: 999px 0 0 999px;
+}
+.sb-tei .meter-track .band:last-child {
+  border-radius: 0 999px 999px 0;
+}
+.sb-tei .meter-pin {
+  position: absolute;
+  top: -5px;
+  width: 4px;
+  height: 24px;
+  margin-left: -2px;
+  border-radius: 2px;
+  background: currentColor;
+  box-shadow: 0 0 0 3px var(--bg-card, #fff);
+}
+.sb-tei .meter-scale {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--text-muted, #94a3b8);
+}
+.sb-tei .meter-text {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+/* ---- benchmark bars --------------------------------------------------- */
+.sb-tei .bench {
+  display: grid;
+  gap: 12px;
+}
+.sb-tei .bench-row {
+  display: grid;
+  grid-template-columns: minmax(120px, 34%) 1fr 44px;
+  gap: 12px;
+  align-items: center;
+  font-size: 13.5px;
+}
+.sb-tei .bench-track {
+  height: 12px;
+  border-radius: 999px;
+  background: var(--line, rgba(127, 127, 127, 0.18));
+  overflow: hidden;
+}
+.sb-tei .bench-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: var(--c6);
+  transition: width 0.4s ease;
+}
+.sb-tei .bench-row.brand .bench-fill {
+  background: var(--c1);
+}
+.sb-tei .bench-row.brand .bench-name {
+  font-weight: 700;
+}
+.sb-tei .bench-val {
+  text-align: right;
+}
+.sb-tei .bench-verdict {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 6px;
+  font-size: 12.5px;
+  color: var(--text-muted, #94a3b8);
+}

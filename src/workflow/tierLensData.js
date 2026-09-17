@@ -120,7 +120,7 @@ export const TIER2_LENSES = {
   ],
   advanced_metrics: [
     { label: 'Emerging Themes', description: 'The subjects gaining traction before they become mainstream.', image: IMG('1460925895917-afdab827c52f') },
-    { label: 'Shifting Audience Priorities', description: "What your audience cares about now, and how that's changing.", image: IMG('1519389950473-47ba0277781c') },
+    { label: 'Shifting Audience Priorities', description: "What your audience cares about now, and how that's changing.", route: 'priorities', image: IMG('1519389950473-47ba0277781c') },
     { label: 'Content Patterns', description: 'The formats and angles driving engagement right now.', image: IMG('1611162616305-c69b3fa7fbe0') },
     { label: 'Campaign Analysis', description: 'How specific campaigns are performing against the wider conversation.', image: IMG('1552664730-d307ca884978') },
   ],
@@ -166,7 +166,7 @@ export const TIER2_LENSES = {
     },
   ],
   issues_intelligence: [
-    { label: 'Track Emerging Issues', description: 'Early signals of a brewing issue, before it escalates.', image: IMG('1583321500900-82807e458f3c') },
+    { label: 'Track Emerging Issues', description: 'Early signals of a brewing issue, before it escalates.', route: 'issues', image: IMG('1583321500900-82807e458f3c') },
     { label: 'Categorized', description: 'Issues grouped by type and root cause.', image: IMG('1553877522-43269d4ea984') },
     { label: 'Real-time', description: 'Live monitoring as an issue develops.', image: IMG('1504711434969-e33886168f5c') },
   ],

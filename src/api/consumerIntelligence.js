@@ -35,6 +35,8 @@ export const CI_LENS_KEYS = [
   'brand_competitive_intel',
   'market_intelligence',
   'network_map',
+  'track_emerging_issues',
+  'shifting_audience_priorities',
 ]
 
 // Media Intelligence lens keys (existing, untouched).
@@ -52,17 +54,17 @@ export const TIER1_TO_CI_KEYS = {
   brand_intelligence: ['brand_intelligence', 'brand_health_storyboard', 'brand_competitive_intel'],
   market_intelligence: ['market_intelligence'],
   network_map_analysis: ['network_map'],
+  issues_intelligence: ['track_emerging_issues'],
+  advanced_metrics: ['shifting_audience_priorities'],
 }
 
 // Tier 1 pillars that have no backend yet — the dashboards page shows a
 // "Coming soon" card for them. (`reputation_index` is an MI lens, not listed.)
 export const COMING_SOON_TIER1 = [
   'landscape_analysis',
-  'advanced_metrics',
   'influencer_mapping',
   'whitespace_gap_analysis',
   'regional_intelligence',
-  'issues_intelligence',
   'crisis_solutioning',
 ]
 

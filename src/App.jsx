@@ -43,6 +43,8 @@ import MarketIntelligenceScreen from "./screens/MarketIntelligenceScreen.jsx";
 import IntelLensScreen from "./screens/IntelLensScreen.jsx";
 import NetworkMapScreen from "./screens/NetworkMapScreen.jsx";
 import BrandHealthScreen from "./screens/BrandHealthScreen.jsx";
+import TrackEmergingIssuesScreen from "./screens/TrackEmergingIssuesScreen.jsx";
+import ShiftingAudiencePrioritiesScreen from "./screens/ShiftingAudiencePrioritiesScreen.jsx";
 
 function isAuthenticated() {
   const token = localStorage.getItem("auth_token");
@@ -1250,6 +1252,38 @@ function BrandHealthRoute() {
   );
 }
 
+// Issues Intelligence → Track Emerging Issues (Tier 2 storyboard).
+function IssuesRoute() {
+  return (
+    <CIDashboardRoute activeTab="track_emerging_issues">
+      {({ chartsData, chartsLoading, chartsError, onBack }) => (
+        <TrackEmergingIssuesScreen
+          chartsData={chartsData}
+          chartsLoading={chartsLoading}
+          chartsError={chartsError}
+          onBack={onBack}
+        />
+      )}
+    </CIDashboardRoute>
+  );
+}
+
+// Advanced Metrics → Shifting Audience Priorities (Tier 2 storyboard).
+function PrioritiesRoute() {
+  return (
+    <CIDashboardRoute activeTab="shifting_audience_priorities">
+      {({ chartsData, chartsLoading, chartsError, onBack }) => (
+        <ShiftingAudiencePrioritiesScreen
+          chartsData={chartsData}
+          chartsLoading={chartsLoading}
+          chartsError={chartsError}
+          onBack={onBack}
+        />
+      )}
+    </CIDashboardRoute>
+  );
+}
+
 function MarketIntelligenceRoute() {
   return (
     <CIDashboardRoute activeTab="market_intelligence">
@@ -1554,6 +1588,22 @@ export default function App() {
             element={
               <ProtectedRoute>
                 <BrandHealthRoute />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/:projectId/sessions/:sessionId/issues"
+            element={
+              <ProtectedRoute>
+                <IssuesRoute />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/:projectId/sessions/:sessionId/priorities"
+            element={
+              <ProtectedRoute>
+                <PrioritiesRoute />
               </ProtectedRoute>
             }
           />

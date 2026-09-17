@@ -8,3 +8,6 @@ dist-ssr
 
 # tutorial recorder scratch output
 .tutorial-build/
+
+# playwright MCP screenshots/snapshots
+.playwright-mcp/

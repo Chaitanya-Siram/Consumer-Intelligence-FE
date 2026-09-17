@@ -27,6 +27,10 @@ export const paths = {
   network: (pid, sid) => `/${pid}/sessions/${sid}/network`,
   health: (pid, sid) => `/${pid}/sessions/${sid}/health`,
   brandintel: (pid, sid) => `/${pid}/sessions/${sid}/brand-intel`,
+  // Issues Intelligence → Track Emerging Issues (Tier 2)
+  issues: (pid, sid) => `/${pid}/sessions/${sid}/issues`,
+  // Advanced Metrics → Shifting Audience Priorities (Tier 2)
+  priorities: (pid, sid) => `/${pid}/sessions/${sid}/priorities`,
   marketintel: (pid, sid) => `/${pid}/sessions/${sid}/market-intelligence`,
   // Tier 2 gallery for a Tier 1 CI pillar (brand_intelligence, market_intelligence, ...)
   intel: (pid, sid, tier1Key) => `/${pid}/sessions/${sid}/intel/${tier1Key}`,
