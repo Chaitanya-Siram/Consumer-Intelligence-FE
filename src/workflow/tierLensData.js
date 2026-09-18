@@ -137,9 +137,9 @@ export const TIER2_LENSES = {
     { label: 'Narrative Participation', description: "Who's amplifying your story, and who's contesting it.", image: IMG('1522202176988-66273c2fd55f') },
   ],
   whitespace_gap_analysis: [
-    { label: 'Audience Expectation', description: "What your audience expects that isn't being delivered.", image: IMG('1553877522-43269d4ea984') },
-    { label: 'Brand Messaging', description: 'Where your message diverges from what resonates.', image: IMG('1504711434969-e33886168f5c') },
-    { label: 'Brand Performance', description: 'The gap between brand promise and lived audience experience.', image: IMG('1460925895917-afdab827c52f') },
+    { label: 'Audience Expectation', description: "What your audience expects that isn't being delivered.", route: 'expectations', image: IMG('1553877522-43269d4ea984') },
+    { label: 'Brand Messaging', description: 'Where your message diverges from what resonates.', route: 'messaging', image: IMG('1504711434969-e33886168f5c') },
+    { label: 'Brand Performance', description: 'The gap between brand promise and lived audience experience.', route: 'performance', image: IMG('1460925895917-afdab827c52f') },
   ],
   regional_intelligence: [
     { label: 'State-Level Sentiment', description: 'Sentiment broken down market by market.', image: IMG('1524661135-423995f22d0b') },

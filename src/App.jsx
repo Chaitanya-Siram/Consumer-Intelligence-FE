@@ -48,6 +48,9 @@ import ShiftingAudiencePrioritiesScreen from "./screens/ShiftingAudiencePrioriti
 import PerceptionAnalysisScreen from "./screens/PerceptionAnalysisScreen.jsx";
 import DominantNarrativesScreen from "./screens/DominantNarrativesScreen.jsx";
 import BrandPerceptionScreen from "./screens/BrandPerceptionScreen.jsx";
+import AudienceExpectationScreen from "./screens/AudienceExpectationScreen.jsx";
+import BrandMessagingScreen from "./screens/BrandMessagingScreen.jsx";
+import BrandPerformanceScreen from "./screens/BrandPerformanceScreen.jsx";
 
 function isAuthenticated() {
   const token = localStorage.getItem("auth_token");
@@ -1335,6 +1338,25 @@ function BrandPerceptionRoute() {
   );
 }
 
+// Whitespace & Gap Analysis → three Tier 2 storyboards.
+function WgRoute({ activeTab, Screen }) {
+  return (
+    <CIDashboardRoute activeTab={activeTab}>
+      {({ chartsData, chartsLoading, chartsError, onBack }) => (
+        <Screen
+          chartsData={chartsData}
+          chartsLoading={chartsLoading}
+          chartsError={chartsError}
+          onBack={onBack}
+        />
+      )}
+    </CIDashboardRoute>
+  );
+}
+const ExpectationsRoute = () => <WgRoute activeTab="audience_expectation" Screen={AudienceExpectationScreen} />;
+const MessagingRoute = () => <WgRoute activeTab="brand_messaging" Screen={BrandMessagingScreen} />;
+const PerformanceRoute = () => <WgRoute activeTab="brand_performance" Screen={BrandPerformanceScreen} />;
+
 function MarketIntelligenceRoute() {
   return (
     <CIDashboardRoute activeTab="market_intelligence">
@@ -1679,6 +1701,30 @@ export default function App() {
             element={
               <ProtectedRoute>
                 <BrandPerceptionRoute />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/:projectId/sessions/:sessionId/expectations"
+            element={
+              <ProtectedRoute>
+                <ExpectationsRoute />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/:projectId/sessions/:sessionId/messaging"
+            element={
+              <ProtectedRoute>
+                <MessagingRoute />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/:projectId/sessions/:sessionId/performance"
+            element={
+              <ProtectedRoute>
+                <PerformanceRoute />
               </ProtectedRoute>
             }
           />

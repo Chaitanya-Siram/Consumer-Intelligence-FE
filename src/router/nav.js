@@ -37,6 +37,10 @@ export const paths = {
   narratives: (pid, sid) => `/${pid}/sessions/${sid}/narratives`,
   // Brand Intelligence → Brand Perception (Tier 2)
   brandperception: (pid, sid) => `/${pid}/sessions/${sid}/brand-perception`,
+  // Whitespace & Gap Analysis (Tier 2)
+  expectations: (pid, sid) => `/${pid}/sessions/${sid}/expectations`,
+  messaging: (pid, sid) => `/${pid}/sessions/${sid}/messaging`,
+  performance: (pid, sid) => `/${pid}/sessions/${sid}/performance`,
   marketintel: (pid, sid) => `/${pid}/sessions/${sid}/market-intelligence`,
   // Tier 2 gallery for a Tier 1 CI pillar (brand_intelligence, market_intelligence, ...)
   intel: (pid, sid, tier1Key) => `/${pid}/sessions/${sid}/intel/${tier1Key}`,
