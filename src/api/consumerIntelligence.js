@@ -39,6 +39,7 @@ export const CI_LENS_KEYS = [
   'shifting_audience_priorities',
   'perception_analysis',
   'dominant_narratives',
+  'brand_perception',
 ]
 
 // Media Intelligence lens keys (existing, untouched).
@@ -53,7 +54,7 @@ export const MI_LENS_KEYS = [
 // Tier 1 pillar key (workflow analysis node `data.lens` with
 // `data.lensType === 'tier1'`) -> the CI payload keys it is backed by.
 export const TIER1_TO_CI_KEYS = {
-  brand_intelligence: ['brand_intelligence', 'brand_health_storyboard', 'brand_competitive_intel'],
+  brand_intelligence: ['brand_intelligence', 'brand_health_storyboard', 'brand_competitive_intel', 'brand_perception'],
   market_intelligence: ['market_intelligence'],
   network_map_analysis: ['network_map'],
   issues_intelligence: ['track_emerging_issues'],

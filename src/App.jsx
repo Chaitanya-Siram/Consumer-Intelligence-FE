@@ -47,6 +47,7 @@ import TrackEmergingIssuesScreen from "./screens/TrackEmergingIssuesScreen.jsx";
 import ShiftingAudiencePrioritiesScreen from "./screens/ShiftingAudiencePrioritiesScreen.jsx";
 import PerceptionAnalysisScreen from "./screens/PerceptionAnalysisScreen.jsx";
 import DominantNarrativesScreen from "./screens/DominantNarrativesScreen.jsx";
+import BrandPerceptionScreen from "./screens/BrandPerceptionScreen.jsx";
 
 function isAuthenticated() {
   const token = localStorage.getItem("auth_token");
@@ -1318,6 +1319,22 @@ function NarrativesRoute() {
   );
 }
 
+// Brand Intelligence → Brand Perception (Tier 2 storyboard).
+function BrandPerceptionRoute() {
+  return (
+    <CIDashboardRoute activeTab="brand_perception">
+      {({ chartsData, chartsLoading, chartsError, onBack }) => (
+        <BrandPerceptionScreen
+          chartsData={chartsData}
+          chartsLoading={chartsLoading}
+          chartsError={chartsError}
+          onBack={onBack}
+        />
+      )}
+    </CIDashboardRoute>
+  );
+}
+
 function MarketIntelligenceRoute() {
   return (
     <CIDashboardRoute activeTab="market_intelligence">
@@ -1654,6 +1671,14 @@ export default function App() {
             element={
               <ProtectedRoute>
                 <NarrativesRoute />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/:projectId/sessions/:sessionId/brand-perception"
+            element={
+              <ProtectedRoute>
+                <BrandPerceptionRoute />
               </ProtectedRoute>
             }
           />

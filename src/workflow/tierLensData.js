@@ -97,6 +97,12 @@ export const TIER2_LENSES = {
       route: 'brandintel',
       image: IMG('1460925895917-afdab827c52f'),
     },
+    {
+      label: 'Brand Perception',
+      description: 'How each brand and product is perceived — popularity, what each is known for, and why the audience switches.',
+      route: 'brandperception',
+      image: IMG('1553877522-43269d4ea984'),
+    },
   ],
   market_intelligence: [
     { label: 'Channel Impact Analysis', description: 'Social post volume by brand across platforms.', route: 'marketintel', slide: 1, image: IMG('1551288049-bebda4e38f71') },
