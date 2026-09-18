@@ -1,0 +1,60 @@
+/* ============================================================
+   Regional Intelligence — additions on top of the shared Whitespace sheet
+   (wg.css, scope `.sb-wg`). Screens mount with scope "sb-wg sb-ri".
+   ============================================================ */
+
+/* OVERVIEW TABLE */
+.sb-ri .ovr{width:100%;border-collapse:collapse;font-size:12.5px;}
+.sb-ri .ovr th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink3);font-weight:700;padding:0 12px 12px;border-bottom:1px solid var(--line);}
+.sb-ri .ovr td{padding:12px;border-bottom:1px solid var(--line);color:var(--ink2);vertical-align:middle;}
+.sb-ri .ovr tr:last-child td{border-bottom:none;}
+.sb-ri .ovr tr.link{cursor:pointer;} .sb-ri .ovr tr.link:hover td{background:var(--brand-soft);}
+.sb-ri .ovr .rg{display:flex;align-items:center;gap:8px;font-weight:700;color:var(--ink);}
+.sb-ri .ovr .rg .fl{font-size:16px;}
+.sb-ri .ovr .mini{display:flex;height:8px;border-radius:5px;overflow:hidden;gap:1px;min-width:120px;}
+.sb-ri .ovr .mini div{height:100%;}
+.sb-ri .ovr .bb{display:flex;align-items:center;gap:6px;}
+.sb-ri .ovr .v{font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--ink3);}
+.sb-ri .ovr .hl{color:var(--brand-1);font-weight:700;}
+.sb-ri .ovr-wrap{overflow-x:auto;}
+
+/* REGION HEADER STRIP */
+.sb-ri .rhead{display:flex;align-items:center;gap:14px;margin-bottom:6px;}
+.sb-ri .rhead .fl{font-size:34px;line-height:1;}
+.sb-ri .rhead .nm{font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:700;color:var(--ink);}
+.sb-ri .rhead .sub{font-size:12px;color:var(--ink3);font-weight:600;}
+
+/* SENTIMENT BAR (single region) */
+.sb-ri .sbar{display:flex;height:22px;border-radius:8px;overflow:hidden;gap:2px;margin:14px 0 10px;}
+.sb-ri .sbar div{height:100%;display:flex;align-items:center;justify-content:center;font:600 11px 'JetBrains Mono',monospace;color:#fff;}
+.sb-ri .sbar .neu{color:var(--ink);}
+.sb-ri .net{font-family:'Space Grotesk',sans-serif;font-size:30px;font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums;line-height:1;}
+.sb-ri .net small{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3);display:block;margin-top:6px;font-family:'Inter',sans-serif;}
+
+/* THEME COLUMNS */
+.sb-ri .tcols{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;align-items:end;height:190px;padding-top:26px;}
+.sb-ri .tcols .tc{display:flex;flex-direction:column;justify-content:flex-end;height:100%;position:relative;}
+.sb-ri .tcols .bar{width:56%;margin:0 auto;border-radius:8px 8px 3px 3px;background:linear-gradient(180deg,var(--c4),var(--brand-1));}
+.sb-ri .tcols .pv{position:absolute;left:0;right:0;text-align:center;font:700 15px 'Space Grotesk',sans-serif;color:var(--ink);font-variant-numeric:tabular-nums;}
+.sb-ri .tcols-x{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:10px;text-align:center;}
+.sb-ri .tcols-x .n{font-size:12.5px;font-weight:700;color:var(--ink);}
+.sb-ri .tcols-x .s{font-size:11px;color:var(--ink3);}
+
+/* H1 / H2 SHIFT */
+.sb-ri .shift{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+@media(max-width:900px){.sb-ri .shift{grid-template-columns:1fr;}}
+.sb-ri .shift .ph{font-size:12px;font-weight:700;color:var(--c4);margin-bottom:12px;letter-spacing:.02em;}
+.sb-ri .shift .h1 .barlist .fill{background:var(--ink3);}
+.sb-ri .shift .h2 .barlist .fill{background:var(--c4);}
+.sb-ri .delta{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;}
+.sb-ri .delta span{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;padding:5px 11px;border-radius:20px;background:var(--bg2);color:var(--ink2);}
+.sb-ri .delta .up{color:var(--pos);} .sb-ri .delta .down{color:var(--neg);} .sb-ri .delta .new{color:var(--c4);}
+.sb-ri .delta b{font-family:'JetBrains Mono',monospace;font-weight:600;}
+
+/* BRAND TOPICS */
+.sb-ri .btopics{display:grid;gap:14px;}
+.sb-ri .btopic{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start;}
+.sb-ri .btopic .bn{font-size:13.5px;font-weight:700;color:var(--ink);margin-bottom:4px;}
+.sb-ri .btopic p{font-size:12.5px;color:var(--ink2);line-height:1.5;}
+.sb-ri .chips{display:flex;flex-wrap:wrap;gap:8px;}
+.sb-ri .chip{font-size:11.5px;font-weight:600;padding:5px 11px;border-radius:20px;background:var(--bg2);color:var(--ink2);border:1px solid var(--line);display:inline-flex;align-items:center;gap:6px;}

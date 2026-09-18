@@ -43,6 +43,12 @@ export const paths = {
   performance: (pid, sid) => `/${pid}/sessions/${sid}/performance`,
   // Consumer Segmentation Analysis → User Behaviour Analysis (Tier 2)
   behaviour: (pid, sid) => `/${pid}/sessions/${sid}/behaviour`,
+  // Regional Intelligence (Tier 2)
+  regionsentiment: (pid, sid) => `/${pid}/sessions/${sid}/regions/sentiment`,
+  regionengagement: (pid, sid) => `/${pid}/sessions/${sid}/regions/engagement`,
+  regionbrands: (pid, sid) => `/${pid}/sessions/${sid}/regions/brands`,
+  // AI/LLM Audit and Analysis → Congruence & Content Intelligence (Tier 2)
+  congruence: (pid, sid) => `/${pid}/sessions/${sid}/congruence`,
   marketintel: (pid, sid) => `/${pid}/sessions/${sid}/market-intelligence`,
   // Tier 2 gallery for a Tier 1 CI pillar (brand_intelligence, market_intelligence, ...)
   intel: (pid, sid, tier1Key) => `/${pid}/sessions/${sid}/intel/${tier1Key}`,

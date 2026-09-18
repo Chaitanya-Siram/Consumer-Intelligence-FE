@@ -52,6 +52,10 @@ import AudienceExpectationScreen from "./screens/AudienceExpectationScreen.jsx";
 import BrandMessagingScreen from "./screens/BrandMessagingScreen.jsx";
 import BrandPerformanceScreen from "./screens/BrandPerformanceScreen.jsx";
 import UserBehaviourScreen from "./screens/UserBehaviourScreen.jsx";
+import RegionalSentimentScreen from "./screens/RegionalSentimentScreen.jsx";
+import RegionalEngagementScreen from "./screens/RegionalEngagementScreen.jsx";
+import RegionalBrandPerceptionScreen from "./screens/RegionalBrandPerceptionScreen.jsx";
+import CongruenceContentScreen from "./screens/CongruenceContentScreen.jsx";
 
 function isAuthenticated() {
   const token = localStorage.getItem("auth_token");
@@ -1359,6 +1363,12 @@ const MessagingRoute = () => <WgRoute activeTab="brand_messaging" Screen={BrandM
 const PerformanceRoute = () => <WgRoute activeTab="brand_performance" Screen={BrandPerformanceScreen} />;
 // Consumer Segmentation Analysis → User Behaviour Analysis (Tier 2 storyboard).
 const BehaviourRoute = () => <WgRoute activeTab="user_behaviour" Screen={UserBehaviourScreen} />;
+// Regional Intelligence → three Tier 2 storyboards.
+const RegionSentimentRoute = () => <WgRoute activeTab="regional_sentiment" Screen={RegionalSentimentScreen} />;
+const RegionEngagementRoute = () => <WgRoute activeTab="regional_engagement" Screen={RegionalEngagementScreen} />;
+const RegionBrandsRoute = () => <WgRoute activeTab="regional_brand_perception" Screen={RegionalBrandPerceptionScreen} />;
+// AI/LLM Audit and Analysis → Congruence & Content Intelligence (Tier 2 storyboard).
+const CongruenceRoute = () => <WgRoute activeTab="congruence_content" Screen={CongruenceContentScreen} />;
 
 function MarketIntelligenceRoute() {
   return (
@@ -1736,6 +1746,38 @@ export default function App() {
             element={
               <ProtectedRoute>
                 <BehaviourRoute />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/:projectId/sessions/:sessionId/regions/sentiment"
+            element={
+              <ProtectedRoute>
+                <RegionSentimentRoute />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/:projectId/sessions/:sessionId/regions/engagement"
+            element={
+              <ProtectedRoute>
+                <RegionEngagementRoute />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/:projectId/sessions/:sessionId/regions/brands"
+            element={
+              <ProtectedRoute>
+                <RegionBrandsRoute />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/:projectId/sessions/:sessionId/congruence"
+            element={
+              <ProtectedRoute>
+                <CongruenceRoute />
               </ProtectedRoute>
             }
           />

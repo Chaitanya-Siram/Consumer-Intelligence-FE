@@ -81,6 +81,12 @@ export const TIER1_LENSES = [
     description: 'Understand who your audience is, how each sub-segment decides, and what drives their product choices across the selection cycle.',
     image: IMG('1529156069898-49953e39b3ac'),
   },
+  {
+    key: 'llm_audit',
+    label: 'AI/LLM Audit and Analysis',
+    description: 'Understand who shapes what LLMs say about your brand, how each assistant interprets it, and where AI perception diverges from brand intent.',
+    image: IMG('1677442136019-21780ecad995'),
+  },
 ]
 
 export const TIER2_LENSES = {
@@ -148,9 +154,9 @@ export const TIER2_LENSES = {
     { label: 'Brand Performance', description: 'The gap between brand promise and lived audience experience.', route: 'performance', image: IMG('1460925895917-afdab827c52f') },
   ],
   regional_intelligence: [
-    { label: 'State-Level Sentiment', description: 'Sentiment broken down market by market.', image: IMG('1524661135-423995f22d0b') },
-    { label: 'Engagement', description: 'Where engagement concentrates geographically.', image: IMG('1611162616305-c69b3fa7fbe0') },
-    { label: 'Brand Perception', description: 'How perception varies by region.', image: IMG('1521791136064-7986c2920216') },
+    { label: 'State-Level Sentiment', description: 'Sentiment broken down market by market.', route: 'regionsentiment', image: IMG('1524661135-423995f22d0b') },
+    { label: 'Engagement', description: 'Where engagement concentrates geographically.', route: 'regionengagement', image: IMG('1611162616305-c69b3fa7fbe0') },
+    { label: 'Brand Perception', description: 'How perception varies by region.', route: 'regionbrands', image: IMG('1521791136064-7986c2920216') },
   ],
   network_map_analysis: [
     { label: 'Conversational Clusters', description: 'The groups driving distinct threads of the conversation.', image: IMG('1522202176988-66273c2fd55f') },
@@ -196,6 +202,9 @@ export const TIER2_LENSES = {
   ],
   consumer_segmentation: [
     { label: 'User Behaviour Analysis', description: 'Sub-segments of the audience, how they decide, and why they hold more than one product.', route: 'behaviour', image: IMG('1529156069898-49953e39b3ac') },
+  ],
+  llm_audit: [
+    { label: 'Congruence & Content Intelligence', description: 'Sources and voices driving the brand narrative across LLMs, how each LLM interprets it, and the gap to brand intent.', route: 'congruence', image: IMG('1677442136019-21780ecad995') },
   ],
 }
 
