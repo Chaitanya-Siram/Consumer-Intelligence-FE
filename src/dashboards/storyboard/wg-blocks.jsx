@@ -75,7 +75,7 @@ export function BarList({ rows, logos, color = "var(--c1)", compact = false }) {
       {rows.map((r) => (
         <div className="row" key={r.name} title={`${r.name}: ${r.pct}%`}>
           <div className={`lbl${r.is_brand ? " hl" : ""}`}>
-            {logos ? <BrandLogo brand={r.name} logos={logos} size={20} rounded={6} /> : null}
+            {logos && !/^others?$/i.test(r.name) ? <BrandLogo brand={r.name} logos={logos} size={20} rounded={6} /> : null}
             {r.name}
           </div>
           <div className="track">

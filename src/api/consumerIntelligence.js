@@ -43,6 +43,7 @@ export const CI_LENS_KEYS = [
   'audience_expectation',
   'brand_messaging',
   'brand_performance',
+  'user_behaviour',
 ]
 
 // Media Intelligence lens keys (existing, untouched).
@@ -64,6 +65,7 @@ export const TIER1_TO_CI_KEYS = {
   advanced_metrics: ['shifting_audience_priorities'],
   landscape_analysis: ['perception_analysis', 'dominant_narratives'],
   whitespace_gap_analysis: ['audience_expectation', 'brand_messaging', 'brand_performance'],
+  consumer_segmentation: ['user_behaviour'],
 }
 
 // Tier 1 pillars that have no backend yet — the dashboards page shows a

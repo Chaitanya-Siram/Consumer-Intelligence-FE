@@ -75,6 +75,12 @@ export const TIER1_LENSES = [
     description: 'Continuously measure brand trust and reputation evolution against competitors to protect and grow brand equity.',
     image: IMG('1521791136064-7986c2920216'),
   },
+  {
+    key: 'consumer_segmentation',
+    label: 'Consumer Segmentation Analysis',
+    description: 'Understand who your audience is, how each sub-segment decides, and what drives their product choices across the selection cycle.',
+    image: IMG('1529156069898-49953e39b3ac'),
+  },
 ]
 
 export const TIER2_LENSES = {
@@ -187,6 +193,9 @@ export const TIER2_LENSES = {
     { label: 'Measure Brand Trust', description: 'A continuous read on how much your audience trusts you.', image: IMG('1521791136064-7986c2920216') },
     { label: 'Perception Drivers', description: 'The specific factors moving your reputation up or down.', image: IMG('1553877522-43269d4ea984') },
     { label: 'Reputation Evolution vs Competitors', description: 'How your reputation trend compares to the field.', image: IMG('1552664730-d307ca884978') },
+  ],
+  consumer_segmentation: [
+    { label: 'User Behaviour Analysis', description: 'Sub-segments of the audience, how they decide, and why they hold more than one product.', route: 'behaviour', image: IMG('1529156069898-49953e39b3ac') },
   ],
 }
 

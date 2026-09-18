@@ -1,0 +1,25 @@
+/* ============================================================
+   User Behaviour Analysis — Consumer Segmentation Analysis Tier-2 storyboard.
+   Layers on the shared Whitespace stylesheet (wg.css, scope `.sb-wg`); the
+   screen mounts with scope "sb-wg sb-ub" so only these additions are new.
+   ============================================================ */
+
+/* SEGMENT CARDS (p33) */
+.sb-ub .segs{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+@media(max-width:1080px){.sb-ub .segs{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:640px){.sb-ub .segs{grid-template-columns:1fr;}}
+.sb-ub .seg{display:grid;gap:12px;align-content:start;border-top:4px solid var(--c1);}
+.sb-ub .seg .range{font-family:'Space Grotesk',sans-serif;font-size:34px;font-weight:700;color:var(--brand-1);font-variant-numeric:tabular-nums;line-height:1;}
+.sb-ub .seg .range small{font-size:12px;font-weight:600;color:var(--ink3);font-family:'Inter',sans-serif;margin-left:8px;}
+.sb-ub .seg h4{margin:0;color:var(--c4);}
+.sb-ub .seg .share{display:flex;align-items:center;gap:8px;font-size:11.5px;color:var(--ink3);font-weight:600;}
+.sb-ub .seg .share .track{flex:1;height:6px;background:var(--bg2);border-radius:4px;overflow:hidden;}
+.sb-ub .seg .share .fill{height:100%;border-radius:4px;background:var(--brand-1);}
+.sb-ub .seg .share .v{font-family:'JetBrains Mono',monospace;}
+
+/* Q&A ROWS (p34) */
+.sb-ub .qa{display:grid;gap:22px;}
+.sb-ub .qa .row{display:grid;grid-template-columns:minmax(180px,260px) 1fr;gap:20px;align-items:start;}
+@media(max-width:900px){.sb-ub .qa .row{grid-template-columns:1fr;}}
+.sb-ub .qa .q{font-family:'Space Grotesk',sans-serif;font-size:16px;font-weight:700;color:var(--ink);line-height:1.35;}
+.sb-ub .qa .a{border-left:3px solid var(--c1);padding-left:16px;}

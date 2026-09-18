@@ -51,6 +51,7 @@ import BrandPerceptionScreen from "./screens/BrandPerceptionScreen.jsx";
 import AudienceExpectationScreen from "./screens/AudienceExpectationScreen.jsx";
 import BrandMessagingScreen from "./screens/BrandMessagingScreen.jsx";
 import BrandPerformanceScreen from "./screens/BrandPerformanceScreen.jsx";
+import UserBehaviourScreen from "./screens/UserBehaviourScreen.jsx";
 
 function isAuthenticated() {
   const token = localStorage.getItem("auth_token");
@@ -1356,6 +1357,8 @@ function WgRoute({ activeTab, Screen }) {
 const ExpectationsRoute = () => <WgRoute activeTab="audience_expectation" Screen={AudienceExpectationScreen} />;
 const MessagingRoute = () => <WgRoute activeTab="brand_messaging" Screen={BrandMessagingScreen} />;
 const PerformanceRoute = () => <WgRoute activeTab="brand_performance" Screen={BrandPerformanceScreen} />;
+// Consumer Segmentation Analysis → User Behaviour Analysis (Tier 2 storyboard).
+const BehaviourRoute = () => <WgRoute activeTab="user_behaviour" Screen={UserBehaviourScreen} />;
 
 function MarketIntelligenceRoute() {
   return (
@@ -1725,6 +1728,14 @@ export default function App() {
             element={
               <ProtectedRoute>
                 <PerformanceRoute />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/:projectId/sessions/:sessionId/behaviour"
+            element={
+              <ProtectedRoute>
+                <BehaviourRoute />
               </ProtectedRoute>
             }
           />
