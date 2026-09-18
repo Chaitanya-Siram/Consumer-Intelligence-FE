@@ -117,6 +117,7 @@ export const TIER2_LENSES = {
     { label: 'Sentiment Shifts', description: 'Where audience sentiment is moving, and how fast.', image: IMG('1553877522-43269d4ea984') },
     { label: 'Share of Voice', description: 'Who is winning the conversation across every channel that matters.', image: IMG('1478760329108-5c3ed9d495a0') },
     { label: 'Competitive Positioning', description: 'How you stack up against the brands shaping the same narrative.', image: IMG('1552664730-d307ca884978') },
+    { label: 'Perception Analysis', description: 'User perception and emotions around the category: benefits, caution, sentiment drivers and outlook.', route: 'perception', image: IMG('1521791136064-7986c2920216') },
   ],
   advanced_metrics: [
     { label: 'Emerging Themes', description: 'The subjects gaining traction before they become mainstream.', image: IMG('1460925895917-afdab827c52f') },

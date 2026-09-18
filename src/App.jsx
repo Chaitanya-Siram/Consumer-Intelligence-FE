@@ -45,6 +45,7 @@ import NetworkMapScreen from "./screens/NetworkMapScreen.jsx";
 import BrandHealthScreen from "./screens/BrandHealthScreen.jsx";
 import TrackEmergingIssuesScreen from "./screens/TrackEmergingIssuesScreen.jsx";
 import ShiftingAudiencePrioritiesScreen from "./screens/ShiftingAudiencePrioritiesScreen.jsx";
+import PerceptionAnalysisScreen from "./screens/PerceptionAnalysisScreen.jsx";
 
 function isAuthenticated() {
   const token = localStorage.getItem("auth_token");
@@ -1284,6 +1285,22 @@ function PrioritiesRoute() {
   );
 }
 
+// Landscape Analysis → Perception Analysis (Tier 2 storyboard).
+function PerceptionRoute() {
+  return (
+    <CIDashboardRoute activeTab="perception_analysis">
+      {({ chartsData, chartsLoading, chartsError, onBack }) => (
+        <PerceptionAnalysisScreen
+          chartsData={chartsData}
+          chartsLoading={chartsLoading}
+          chartsError={chartsError}
+          onBack={onBack}
+        />
+      )}
+    </CIDashboardRoute>
+  );
+}
+
 function MarketIntelligenceRoute() {
   return (
     <CIDashboardRoute activeTab="market_intelligence">
@@ -1604,6 +1621,14 @@ export default function App() {
             element={
               <ProtectedRoute>
                 <PrioritiesRoute />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/:projectId/sessions/:sessionId/perception"
+            element={
+              <ProtectedRoute>
+                <PerceptionRoute />
               </ProtectedRoute>
             }
           />

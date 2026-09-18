@@ -1,6 +1,6 @@
-# Consumer Intelligence lens contracts: Track Emerging Issues and Shifting Audience Priorities
+# Consumer Intelligence lens contracts: Track Emerging Issues, Shifting Audience Priorities, Perception Analysis
 
-Backend contract for two new Consumer Intelligence (CI) Tier-2 lenses. The frontend
+Backend contract for three new Consumer Intelligence (CI) Tier-2 lenses. The frontend
 screens are already built and read these keys from the CI charts payload. Until the
 backend returns them, the screens render a built-in sample and show a "Sample data" pill.
 
@@ -11,13 +11,14 @@ It opens the WebSocket `/ws/consumer-intelligence/charts` and expects the final 
 carry `charts_data`, an object keyed by lens. It also fetches the cached payload via
 `GET /consumer-intelligence/charts?session_id=<id>`.
 
-Both new lenses must appear in that same `charts_data` object, alongside the existing
+All new lenses must appear in that same `charts_data` object, alongside the existing
 Brand Intelligence keys (`brand_health_storyboard`, `brand_competitive_intel`, ...).
 
 | Workflow analysis node (`data.lens`, `lensType: "tier1"`) | Tier-2 label (`data.tier2[]`) | `charts_data` key to return |
 |---|---|---|
 | `issues_intelligence` | "Track Emerging Issues" | `track_emerging_issues` |
 | `advanced_metrics` | "Shifting Audience Priorities" | `shifting_audience_priorities` |
+| `landscape_analysis` | "Perception Analysis" | `perception_analysis` |
 
 Frontend mapping lives in `src/api/consumerIntelligence.js` (`TIER1_TO_CI_KEYS`).
 Only build a lens when the session's workflow selected it, the same way the Brand
@@ -37,7 +38,7 @@ organizations, syndication, similar, added_type
 Plus the project's brand name and competitor list, as already used for
 `brand_competitive_intel` (`meta.brand`, `meta.competitors`).
 
-## 3. Rules shared by both lenses
+## 3. Rules shared by all lenses
 
 - **Numbers come from tags, prose comes from the LLM.** Every count, percentage, series
   and score below is computed from the tagged articles. Every headline, sub-line,
@@ -52,7 +53,8 @@ Plus the project's brand name and competitor list, as already used for
 - **Empty is fine, fabricated is not.** If a section cannot be computed for this session
   (too few articles, no dates), return an empty array or omit the key. The frontend hides
   what is missing. Do not pad with made-up values.
-- **Tone values** are `"pos" | "neg" | "neu"`.
+- **Tone values** are `"pos" | "neg" | "neu"`, plus `"warn"` where a payload field says so
+  (the emotion mix in `perception_analysis`).
 - **`tabs`** is fixed per lens and can be returned verbatim as shown.
 - **`meta.is_sample`** must be absent or `false` in real payloads.
 
@@ -259,10 +261,106 @@ Computation hints (define the weights once, keep them stable across sessions):
   switching / multiple products; usage frequency = mean brand mentions per week.
   If a tile cannot be computed, set `value: "—"` and `trend: "no data"`, `dir: "flat"`.
 
-## 6. Done when
+## 6. `perception_analysis`
 
-- `GET /consumer-intelligence/charts?session_id=<id>` returns both keys for a session whose
+Screen: three tabs. Reference layout: `src/screens/PerceptionAnalysisScreen.jsx`.
+Full sample: `src/dashboards/storyboard/pa-sample.js`. Deck pages 28–31.
+
+Prose fields in this lens may contain `<mark>…</mark>` around key phrases (the deck's
+underlined links). No other markup is rendered.
+
+```jsonc
+{
+  "meta": {
+    "brand": "Discover",                  // agg: project brand
+    "category": "Gen-Z Student Credit Cards",   // llm or project name
+    "window": "Jan – Jun 2024",           // agg
+    "total_mentions": 4870,               // agg
+    "rated_mentions": 4212,               // agg: articles with a sentiment tag
+    "logos": { "Discover": "https://...", "Capital One": "https://...", "Bank of America": "https://..." }  // required
+  },
+  "tabs": [
+    { "id": "t1", "label": "General Perception" },
+    { "id": "t2", "label": "Sentiment Drivers" },
+    { "id": "t3", "label": "Emotional Outlook" }
+  ],
+  "footer": ["Perception Analysis · Landscape Analysis", "Computed from 4,870 tagged posts"],
+
+  // ---- tab 1 : General Perception (deck p29) --------------------------------
+  "perception": {
+    "banner": { "eyebrow": "Perception Analysis", "headline": "...", "sub": "...", "stats": [ /* 4, agg */ ] },  // headline/sub llm
+    "note": "...",                        // llm, one sentence describing the section
+    "summary": "...",                     // llm: the one-paragraph read
+    "keywords": ["building credit history", "..."],   // llm, 4–6 short phrases lifted from summary
+    "themes": [                           // 6 cards, order fixed; pct agg, text llm
+      { "key": "benefits", "title": "Perceived Benefits",          "pct": 27, "text": "... <mark>...</mark> ..." },
+      { "key": "caution",  "title": "Cautionary Use",              "pct": 19, "text": "..." },
+      { "key": "literacy", "title": "Building Financial Literacy", "pct": 16, "text": "..." },
+      { "key": "brands",   "title": "Brand Preferences",           "pct": 15, "text": "...", "brands": ["Discover", "Capital One"] },
+      { "key": "parents",  "title": "Parental Influence",          "pct": 13, "text": "..." },
+      { "key": "concerns", "title": "Concerns and Advice",         "pct": 10, "text": "..." }
+    ]                                     // keys drive the card icons; keep them. pct = share of perception-tagged posts, sums to 100
+  },
+
+  // ---- tab 2 : Sentiment Drivers (deck p30) ---------------------------------
+  "sentiment": {
+    "banner": { "eyebrow": "Sentiment Drivers", "headline": "...", "sub": "...", "stats": [ /* 4 */ ] },
+    "note": "...",                        // llm
+    "split": [                            // agg from `sentiment`, sums to 100, tones fixed
+      { "name": "Positive", "pct": 37, "tone": "pos" },
+      { "name": "Negative", "pct": 12, "tone": "neg" },
+      { "name": "Neutral",  "pct": 51, "tone": "neu" }
+    ],
+    "groups": [                           // one per pole, same pct as split; drivers llm (2–3 each)
+      { "tone": "pos", "label": "Positive", "pct": 37, "drivers": [ { "title": "...", "text": "...", "brands": [] } ] },
+      { "tone": "neu", "label": "Neutral",  "pct": 51, "drivers": [ ... ] },
+      { "tone": "neg", "label": "Negative", "pct": 12, "drivers": [ { "title": "Customer Service Issues", "text": "...", "brands": ["Discover"] } ] }
+    ],
+    "quotes": [                           // ≤3 verbatim excerpts from `content`, with source
+      { "text": "...", "source": "Reddit · r/CreditCards", "tone": "pos" }
+    ]
+  },
+
+  // ---- tab 3 : Emotional Outlook (deck p31) ---------------------------------
+  "emotion": {
+    "banner": { "eyebrow": "Emotional Outlook", "headline": "...", "sub": "...", "stats": [ /* 4 */ ] },
+    "note": "...",                        // llm
+    "summary": "...",                     // llm: the one-paragraph read
+    "mix": [                              // agg from emotion tags, sums to 100, tones fixed
+      { "name": "Trust / Appreciation",    "pct": 41, "tone": "pos" },
+      { "name": "Neutral / Informational", "pct": 37, "tone": "neu" },
+      { "name": "Anxiety / Fear",          "pct": 13, "tone": "warn" },
+      { "name": "Frustration / Anger",     "pct": 9,  "tone": "neg" }
+    ],
+    "lead": "... <mark>...</mark> ...",   // llm, one sentence
+    "aspect_label": "Negative aspects",
+    "aspect_tags": ["Unhappy", "Fearful", "Stressed", "Anxious"],   // the emotion labels that make up the negative set
+    "aspects": [                          // 3 cards; pct agg = share of rated posts, text llm
+      { "key": "debt",     "title": "Debt Concerns",      "pct": 11, "text": "..." },
+      { "key": "literacy", "title": "Financial Literacy", "pct": 6,  "text": "..." },
+      { "key": "stress",   "title": "Stress and Anxiety", "pct": 5,  "text": "..." }
+    ]
+  }
+}
+```
+
+Computation hints:
+
+- `perception.themes[].pct`: classify each article into one of the six perception themes
+  (LLM or keyword rules), count, normalise to 100. Titles and keys are fixed; the LLM writes
+  the `text` for each from that theme's articles.
+- `sentiment.split` / `groups[].pct`: count normalised `sentiment` over rated articles.
+  Drivers are the top themes within each pole, described by the LLM from those articles.
+- `emotion.mix`: needs an emotion tag per article (trust / neutral / anxiety / frustration).
+  If the tagger does not emit one, derive it from sentiment + theme, or return `mix: []` and
+  the frontend hides the strip.
+- `emotion.aspects[].pct`: share of rated articles matching each negative aspect.
+- `brands[]` on any card: only brands actually named in that card's source articles.
+
+## 7. Done when
+
+- `GET /consumer-intelligence/charts?session_id=<id>` returns each key for a session whose
   workflow selected the corresponding Tier-1 lens.
 - Every brand named in either payload has an entry in that payload's `meta.logos`.
-- No field contains sample text from this document or from `tei-sample.js`.
+- No field contains sample text from this document, `tei-sample.js` or `pa-sample.js`.
 - The frontend "Sample data" pill disappears on those screens.

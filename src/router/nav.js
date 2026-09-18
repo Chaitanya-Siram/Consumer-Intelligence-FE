@@ -31,6 +31,8 @@ export const paths = {
   issues: (pid, sid) => `/${pid}/sessions/${sid}/issues`,
   // Advanced Metrics → Shifting Audience Priorities (Tier 2)
   priorities: (pid, sid) => `/${pid}/sessions/${sid}/priorities`,
+  // Landscape Analysis → Perception Analysis (Tier 2)
+  perception: (pid, sid) => `/${pid}/sessions/${sid}/perception`,
   marketintel: (pid, sid) => `/${pid}/sessions/${sid}/market-intelligence`,
   // Tier 2 gallery for a Tier 1 CI pillar (brand_intelligence, market_intelligence, ...)
   intel: (pid, sid, tier1Key) => `/${pid}/sessions/${sid}/intel/${tier1Key}`,
