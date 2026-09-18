@@ -8,7 +8,7 @@
  * `chartsData.perception_analysis`; until the backend publishes that key it
  * renders the sample payload in pa-sample.js and says so in the header.
  */
-import { useCallback, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 
 import {
   AspectCards,
@@ -26,6 +26,7 @@ import {
 import BrandLogo from "../dashboards/storyboard/BrandLogo.jsx";
 import StoryboardShell from "../dashboards/storyboard/StoryboardShell.jsx";
 import { PA_SAMPLE } from "../dashboards/storyboard/pa-sample.js";
+import { mergeLogos } from "../dashboards/storyboard/logos.js";
 import "../dashboards/storyboard/pa.css";
 
 export const DASHBOARD_KEY = "perception_analysis";
@@ -43,21 +44,23 @@ export default function PerceptionAnalysisScreen({
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 
-  if (chartsLoading) return <div className="sb-state">Loading storyboard…</div>;
-
   // A missing key is expected until the backend ships this lens: fall back to
   // the sample so the layout stays reviewable. A charts *error* still
   // surfaces if there is nothing to show.
   const live = chartsData?.[DASHBOARD_KEY];
   const story = live?.tabs?.length ? live : PA_SAMPLE;
   const isSample = story === PA_SAMPLE;
+  // Logos from this lens plus any other lens in the session (Brand &
+  // Competitive already resolves them), so marks show before this lens ships its own.
+  const logos = useMemo(() => mergeLogos(chartsData, story.meta?.logos), [chartsData, story]);
+
+  if (chartsLoading) return <div className="sb-state">Loading storyboard…</div>;
   if (chartsError && !live && !isSample) {
     return <div className="sb-state sb-state--error">{chartsError}</div>;
   }
 
   const { meta = {}, tabs, perception, sentiment, emotion } = story;
   const tab = tabs.find((t) => t.id === activeTab) || tabs[0];
-  const logos = meta.logos || {};
 
   const panels = {
     t1: (

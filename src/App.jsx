@@ -46,6 +46,7 @@ import BrandHealthScreen from "./screens/BrandHealthScreen.jsx";
 import TrackEmergingIssuesScreen from "./screens/TrackEmergingIssuesScreen.jsx";
 import ShiftingAudiencePrioritiesScreen from "./screens/ShiftingAudiencePrioritiesScreen.jsx";
 import PerceptionAnalysisScreen from "./screens/PerceptionAnalysisScreen.jsx";
+import DominantNarrativesScreen from "./screens/DominantNarrativesScreen.jsx";
 
 function isAuthenticated() {
   const token = localStorage.getItem("auth_token");
@@ -1301,6 +1302,22 @@ function PerceptionRoute() {
   );
 }
 
+// Landscape Analysis → Dominant Narratives (Tier 2 storyboard).
+function NarrativesRoute() {
+  return (
+    <CIDashboardRoute activeTab="dominant_narratives">
+      {({ chartsData, chartsLoading, chartsError, onBack }) => (
+        <DominantNarrativesScreen
+          chartsData={chartsData}
+          chartsLoading={chartsLoading}
+          chartsError={chartsError}
+          onBack={onBack}
+        />
+      )}
+    </CIDashboardRoute>
+  );
+}
+
 function MarketIntelligenceRoute() {
   return (
     <CIDashboardRoute activeTab="market_intelligence">
@@ -1629,6 +1646,14 @@ export default function App() {
             element={
               <ProtectedRoute>
                 <PerceptionRoute />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/:projectId/sessions/:sessionId/narratives"
+            element={
+              <ProtectedRoute>
+                <NarrativesRoute />
               </ProtectedRoute>
             }
           />

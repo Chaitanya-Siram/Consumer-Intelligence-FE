@@ -113,7 +113,7 @@ export const TIER2_LENSES = {
     { label: 'Regional Dashboards', description: 'Market-by-market coverage across every region tracked.', route: 'marketintel', slide: 12, image: IMG('1591696205602-2f950c417cb9') },
   ],
   landscape_analysis: [
-    { label: 'Dominant Narratives', description: 'The stories currently shaping perception of your brand and category.', image: IMG('1504711434969-e33886168f5c') },
+    { label: 'Dominant Narratives', description: 'The stories currently shaping perception of your brand and category.', route: 'narratives', image: IMG('1504711434969-e33886168f5c') },
     { label: 'Sentiment Shifts', description: 'Where audience sentiment is moving, and how fast.', image: IMG('1553877522-43269d4ea984') },
     { label: 'Share of Voice', description: 'Who is winning the conversation across every channel that matters.', image: IMG('1478760329108-5c3ed9d495a0') },
     { label: 'Competitive Positioning', description: 'How you stack up against the brands shaping the same narrative.', image: IMG('1552664730-d307ca884978') },
