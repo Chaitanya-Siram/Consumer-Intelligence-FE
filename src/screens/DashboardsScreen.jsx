@@ -16,6 +16,16 @@ import logoImg from "../assets/images/image.png";
 import monitoringImg from "../assets/images/monitoringImage.png";
 import mediaMeasurementImg from "../assets/images/mediaMeasurement.png";
 import narrativeImage from "../assets/images/narrativeImage.png";
+
+// Card artwork for dashboards without a bundled photo. Same Unsplash crop the
+// Tier-1 lens gallery (tierLensData.js) already uses, so these IDs are known to
+// resolve; CardArt falls back to the drawn placeholder if one ever fails.
+const IMG = (id) => `https://images.unsplash.com/photo-${id}?w=480&h=220&fit=crop&auto=format`;
+const CARD_IMAGES = {
+  pr_impact: IMG("1504711434969-e33886168f5c"),          // newspapers / press
+  reputation_index: IMG("1521791136064-7986c2920216"),   // handshake / trust
+  trend_intelligence: IMG("1551288049-bebda4e38f71"),    // analytics dashboard
+};
 import { OrbSettingsProvider } from "../components/builder/orb-settings";
 import { SenseOrb } from "../components/builder/sense-orb";
 import { useOnBackHandler } from "../utils/useOnBackHandler.js";
@@ -52,6 +62,7 @@ const DASHBOARDS = [
   {
     key: "media_monitoring",
     title: "Daily Monitoring",
+    image: monitoringImg,
     tile: 0,
     badge: "Live · Day by day",
     live: true,
@@ -64,6 +75,7 @@ const DASHBOARDS = [
   {
     key: "media_measurement",
     title: "Media Measurement",
+    image: mediaMeasurementImg,
     tile: 1,
     badge: "5-chapter story",
     viz: "bars",
@@ -75,6 +87,7 @@ const DASHBOARDS = [
   {
     key: "narrative_intelligence",
     title: "Narrative Intelligence",
+    image: narrativeImage,
     tile: 2,
     badge: "Signals",
     viz: "bars",
@@ -86,6 +99,7 @@ const DASHBOARDS = [
   {
     key: "pr_impact",
     title: "PR Impact",
+    image: CARD_IMAGES.pr_impact,
     tile: 3,
     badge: "Impact",
     viz: "line",
@@ -97,6 +111,7 @@ const DASHBOARDS = [
   {
     key: "reputation_index",
     title: "Reputation Index",
+    image: CARD_IMAGES.reputation_index,
     tile: 4,
     badge: "Score",
     viz: "line",
@@ -106,6 +121,25 @@ const DASHBOARDS = [
     statL: "Reputation score",
   },
 ];
+
+function CardArt({ image, type, accent }) {
+  const [failed, setFailed] = useState(false);
+  if (image && !failed) {
+    // Bundled PNGs are cut-outs and sit on the gradient (contain); remote
+    // photos fill the frame (cover).
+    const cover = /^https?:/.test(image);
+    return (
+      <img
+        src={image}
+        alt=""
+        className={`lc-top-photo${cover ? " lc-top-photo--cover" : ""}`}
+        loading="lazy"
+        onError={() => setFailed(true)}
+      />
+    );
+  }
+  return <EcardArt type={type} accent={accent} />;
+}
 
 function EcardArt({ type, accent }) {
   if (type === "bars") {
@@ -297,6 +331,7 @@ export default function DashboardsScreen({
             kind: "tier1",
             key,
             title: tier1.label,
+            image: tier1.image,
             tile: 4,
             badge: comingSoon ? "Coming soon" : "Actionable Intelligence",
             viz: "line",
@@ -315,6 +350,7 @@ export default function DashboardsScreen({
               key === "trend_intelligence"
                 ? "Trend Intelligence"
                 : key.replace(/_/g, " "),
+            image: CARD_IMAGES[key],
             tile: 5,
             badge: "Signals",
             viz: "bars",
@@ -624,27 +660,7 @@ export default function DashboardsScreen({
                   >
                     <div className="lc-top">
                       <div className="lc-top-chart">
-                        {d.title === "Daily Monitoring" ? (
-                          <img
-                            src={monitoringImg}
-                            alt=""
-                            className="lc-top-photo"
-                          />
-                        ) : d.title === "Media Measurement" ? (
-                          <img
-                            src={mediaMeasurementImg}
-                            alt=""
-                            className="lc-top-photo"
-                          />
-                        ) : d.title === "Narrative Intelligence" ? (
-                          <img
-                            src={narrativeImage}
-                            alt=""
-                            className="lc-top-photo"
-                          />
-                        ) : (
-                          <EcardArt type={d.viz} accent={fg} />
-                        )}
+                        <CardArt image={d.image} type={d.viz} accent={fg} />
                       </div>
 
                       <div className="lc-top-badge">
@@ -698,7 +714,7 @@ export default function DashboardsScreen({
                   >
                     <div className="lc-top">
                       <div className="lc-top-chart">
-                        <EcardArt type={d.viz} accent={fg} />
+                        <CardArt image={d.image} type={d.viz} accent={fg} />
                       </div>
 
                       <div className="lc-top-badge">

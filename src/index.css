@@ -7189,6 +7189,14 @@ select.wfinput {
   padding: 10px 14px 0;
 }
 
+/* Remote photographs fill the whole frame instead of sitting as a cut-out. */
+.lc-top-photo--cover {
+  object-fit: cover;
+  object-position: center;
+  padding: 0;
+  border-radius: 18px;
+}
+
 /* Favorite-style circular badge, overlaid top-right on the inset photo */
 .lc-top-badge {
   position: absolute;
