@@ -6,6 +6,7 @@
  * width the payload supplies. Class names are the contract with bci.css.
  */
 import BrandLogo from "./BrandLogo.jsx";
+import BannerMedia from "./bannerMedia.jsx";
 import PlatformIcon from "./PlatformIcon.jsx";
 import { Rich } from "../../utils/text.jsx";
 
@@ -29,9 +30,7 @@ export function BciBanner({ tab, variant = "b-purple" }) {
   const banner = tab.banner || {};
   return (
     <div className={`tbanner ${variant}`}>
-      {banner.image ? (
-        <img className="banner-video" src={banner.image} alt="" />
-      ) : null}
+      <BannerMedia image={banner.image} topic={banner.eyebrow || banner.headline || tab.label} />
       <div className="banner-tint" />
       <div className="banner-inner">
         <div className="b-eyebrow">

@@ -8,6 +8,7 @@
  * contract with pa.css.
  */
 import BrandLogo from "./BrandLogo.jsx";
+import BannerMedia from "./bannerMedia.jsx";
 
 const TONE = { pos: "var(--pos)", neg: "var(--neg)", neu: "var(--neu)", warn: "var(--warn)" };
 
@@ -35,7 +36,7 @@ export function Rich({ text }) {
 export function PaBanner({ banner = {}, variant = "b-purple" }) {
   return (
     <div className={`tbanner ${variant}`}>
-      {banner.image ? <img className="banner-video" src={banner.image} alt="" /> : null}
+      <BannerMedia image={banner.image} topic={banner.eyebrow || banner.headline} />
       <div className="banner-tint" />
       <div className="banner-inner">
         {banner.eyebrow ? (

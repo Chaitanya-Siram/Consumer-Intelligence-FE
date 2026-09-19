@@ -147,6 +147,7 @@ export default function BrandPerceptionScreen({
   return (
     <StoryboardShell
       scope="sb-bp"
+      bannerContext={{ brand: meta.brand, category: meta.category }}
       brandName={brandName}
       subtitle={
         <>

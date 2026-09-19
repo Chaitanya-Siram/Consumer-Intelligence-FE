@@ -9,6 +9,7 @@
  * the Perception Analysis blocks; the class names they emit exist in dn.css.
  */
 import BrandLogo from "./BrandLogo.jsx";
+import BannerMedia from "./bannerMedia.jsx";
 import { Rich } from "./pa-blocks.jsx";
 
 export { Rich, SecHead, SummaryPanel } from "./pa-blocks.jsx";
@@ -18,7 +19,7 @@ const CAT = ["var(--c1)", "var(--c2)", "var(--c3)", "var(--c4)", "var(--c5)", "v
 export function DnBanner({ banner = {}, variant = "b-purple" }) {
   return (
     <div className={`tbanner ${variant}`}>
-      {banner.image ? <img className="banner-video" src={banner.image} alt="" /> : null}
+      <BannerMedia image={banner.image} topic={banner.eyebrow || banner.headline} />
       <div className="banner-tint" />
       <div className="banner-inner">
         {banner.eyebrow ? (

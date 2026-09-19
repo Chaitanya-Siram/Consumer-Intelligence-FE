@@ -216,6 +216,8 @@ export default function TrendIntelligenceScreen({
   return (
     <StoryboardShell
       scope="sb-trend"
+
+      bannerContext={{ brand: meta.brand, category: meta.category }}
       brandName={`${meta.brand || "Brand"} × InfoVision`}
       subtitle="Trend Intelligence Storyboard"
       tabs={tabs}

@@ -168,6 +168,7 @@ export default function TrackEmergingIssuesScreen({
   return (
     <StoryboardShell
       scope="sb-tei"
+      bannerContext={{ brand: meta.brand, category: meta.category }}
       brandName={meta.brand || "Emerging Issues"}
       subtitle={
         <>

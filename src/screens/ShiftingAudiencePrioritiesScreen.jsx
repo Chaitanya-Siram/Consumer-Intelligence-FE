@@ -153,6 +153,7 @@ export default function ShiftingAudiencePrioritiesScreen({
   return (
     <StoryboardShell
       scope="sb-tei sb-sap"
+      bannerContext={{ brand: meta.brand, category: meta.category }}
       brandName={brandLabel}
       subtitle={
         <>

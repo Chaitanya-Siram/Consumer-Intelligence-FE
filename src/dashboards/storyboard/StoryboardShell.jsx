@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
 import { Rich } from "../../utils/text.jsx";
+import { BannerContext } from "./bannerMedia.jsx";
 import "./storyboard-base.css";
 
 /**
@@ -132,11 +133,14 @@ export default function StoryboardShell({
   // Brand & Competitive has neither and lays its footer out as plain spans.
   progress = true,
   footerAs = "div",
+  // { brand, category } so tab banners can pick relevant photography.
+  bannerContext = null,
 }) {
   return (
     // `sb-lens` carries the rules shared by every storyboard; `scope` carries this
     // page's own, because the four source pages style the same class names
     // differently. Both are required.
+    <BannerContext.Provider value={bannerContext || {}}>
     <div className={`sb-lens ${scope}`}>
       {progress ? <ScrollProgress /> : null}
 
@@ -187,5 +191,6 @@ export default function StoryboardShell({
 
       {onCloseModal ? <AiModal modal={modal} onClose={onCloseModal} /> : null}
     </div>
+    </BannerContext.Provider>
   );
 }

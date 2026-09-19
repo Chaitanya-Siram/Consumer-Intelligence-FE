@@ -7,6 +7,7 @@
  * the contract with tei.css.
  */
 import { useRef, useState } from "react";
+import BannerMedia from "./bannerMedia.jsx";
 
 const CAT = [
   "var(--c1)", "var(--c2)", "var(--c3)", "var(--c4)",
@@ -17,7 +18,7 @@ const TONE = { pos: "var(--pos)", neg: "var(--neg)", neu: "var(--c6)" };
 export function TeiBanner({ banner = {}, variant = "b-purple" }) {
   return (
     <div className={`tbanner ${variant}`}>
-      {banner.image ? <img className="banner-video" src={banner.image} alt="" /> : null}
+      <BannerMedia image={banner.image} topic={banner.eyebrow || banner.headline} />
       <div className="banner-tint" />
       <div className="banner-inner">
         {banner.eyebrow ? (

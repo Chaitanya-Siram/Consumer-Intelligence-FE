@@ -8,6 +8,7 @@
  * `Rich`, `SecHead`, `SummaryPanel` are shared with pa-blocks.
  */
 import BrandLogo from "./BrandLogo.jsx";
+import BannerMedia from "./bannerMedia.jsx";
 import { Rich } from "./pa-blocks.jsx";
 
 export { Rich, SecHead, SummaryPanel } from "./pa-blocks.jsx";
@@ -18,7 +19,7 @@ const TONE = { pos: "var(--pos)", neg: "var(--neg)", neu: "var(--neu)", warn: "v
 export function WgBanner({ banner = {}, variant = "b-purple" }) {
   return (
     <div className={`tbanner ${variant}`}>
-      {banner.image ? <img className="banner-video" src={banner.image} alt="" /> : null}
+      <BannerMedia image={banner.image} topic={banner.eyebrow || banner.headline} />
       <div className="banner-tint" />
       <div className="banner-inner">
         {banner.eyebrow ? (

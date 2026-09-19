@@ -161,6 +161,7 @@ export default function CongruenceContentScreen({ chartsData, chartsLoading, cha
   return (
     <StoryboardShell
       scope="sb-wg sb-cc"
+      bannerContext={{ brand: meta.brand, category: meta.category }}
       brandName={<><BrandLogo brand={meta.brand || "Brand"} logos={logos} size={22} rounded={6} />{meta.brand || "Brand"}{meta.category ? <span style={{ fontWeight: 600, color: "var(--ink3)" }}>· {meta.category}</span> : null}</>}
       subtitle={<>AI/LLM Audit and Analysis · Congruence &amp; Content Intelligence{isSample ? <span className="sample-pill">Sample data</span> : null}</>}
       tabs={tabs}

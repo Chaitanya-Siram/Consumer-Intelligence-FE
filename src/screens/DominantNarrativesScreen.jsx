@@ -136,6 +136,7 @@ export default function DominantNarrativesScreen({
   return (
     <StoryboardShell
       scope="sb-dn"
+      bannerContext={{ brand: meta.brand, category: meta.category }}
       brandName={brandName}
       subtitle={
         <>

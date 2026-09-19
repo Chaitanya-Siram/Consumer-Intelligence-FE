@@ -282,6 +282,8 @@ export default function BrandCompetitiveScreen({
   return (
     <StoryboardShell
       scope="sb-bci"
+
+      bannerContext={{ brand: meta.brand, category: meta.category }}
       brandName={meta.brand || "Brand"}
       subtitle="SOCIAL & MEDIA INTELLIGENCE"
       tabs={tabs}

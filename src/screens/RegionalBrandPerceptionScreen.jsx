@@ -103,6 +103,7 @@ export default function RegionalBrandPerceptionScreen({ chartsData, chartsLoadin
   return (
     <StoryboardShell
       scope="sb-wg sb-ri"
+      bannerContext={{ brand: meta.brand, category: meta.category }}
       brandName={<><BrandLogo brand={meta.brand || "Brand"} logos={logos} size={22} rounded={6} />{meta.brand || "Brand"}{meta.category ? <span style={{ fontWeight: 600, color: "var(--ink3)" }}>· {meta.category}</span> : null}</>}
       subtitle={<>Regional Intelligence · Brand Perception{isSample ? <span className="sample-pill">Sample data</span> : null}</>}
       tabs={tabs}

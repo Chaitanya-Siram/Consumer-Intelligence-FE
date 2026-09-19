@@ -61,6 +61,7 @@ export default function BrandMessagingScreen({ chartsData, chartsLoading, charts
   return (
     <StoryboardShell
       scope="sb-wg"
+      bannerContext={{ brand: meta.brand, category: meta.category }}
       brandName={<><BrandLogo brand={meta.brand || "Brand"} logos={logos} size={22} rounded={6} />{meta.brand || "Brand"}{meta.category ? <span style={{ fontWeight: 600, color: "var(--ink3)" }}>· {meta.category}</span> : null}</>}
       subtitle={<>Whitespace &amp; Gap Analysis · Brand Messaging{isSample ? <span className="sample-pill">Sample data</span> : null}</>}
       tabs={tabs}

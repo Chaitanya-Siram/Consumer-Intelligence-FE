@@ -6,6 +6,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 
 import { Rich } from "../../utils/text.jsx";
+import BannerMedia from "./bannerMedia.jsx";
 
 const POSITIVE = "#059669";
 const NEGATIVE = "#dc2626";
@@ -161,7 +162,7 @@ export function TabBanner({ tab }) {
     <div className={`tbanner ${tab.banner_class || "b-snapshot"}`}>
       <div className="bg-overlay" />
       <BannerParticles variant={tab.banner_class} />
-      {banner.image ? <img className="banner-img" src={banner.image} alt="" /> : null}
+      <BannerMedia image={banner.image} topic={banner.eyebrow || banner.headline || tab.label} className="banner-img" />
       <div className="text-layer">
         <div className="eyebrow">{banner.eyebrow}</div>
         <h2>{banner.headline || tab.label}</h2>

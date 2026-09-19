@@ -145,6 +145,7 @@ export default function PerceptionAnalysisScreen({
   return (
     <StoryboardShell
       scope="sb-pa"
+      bannerContext={{ brand: meta.brand, category: meta.category }}
       brandName={brandName}
       subtitle={
         <>
