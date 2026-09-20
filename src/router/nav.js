@@ -37,6 +37,11 @@ export const paths = {
   narratives: (pid, sid) => `/${pid}/sessions/${sid}/narratives`,
   // Brand Intelligence → Brand Perception (Tier 2)
   brandperception: (pid, sid) => `/${pid}/sessions/${sid}/brand-perception`,
+  // Social Research (Tier 2) — tab is URL-synced, so it's an optional third segment.
+  socialresearch: (pid, sid, tab) => `/${pid}/sessions/${sid}/social-research${tab ? `/${tab}` : ''}`,
+  sociallistening: (pid, sid, tab) => `/${pid}/sessions/${sid}/social-listening${tab ? `/${tab}` : ''}`,
+  socialaudit: (pid, sid, tab) => `/${pid}/sessions/${sid}/social-audit${tab ? `/${tab}` : ''}`,
+  prresearch: (pid, sid, tab) => `/${pid}/sessions/${sid}/pr-research${tab ? `/${tab}` : ''}`,
   // Whitespace & Gap Analysis (Tier 2)
   expectations: (pid, sid) => `/${pid}/sessions/${sid}/expectations`,
   messaging: (pid, sid) => `/${pid}/sessions/${sid}/messaging`,

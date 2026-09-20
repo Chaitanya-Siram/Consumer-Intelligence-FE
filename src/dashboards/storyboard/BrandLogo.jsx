@@ -8,9 +8,9 @@
  */
 import { useState } from "react";
 
-export default function BrandLogo({ brand, logos, size = 28, rounded = 8, className = "" }) {
+export default function BrandLogo({ brand, logos, photoUrl, size = 28, rounded = 8, className = "" }) {
   const [failed, setFailed] = useState(false);
-  const src = logos?.[brand];
+  const src = photoUrl || logos?.[brand];
 
   const initials = String(brand || "?")
     .split(/\s+/)
@@ -54,7 +54,7 @@ export default function BrandLogo({ brand, logos, size = 28, rounded = 8, classN
     <img
       className={className}
       src={src}
-      alt={`${brand} logo`}
+      alt={photoUrl ? brand : `${brand} logo`}
       title={brand}
       onError={() => setFailed(true)}
       style={{ ...box, objectFit: "contain", background: "#fff" }}
