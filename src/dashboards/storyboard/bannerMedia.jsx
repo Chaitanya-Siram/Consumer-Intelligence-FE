@@ -62,6 +62,10 @@ export function bannerTopic(banner = {}) {
 export function bannerQueries({ category, brand, topic }) {
   const c = clean(category), t = clean(topic), b = clean(brand);
   const out = [];
+  // A brand name that's also an ordinary word ("Armor All") reliably pulls the
+  // word's literal meaning (knights, military vehicles) unless the category is
+  // right there in the same query — brand + topic alone isn't enough.
+  if (b && c && t) out.push(`${b} ${c} ${t}`);
   if (b && t) out.push(`${b} ${t}`);
   if (c && t) out.push(`${c} ${t}`);
   if (b) out.push(b);
