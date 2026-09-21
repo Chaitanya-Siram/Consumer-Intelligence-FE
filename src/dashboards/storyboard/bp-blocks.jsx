@@ -9,6 +9,7 @@
 import BrandLogo from "./BrandLogo.jsx";
 import BannerMedia from "./bannerMedia.jsx";
 import { Rich } from "./pa-blocks.jsx";
+import "./verbatim.css";
 
 export { Rich, SecHead, SummaryPanel } from "./pa-blocks.jsx";
 
@@ -85,6 +86,12 @@ export function ProductCards({ products, logos }) {
     <div className="grid g3">
       {products.map((p) => (
         <div className="card pcard" key={p.name}>
+          {p.image?.url ? (
+            <figure className="pcard-photo">
+              <img src={p.image.url} alt={p.image.alt || p.name} loading="lazy" referrerPolicy="no-referrer" onError={(e) => { e.currentTarget.parentElement.style.display = "none"; }} />
+              <figcaption>Stock photo{p.image.photographer ? ` · ${p.image.photographer}` : ""} · Pexels</figcaption>
+            </figure>
+          ) : null}
           <div className="head">
             <BrandLogo brand={p.brand} logos={logos} size={26} rounded={7} />
             <div>

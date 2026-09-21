@@ -1,0 +1,27 @@
+/* "In their words" post evidence: scraped preview card + link-out. Shared by every
+ * lens that renders <Quotes />, so it lives beside blocks.jsx instead of in each
+ * lens stylesheet. */
+.vb-preview{display:block;text-decoration:none;color:inherit;border-radius:var(--r-sm,10px);overflow:hidden}
+.vb-preview-img{width:100%;aspect-ratio:1.91/1;object-fit:cover;display:block;background:rgba(127,127,127,.12)}
+.vb-grid .vb .vb-preview-body{padding:14px 18px 6px}
+.vb-preview-site{display:flex;align-items:center;gap:6px;font-size:11px;letter-spacing:.04em;text-transform:uppercase;opacity:.7;margin-bottom:6px}
+.vb-preview-site img{width:14px;height:14px;border-radius:3px}
+.vb-preview-title{font-weight:600;font-size:14px;line-height:1.35;margin:0 0 6px}
+.vb-preview-desc{font-size:13px;line-height:1.5;opacity:.85;margin:0}
+.vb-grid .vb .vb-link{display:inline-flex;align-items:center;gap:4px;margin:8px 18px 14px;font-size:12px;font-weight:600;text-decoration:none;opacity:.85}
+.vb-grid .vb .vb-link:hover,.vb-grid .vb .vb-link:focus-visible{opacity:1;text-decoration:underline}
+.vb-grid .vb:not(.vb-evidence) .vb-link{margin:10px 0 0}
+.vb-grid .vb .vb-card{padding:16px 18px 6px}
+.vb-card-head{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.vb-card-head img{border-radius:4px}
+.vb-card-who{display:flex;flex-direction:column;gap:2px;min-width:0}
+.vb-card-author{font-size:13px;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.vb-card-platform{display:inline-flex;align-items:center;gap:5px;font-size:11px;letter-spacing:.04em;text-transform:uppercase;opacity:.7}
+.vb-card-date{margin-left:auto;font-size:11px;opacity:.6}
+.vb-card-text{font-size:14px;line-height:1.55;margin:0 0 8px}
+.vb-grid{align-items:start}
+
+/* Product card photo (Brand Perception): a stock photo of the product type, captioned as such. */
+.pcard .pcard-photo{margin:-1px -1px 12px;border-radius:inherit;border-bottom-left-radius:0;border-bottom-right-radius:0;overflow:hidden;position:relative}
+.pcard .pcard-photo img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover}
+.pcard .pcard-photo figcaption{position:absolute;left:8px;bottom:6px;padding:2px 8px;border-radius:999px;background:rgba(0,0,0,.55);color:#fff;font-size:10px;letter-spacing:.03em}

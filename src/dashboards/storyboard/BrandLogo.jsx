@@ -8,6 +8,17 @@
  */
 import { useState } from "react";
 
+const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:8000";
+
+/** A person's picture for a payload row: the picture the backend cached from the
+ * post's own profile (`avatar_key`), else a real `photo_url`. Muck Rack's gray
+ * "no photo" icon is not a picture, so it counts as none and initials show. */
+export function avatarSrc(row) {
+  if (row?.avatar_key) return `${API_BASE}/consumer-intelligence/profile-image?key=${encodeURIComponent(row.avatar_key)}`;
+  const url = row?.photo_url;
+  return url && !/icon-user-circle/.test(url) ? url : null;
+}
+
 export default function BrandLogo({ brand, logos, photoUrl, size = 28, rounded = 8, className = "" }) {
   const [failed, setFailed] = useState(false);
   const src = photoUrl || logos?.[brand];

@@ -7,7 +7,8 @@ import { useEffect, useMemo, useRef, useState } from "react";
 
 import { Rich } from "../../utils/text.jsx";
 import BannerMedia from "./bannerMedia.jsx";
-import BrandLogo from "./BrandLogo.jsx";
+import BrandLogo, { avatarSrc } from "./BrandLogo.jsx";
+import "./verbatim.css";
 
 const POSITIVE = "#059669";
 const NEGATIVE = "#dc2626";
@@ -468,6 +469,24 @@ function VerbatimEvidence({ quote, logos }) {
       />
     );
   }
+  if (quote.preview) {
+    const { image, title, description, site, favicon } = quote.preview;
+    return (
+      <a className="vb-preview" href={safePostUrl(quote.url)} target="_blank" rel="noopener noreferrer">
+        {image ? <img className="vb-preview-img" src={image} alt="" loading="lazy" referrerPolicy="no-referrer" onError={(e) => { e.currentTarget.style.display = "none"; }} /> : null}
+        <div className="vb-preview-body">
+          <div className="vb-preview-site">
+            {favicon ? <img src={favicon} alt="" width={14} height={14} loading="lazy" referrerPolicy="no-referrer" /> : null}
+            {site || quote.source}
+          </div>
+          {title ? <p className="vb-preview-title">{title}</p> : null}
+          <p className="vb-preview-desc">“{quote.text}”</p>
+          {description && !quote.text.includes(description.slice(0, 40)) ? <p className="vb-preview-desc">{description}</p> : null}
+        </div>
+      </a>
+    );
+  }
+  if (quote.platform) return <PostCard quote={quote} />;
   return (
     <>
       “{quote.text}”
@@ -479,18 +498,58 @@ function VerbatimEvidence({ quote, logos }) {
   );
 }
 
+/** Designed stand-in for a post that can't be embedded or captured (deleted, or
+ * behind a bot wall): platform + site icon, author, date, the quote itself. */
+function PostCard({ quote }) {
+  const host = quote.url ? new URL(quote.url).hostname.replace(/^www\./, "") : "";
+  return (
+    <div className="vb-card">
+      <div className="vb-card-head">
+        {quote.author ? <BrandLogo brand={quote.author} photoUrl={avatarSrc(quote)} size={34} rounded={999} /> : null}
+        <div className="vb-card-who">
+          <span className="vb-card-author">{quote.author || quote.platform}</span>
+          <span className="vb-card-platform">
+            {host ? <img src={`https://www.google.com/s2/favicons?domain=${host}&sz=64`} alt="" width={14} height={14} loading="lazy" referrerPolicy="no-referrer" /> : null}
+            {quote.platform}
+          </span>
+        </div>
+        {quote.date ? <span className="vb-card-date">{quote.date}</span> : null}
+      </div>
+      <p className="vb-card-text">“{quote.text}”</p>
+    </div>
+  );
+}
+
+/** Only http(s) post links are followed; anything else (javascript:, data:) is dropped. */
+function safePostUrl(url) {
+  try {
+    const parsed = new URL(url);
+    return parsed.protocol === "http:" || parsed.protocol === "https:" ? parsed.href : undefined;
+  } catch {
+    return undefined;
+  }
+}
+
+/** "In their words" shows the five strongest posts; the backend already orders them. */
+const TOP_POSTS = 5;
+
 export function Quotes({ quotes, logos }) {
   if (!quotes?.length) return null;
   return (
     <div className="vb-grid reveal d1">
-      {quotes.map((quote) => (
-        <div className={`vb${quote.embed || quote.screenshot_key ? " vb-evidence" : ""}`} key={quote.source + quote.text.slice(0, 24)}>
-          <VerbatimEvidence quote={quote} logos={logos} />
-          {/* Caption below, not an overlay — an overlay badge collides with a
-           * real embed's own UI (follow/menu button, reply row). */}
-          {quote.engagement != null ? <div className="vb-engagement">{Number(quote.engagement).toLocaleString()} engagements</div> : null}
-        </div>
-      ))}
+      {quotes.slice(0, TOP_POSTS).map((quote) => {
+        const postUrl = safePostUrl(quote.url);
+        const hasEvidence = quote.embed || quote.screenshot_key || quote.preview || quote.platform;
+        return (
+          <div className={`vb${hasEvidence ? " vb-evidence" : ""}`} key={quote.source + quote.text.slice(0, 24)}>
+            <VerbatimEvidence quote={{ ...quote, url: postUrl }} logos={logos} />
+            {/* Caption below, not an overlay — an overlay badge collides with a
+             * real embed's own UI (follow/menu button, reply row). */}
+            {quote.engagement != null ? <div className="vb-engagement">{Number(quote.engagement).toLocaleString()} engagements</div> : null}
+            {postUrl ? <a className="vb-link" href={postUrl} target="_blank" rel="noopener noreferrer">View original post ↗</a> : null}
+          </div>
+        );
+      })}
     </div>
   );
 }

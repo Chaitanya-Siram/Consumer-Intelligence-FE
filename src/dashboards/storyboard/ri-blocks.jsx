@@ -4,6 +4,7 @@
  * slices and the overview table. Reuses the Whitespace blocks (wg-blocks) and
  * stylesheet plus ri.css additions.
  */
+import { CountryName } from "../../utils/countryFlags.jsx";
 import BrandLogo from "./BrandLogo.jsx";
 import { BarList, Bullets, CAT, Rich, WgBanner } from "./wg-blocks.jsx";
 
@@ -21,7 +22,7 @@ export function RegionHead({ region, sub }) {
   return (
     <div className="rhead">
             <div>
-        <div className="nm">{region.name}</div>
+        <div className="nm"><CountryName name={region.name} size={22} gap={8} /></div>
         {sub ? <div className="sub">{sub}</div> : null}
       </div>
     </div>
@@ -228,7 +229,7 @@ export function OverviewTable({ regions, cols, onPick }) {
             <tr key={r.key} className="link" onClick={() => onPick?.(r.key)} title={`Open ${r.name}`}>
               <td>
                 <div className="rg">
-                  {r.name}
+                  <CountryName name={r.name} />
                 </div>
               </td>
               {cols.map((c) => <td key={c.h}>{c.render(r)}</td>)}

@@ -17,6 +17,7 @@ import { RE_SAMPLE } from "../dashboards/storyboard/ri-sample.js";
 import { mergeLogos } from "../dashboards/storyboard/logos.js";
 import "../dashboards/storyboard/wg.css";
 import "../dashboards/storyboard/ri.css";
+import { FlagText } from "../utils/countryFlags.jsx";
 
 export const DASHBOARD_KEY = "regional_engagement";
 
@@ -58,7 +59,7 @@ export default function RegionalEngagementScreen({ chartsData, chartsLoading, ch
         <OverviewTable regions={regions} onPick={switchTab} cols={[
           { h: periods[0], render: (r) => r.types_h1?.[0] ? <>{r.types_h1[0].name} <span className="v">{r.types_h1[0].pct}%</span></> : "—" },
           { h: periods[1], render: (r) => r.types_h2?.[0] ? <><span className="hl">{r.types_h2[0].name}</span> <span className="v">{r.types_h2[0].pct}%</span></> : "—" },
-          { h: "Headline", render: (r) => <span style={{ color: "var(--ink2)" }}>{r.headline}</span> },
+          { h: "Headline", render: (r) => <span style={{ color: "var(--ink2)" }}><FlagText text={r.headline} /></span> },
         ]} />
       </div>
     </div>

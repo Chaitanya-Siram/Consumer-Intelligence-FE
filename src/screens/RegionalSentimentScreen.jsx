@@ -17,6 +17,7 @@ import { RS_SAMPLE } from "../dashboards/storyboard/ri-sample.js";
 import { mergeLogos } from "../dashboards/storyboard/logos.js";
 import "../dashboards/storyboard/wg.css";
 import "../dashboards/storyboard/ri.css";
+import { FlagText } from "../utils/countryFlags.jsx";
 
 export const DASHBOARD_KEY = "regional_sentiment";
 
@@ -66,7 +67,7 @@ export default function RegionalSentimentScreen({ chartsData, chartsLoading, cha
             </div>) : <span className="v">—</span> },
           { h: "Net", render: (r) => r.sentiment ? <span className={`v${r === best ? " hl" : ""}`}>{r.sentiment.pos - r.sentiment.neg > 0 ? "+" : ""}{r.sentiment.pos - r.sentiment.neg}</span> : <span className="v">—</span> },
           { h: "Top theme", render: (r) => r.themes?.[0] ? <>{r.themes[0].name} <span className="v">{r.themes[0].pct}%</span></> : "—" },
-          { h: "Headline", render: (r) => <span style={{ color: "var(--ink2)" }}>{r.headline}</span> },
+          { h: "Headline", render: (r) => <span style={{ color: "var(--ink2)" }}><FlagText text={r.headline} /></span> },
         ]} />
       </div>
     </div>

@@ -15,7 +15,7 @@
 import { useState } from "react";
 
 import BrandLogo from "./BrandLogo.jsx";
-import BannerMedia, { useBannerImage } from "./bannerMedia.jsx";
+import BannerMedia, { bannerTopic, useBannerImage } from "./bannerMedia.jsx";
 import { Card, SentimentDonut } from "./blocks.jsx";
 import { Legendary, TrajectoryChart } from "./charts.jsx";
 import { Rich, SecHead } from "./pa-blocks.jsx";
@@ -43,7 +43,7 @@ function CardThumb({ topic }) {
 export function SrBanner({ banner = {}, variant = "b-purple", brand, logos }) {
   return (
     <div className={`tbanner ${variant}`}>
-      <BannerMedia image={banner.image} topic={banner.eyebrow || banner.headline} />
+      <BannerMedia image={banner.image} topic={bannerTopic(banner)} />
       <div className="banner-tint" />
       <div className="banner-inner">
         {brand ? (

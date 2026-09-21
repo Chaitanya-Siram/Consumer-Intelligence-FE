@@ -16,9 +16,12 @@
  * legible. Screens pass `{ brand, category }` to StoryboardShell, which
  * provides it through BannerContext; banner blocks render <BannerMedia />.
  */
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useReducer, useState } from "react";
 
 import { resolvePexelsImageUrls } from "../../api/pexels.js";
+import BrandLogo from "./BrandLogo.jsx";
+import { brandLogoUrl, LOGOS_REGISTERED_EVENT, sessionBrands } from "./chartAxisIcons.js";
+import "./bannerBrands.css";
 
 export const BannerContext = createContext({});
 
@@ -43,6 +46,13 @@ const ssSet = (k, v) => { try { sessionStorage.setItem(SS_PREFIX + k, v); } catc
 // Strip words that make image search worse (index, analysis, tab labels).
 const NOISE = /\b(index|analysis|analytics|intelligence|insights?|dashboard|overview|tab|study|scan|tier|lens|score|share|voice|drivers?|metrics?|report|q[1-4]|20\d\d|&|and|the|of|for|vs|versus|by|in)\b/gi;
 const clean = (s) => String(s || "").replace(/[^\w\s'-]/g, " ").replace(NOISE, " ").replace(/\s+/g, " ").trim();
+
+/** A banner's tab title (eyebrow) plus its LLM headline, combined into one
+ * topic string so the image/video search reflects what the banner actually
+ * says instead of only its section label. */
+export function bannerTopic(banner = {}) {
+  return [banner.eyebrow, banner.headline].filter(Boolean).join(" ");
+}
 
 /** Candidate search strings, most specific first. */
 export function bannerQueries({ category, brand, topic }) {
@@ -99,5 +109,38 @@ export default function BannerMedia({ image, topic, className = "banner-video" }
   const [failed, setFailed] = useState(false);
   const src = failed ? CURATED[hash(topic || "x") % CURATED.length] : resolved;
   if (!src) return null;
-  return <img className={className} src={src} alt="" loading="eager" decoding="async" onError={() => !failed && setFailed(true)} />;
+  return (
+    <>
+      <img className={className} src={src} alt="" loading="eager" decoding="async" onError={() => !failed && setFailed(true)} />
+      <BannerBrands />
+    </>
+  );
+}
+
+const MAX_RIVAL_LOGOS = 3;
+
+/** The primary brand's logo, followed by "vs" and the competitors' logos when the
+ * session compares brands. The banner title itself is drawn by each banner block. */
+function BannerBrands() {
+  const ctx = useContext(BannerContext);
+  const [, redraw] = useReducer((n) => n + 1, 0);
+  // The banner can render before the charts payload registers its logos.
+  useEffect(() => {
+    window.addEventListener(LOGOS_REGISTERED_EVENT, redraw);
+    return () => window.removeEventListener(LOGOS_REGISTERED_EVENT, redraw);
+  }, []);
+  const { brand: sessionBrand, competitors } = sessionBrands();
+  const brand = ctx.brand || sessionBrand;
+  const brandLogo = brandLogoUrl(brand);
+  if (!brand || !brandLogo) return null;
+  const rivals = competitors.filter((name) => name !== brand && brandLogoUrl(name)).slice(0, MAX_RIVAL_LOGOS);
+  return (
+    <div className="banner-brands" aria-label={rivals.length ? `${brand} versus ${rivals.join(", ")}` : brand}>
+      <BrandLogo brand={brand} logos={{ [brand]: brandLogo }} size={30} rounded={999} />
+      {rivals.length ? <span className="banner-brands-vs">vs</span> : null}
+      {rivals.map((name) => (
+        <BrandLogo key={name} brand={name} logos={{ [name]: brandLogoUrl(name) }} size={30} rounded={999} />
+      ))}
+    </div>
+  );
 }

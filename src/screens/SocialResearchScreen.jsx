@@ -231,7 +231,7 @@ export default function SocialResearchScreen({ chartsData, chartsLoading, charts
         <SrBanner
           banner={competitiveCultural.banner}
           variant={BANNER_VARIANT.competitive_cultural}
-          brand={meta.brand}
+          brand={competitiveCultural.share_of_voice?.[0]?.brand || meta.brand}
           logos={logos}
         />
         <div className="sec">

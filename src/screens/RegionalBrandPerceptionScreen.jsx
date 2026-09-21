@@ -17,6 +17,7 @@ import { RBP_SAMPLE } from "../dashboards/storyboard/ri-sample.js";
 import { mergeLogos } from "../dashboards/storyboard/logos.js";
 import "../dashboards/storyboard/wg.css";
 import "../dashboards/storyboard/ri.css";
+import { FlagText } from "../utils/countryFlags.jsx";
 
 export const DASHBOARD_KEY = "regional_brand_perception";
 const isOther = (n) => /^others?$/i.test(n);
@@ -62,7 +63,7 @@ export default function RegionalBrandPerceptionScreen({ chartsData, chartsLoadin
           { h: "Market leader", render: (r) => { const l = leader(r); return l ? <span className="bb"><BrandLogo brand={l.name} logos={logos} size={18} rounded={5} />{l.name} <span className="v">{l.pct}%</span></span> : "—"; } },
           { h: meta.brand || "Brand", render: (r) => { const o = own(r); return o ? <span className="bb hl"><BrandLogo brand={o.name} logos={logos} size={18} rounded={5} /><span className="v hl">{o.pct}%</span></span> : <span className="v">not in top mentions</span>; } },
           { h: "Brands tracked", render: (r) => <span className="v">{(r.brands || []).filter((b) => !isOther(b.name)).length}</span> },
-          { h: "Headline", render: (r) => <span style={{ color: "var(--ink2)" }}>{r.headline}</span> },
+          { h: "Headline", render: (r) => <span style={{ color: "var(--ink2)" }}><FlagText text={r.headline} /></span> },
         ]} />
       </div>
     </div>
