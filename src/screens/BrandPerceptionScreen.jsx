@@ -13,7 +13,6 @@ import {
   BarList,
   BpBanner,
   BrandCards,
-  Posts,
   ProductCards,
   Reasons,
   Rich,
@@ -21,6 +20,7 @@ import {
   SummaryPanel,
 } from "../dashboards/storyboard/bp-blocks.jsx";
 import BrandLogo from "../dashboards/storyboard/BrandLogo.jsx";
+import { Quotes } from "../dashboards/storyboard/blocks.jsx";
 import StoryboardShell from "../dashboards/storyboard/StoryboardShell.jsx";
 import { BP_SAMPLE } from "../dashboards/storyboard/bp-sample.js";
 import { mergeLogos } from "../dashboards/storyboard/logos.js";
@@ -122,7 +122,7 @@ export default function BrandPerceptionScreen({
               {switching?.posts?.length ? (
                 <div className="card">
                   <div className="card-title">What people say</div>
-                  <Posts posts={switching.posts} />
+                  <Quotes quotes={switching.posts} logos={logos} initial={3} expandable />
                 </div>
               ) : null}
             </div>

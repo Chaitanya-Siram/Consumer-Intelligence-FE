@@ -116,6 +116,11 @@ export function ProductCards({ products, logos }) {
             <div className="quote">
               &ldquo;{p.quote.text}&rdquo;
               {p.quote.source ? <small>{p.quote.source}</small> : null}
+              {/^https?:\/\//i.test(p.quote.url || "") ? (
+                <a href={p.quote.url} target="_blank" rel="noopener noreferrer" style={{ display: "block", marginTop: 6, fontSize: 12, fontWeight: 600 }}>
+                  View original post ↗
+                </a>
+              ) : null}
             </div>
           ) : null}
         </div>

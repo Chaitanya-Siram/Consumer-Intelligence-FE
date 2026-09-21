@@ -3,7 +3,7 @@
  * and Analysis, Tier 2). No charting library; bubbles, heat-maps and bars are
  * CSS/SVG on the `.sb-wg` tokens. Reuses the Whitespace blocks.
  */
-import BrandLogo from "./BrandLogo.jsx";
+import BrandLogo, { avatarSrc } from "./BrandLogo.jsx";
 import { Bullets, CAT, Rich } from "./wg-blocks.jsx";
 
 export { BarList, Bullets, Rich, SecHead, SummaryPanel, WgBanner } from "./wg-blocks.jsx";
@@ -15,13 +15,20 @@ const LLM_COLOR = {
 const llmColor = (n) => LLM_COLOR[String(n).toLowerCase()] || "var(--c6)";
 const llmMark = (n) => String(n).replace(/[^A-Za-z]/g, "").slice(0, 2).toUpperCase();
 
-export function LlmChips({ llms }) {
+/** The assistant's own logo when the payload has one (`meta.logos`), else the
+ * coloured two-letter tile. `size` is the tile's edge in px. */
+function LlmMark({ name, logos, size }) {
+  if (logos?.[name]) return <span title={name} style={{ display: "inline-flex" }}><BrandLogo brand={name} logos={logos} size={size} rounded={5} /></span>;
+  return <i style={{ background: llmColor(name) }} title={name}>{llmMark(name)}</i>;
+}
+
+export function LlmChips({ llms, logos }) {
   if (!llms?.length) return null;
   return (
     <div className="llms">
       {llms.map((l) => (
         <span className="llm" key={l}>
-          <i style={{ background: llmColor(l) }}>{llmMark(l)}</i>
+          <LlmMark name={l} logos={logos} size={22} />
           {l}
         </span>
       ))}
@@ -29,12 +36,12 @@ export function LlmChips({ llms }) {
   );
 }
 
-function MiniLlms({ llms }) {
+function MiniLlms({ llms, logos }) {
   if (!llms?.length) return null;
   return (
     <span className="mini-llms">
       {llms.map((l) => (
-        <i key={l} style={{ background: llmColor(l) }} title={l}>{llmMark(l)}</i>
+        <LlmMark key={l} name={l} logos={logos} size={18} />
       ))}
     </span>
   );
@@ -72,7 +79,7 @@ export function StageCards({ stages }) {
   );
 }
 
-export function Flow({ inputs, llms, datasets }) {
+export function Flow({ inputs, llms, datasets, logos }) {
   return (
     <div className="flow">
       <div className="box">
@@ -82,7 +89,7 @@ export function Flow({ inputs, llms, datasets }) {
       <div className="arrow">→</div>
       <div className="box">
         <div className="lab">LLMs analysed</div>
-        <LlmChips llms={llms} />
+        <LlmChips llms={llms} logos={logos} />
       </div>
       <div className="arrow">→</div>
       <div className="box">
@@ -125,7 +132,7 @@ export function SourceTable({ sources, logos }) {
               <td><span className="type">{s.type}</span></td>
               <td className="num">{s.mentions}</td>
               <td className="num">{s.reach || "—"}</td>
-              <td><MiniLlms llms={s.llms} /></td>
+              <td><MiniLlms llms={s.llms} logos={logos} /></td>
             </tr>
           ))}
         </tbody>
@@ -146,7 +153,12 @@ export function JournalistTable({ journalists }) {
           {journalists.map((j, i) => (
             <tr key={j.name}>
               <td><span className={`rk${i === 0 ? " r1" : ""}`}>{i + 1}</span></td>
-              <td><span className="nm">{j.name}</span></td>
+              <td>
+                <span className="nm" style={{ display: "inline-flex", alignItems: "center", gap: 10 }}>
+                  <BrandLogo brand={j.name} photoUrl={avatarSrc(j)} size={26} rounded={999} />
+                  {j.name}
+                </span>
+              </td>
               <td>{j.outlet}</td>
               <td className="num">{j.mentions}</td>
               <td><span className="type">{j.beat}</span></td>

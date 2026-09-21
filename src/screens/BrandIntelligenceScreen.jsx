@@ -89,7 +89,7 @@ function LeaderMedia({ media, name }) {
       />
     );
   }
-  if (media.type === "mp4" || media.type === "webm") {
+  if (media.type === "mp4" || media.type === "webm" || media.type === "video") {
     return <video className="banner-video" src={media.url} controls muted playsInline style={boxStyle} />;
   }
   return <img src={media.url} alt={name} loading="lazy" style={boxStyle} />;
