@@ -117,7 +117,7 @@ function Hero({ hero }) {
           allow="autoplay; encrypted-media"
           style={{ border: 0, pointerEvents: "none" }}
         />
-      ) : media?.url ? (
+      ) : media?.type === "mp4" || media?.type === "webm" || media?.type === "video" ? (
         <video
           className="hero-img"
           src={media.url}
@@ -127,6 +127,11 @@ function Hero({ hero }) {
           loop
           playsInline
         />
+      ) : media?.url ? (
+        // Any other type (Pexels/brand-website photos come back as "image") is a
+        // still — a <video src> can't decode a JPEG/PNG and renders blank, which
+        // is why the hero used to go flat black for every photo hero.
+        <img className="hero-img" src={media.url} alt="" loading="eager" />
       ) : null}
       <div className="hero-overlay" />
       <div className="hero-content">
