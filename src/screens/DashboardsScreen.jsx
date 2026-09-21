@@ -7,6 +7,7 @@ import ChatDock from "../components/ChatDock.jsx";
 import { useNavigate } from "react-router-dom";
 import { paths } from "../router/nav.js";
 import { TIER1_LENSES, TIER2_LENSES } from "../workflow/tierLensData.js";
+import { useStockImage } from "../dashboards/storyboard/bannerMedia.jsx";
 import {
   CI_LENS_KEYS,
   MI_LENS_KEYS,
@@ -122,15 +123,18 @@ const DASHBOARDS = [
   },
 ];
 
-function CardArt({ image, type, accent }) {
+function CardArt({ image, query, type, accent }) {
   const [failed, setFailed] = useState(false);
-  if (image && !failed) {
+  // The static bundled/Unsplash `image` shows immediately; a real DuckDuckGo
+  // (then Pexels) photo for this card's own title replaces it once resolved.
+  const resolved = useStockImage(query, image);
+  if (resolved && !failed) {
     // Bundled PNGs are cut-outs and sit on the gradient (contain); remote
     // photos fill the frame (cover).
-    const cover = /^https?:/.test(image);
+    const cover = /^https?:/.test(resolved);
     return (
       <img
-        src={image}
+        src={resolved}
         alt=""
         className={`lc-top-photo${cover ? " lc-top-photo--cover" : ""}`}
         loading="lazy"
@@ -273,6 +277,11 @@ export default function DashboardsScreen({
   useOnBackHandler(onBack);
   const navigate = useNavigate();
   const [modalDashboard, setModalDashboard] = useState(null);
+  // Same brand source every other screen uses (MediaMonitoringScreenV2,
+  // MediaMeasurementScreen, ...) — card photos should show this brand, not
+  // generic stock imagery for the lens topic alone.
+  const cardBrand = session?.brand_keywords?.[0] || project?.name || "";
+  const cardQuery = (label) => [cardBrand, label].filter(Boolean).join(" ");
 
   const activeNodes = useMemo(() => {
     const wf = session?.workflow;
@@ -714,7 +723,7 @@ export default function DashboardsScreen({
                   >
                     <div className="lc-top">
                       <div className="lc-top-chart">
-                        <CardArt image={d.image} type={d.viz} accent={fg} />
+                        <CardArt image={d.image} query={cardQuery(d.title)} type={d.viz} accent={fg} />
                       </div>
 
                       <div className="lc-top-badge">

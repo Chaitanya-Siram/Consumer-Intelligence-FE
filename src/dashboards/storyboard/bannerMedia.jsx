@@ -146,6 +146,54 @@ export function useBannerImage({ image, topic }) {
   return url;
 }
 
+const STOCK_SS_PREFIX = "sb_stock_image:";
+const stockImageMem = new Map(); // query -> resolved url, or null once tried and nothing found
+
+/** Real photo for an arbitrary query (DuckDuckGo, then Pexels — see the
+ * backend's `brand_media.stock_photo`), for callers with no brand/session
+ * context of their own — the workflow builder's lens/sub-lens picker cards,
+ * which run before any session exists. Cached per query (in-memory, then
+ * sessionStorage) the same way `fetchBrandHero` above is. */
+async function fetchStockImage(query) {
+  if (!query) return null;
+  if (stockImageMem.has(query)) return stockImageMem.get(query);
+  try {
+    const cached = sessionStorage.getItem(STOCK_SS_PREFIX + query);
+    if (cached !== null) {
+      const url = cached || null;
+      stockImageMem.set(query, url);
+      return url;
+    }
+  } catch { /* ignore */ }
+  let url = null;
+  try {
+    const res = await fetch(`${API_BASE}/consumer-intelligence/stock-image?query=${encodeURIComponent(query)}`);
+    if (res.ok) {
+      const data = await res.json();
+      if (data?.url) url = data.url;
+    }
+  } catch { /* offline / blocked — the caller's own static fallback still applies */ }
+  stockImageMem.set(query, url);
+  try { sessionStorage.setItem(STOCK_SS_PREFIX + query, url || ""); } catch { /* ignore */ }
+  return url;
+}
+
+/** `fallback` (a bundled/static image, so the card is never blank) shows
+ * immediately; a resolved DuckDuckGo/Pexels photo replaces it once fetched. */
+export function useStockImage(query, fallback) {
+  const [url, setUrl] = useState(fallback || null);
+  useEffect(() => {
+    if (!query) { setUrl(fallback || null); return undefined; }
+    let live = true;
+    (async () => {
+      const resolved = await fetchStockImage(query);
+      if (live) setUrl(resolved || fallback || null);
+    })();
+    return () => { live = false; };
+  }, [query, fallback]);
+  return url;
+}
+
 /**
  * The banner <img>. `className` matches the host banner's CSS ("banner-video"
  * in the BCI-derived sheets, "banner-img" in Trend). On a 404 it falls back to

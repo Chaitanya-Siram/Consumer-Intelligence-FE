@@ -24,6 +24,7 @@ import { prettyFileName } from "../utils/files.js";
 import { chartsWsUrl } from "../api/charts.js";
 import {
   ciWsUrl,
+  MI_LENS_KEYS,
   sessionHasCI,
   sessionHasMI,
 } from "../api/consumerIntelligence.js";
@@ -1608,9 +1609,11 @@ export default function ReviewScreen({
             // length overcounts what the user actually picked. Count the distinct Tier 1
             // selections from the workflow itself instead — same source DashboardsScreen
             // already reads for its "one card per Tier 1 pillar" count.
+            // Media Intelligence lenses live in the same workflow but are built by
+            // a different stream, so they are not part of this "consumer-intelligence" count.
             const tier1Count = new Set(
               (session?.workflow?.nodes || [])
-                .filter((n) => n.type === "analysis" && n.data?.lens)
+                .filter((n) => n.type === "analysis" && n.data?.lens && !MI_LENS_KEYS.includes(n.data.lens))
                 .map((n) => n.data.lens),
             ).size;
             push(
