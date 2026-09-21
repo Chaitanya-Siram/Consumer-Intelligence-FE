@@ -7,6 +7,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 
 import { Rich } from "../../utils/text.jsx";
 import BannerMedia from "./bannerMedia.jsx";
+import BrandLogo from "./BrandLogo.jsx";
 
 const POSITIVE = "#059669";
 const NEGATIVE = "#dc2626";
@@ -411,13 +412,83 @@ export function Callout({ text }) {
   );
 }
 
-export function Quotes({ quotes }) {
+const CI_API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:8000";
+
+/** Loads Twitter's own embed script once, then asks it to activate any new
+ * `.twitter-tweet` blockquotes already in the DOM (widgets.js only scans on
+ * load and on explicit `widgets.load()` calls, not via a MutationObserver). */
+function useTwitterWidgets(active) {
+  useEffect(() => {
+    if (!active) return undefined;
+    const existing = document.querySelector('script[data-twitter-widgets]');
+    if (existing) {
+      window.twttr?.widgets?.load();
+      return undefined;
+    }
+    const script = document.createElement("script");
+    script.src = "https://platform.twitter.com/widgets.js";
+    script.async = true;
+    script.dataset.twitterWidgets = "1";
+    document.body.appendChild(script);
+    return undefined;
+  }, [active]);
+}
+
+/** Real evidence for a verbatim quote, in the same preference order the
+ * backend resolved it: an official embed (X/YouTube, live and ToS-safe),
+ * else a server-captured screenshot of the live post, else the plain quote
+ * text every caller already showed before this existed. */
+function VerbatimEvidence({ quote, logos }) {
+  const embed = quote.embed;
+  useTwitterWidgets(embed?.type === "twitter");
+
+  if (embed?.type === "twitter") {
+    return (
+      <blockquote className="twitter-tweet" data-conversation="none">
+        <a href={quote.url}>{quote.text}</a>
+      </blockquote>
+    );
+  }
+  if (embed?.type === "youtube") {
+    return (
+      <iframe
+        className="vb-embed"
+        src={`https://www.youtube.com/embed/${embed.video_id}`}
+        title={quote.source || "Embedded post"}
+        allow="encrypted-media"
+      />
+    );
+  }
+  if (quote.screenshot_key) {
+    return (
+      <img
+        className="vb-shot"
+        src={`${CI_API_BASE}/consumer-intelligence/verbatim-image?key=${encodeURIComponent(quote.screenshot_key)}`}
+        alt={quote.text}
+      />
+    );
+  }
+  return (
+    <>
+      “{quote.text}”
+      <span className="src">
+        {logos && quote.source ? <BrandLogo brand={quote.source.split(" · ")[0]} logos={logos} size={14} rounded={4} /> : null}
+        {quote.source}
+      </span>
+    </>
+  );
+}
+
+export function Quotes({ quotes, logos }) {
   if (!quotes?.length) return null;
   return (
     <div className="vb-grid reveal d1">
       {quotes.map((quote) => (
-        <div className="vb" key={quote.source + quote.text.slice(0, 24)}>
-          “{quote.text}”<span className="src">{quote.source}</span>
+        <div className={`vb${quote.embed || quote.screenshot_key ? " vb-evidence" : ""}`} key={quote.source + quote.text.slice(0, 24)}>
+          <VerbatimEvidence quote={quote} logos={logos} />
+          {/* Caption below, not an overlay — an overlay badge collides with a
+           * real embed's own UI (follow/menu button, reply row). */}
+          {quote.engagement != null ? <div className="vb-engagement">{Number(quote.engagement).toLocaleString()} engagements</div> : null}
         </div>
       ))}
     </div>
@@ -499,6 +570,163 @@ export function VerdictColumns({ columns }) {
         </div>
       ))}
     </div>
+  );
+}
+
+/** Word-boundary-safe label truncation with an ellipsis; never cuts mid-word. */
+function truncateLabel(text, chars) {
+  const s = String(text || "");
+  if (s.length <= chars) return s;
+  return s.slice(0, chars).replace(/\s+\S*$/, "") + "…";
+}
+
+const SENTIMENT_R = 68;
+const SENTIMENT_CIRC = 2 * Math.PI * SENTIMENT_R;
+const SENTIMENT_COLOR = { pos: "var(--pos)", neg: "var(--neg)", neu: "var(--neu)" };
+
+/**
+ * Three-slice hand-drawn donut for a fixed pos/neg/neu sentiment split.
+ * Same stroke-dasharray/dashoffset technique as wg-blocks.jsx's `ShareDonut`,
+ * but with three hardcoded tone colours instead of a category palette.
+ */
+export function SentimentDonut({ rows }) {
+  if (!rows?.length) return null;
+  const total = rows.reduce((a, r) => a + (Number(r.pct) || 0), 0) || 1;
+  const lead = rows.reduce((a, r) => (Number(r.pct) > Number(a.pct) ? r : a), rows[0]);
+  let off = 0;
+  return (
+    <div className="donut">
+      <svg viewBox="0 0 170 170" role="img" aria-label={rows.map((r) => `${r.name} ${r.pct}%`).join(", ")}>
+        {rows.map((r) => {
+          const color = SENTIMENT_COLOR[r.tone] || SENTIMENT_COLOR.neu;
+          const len = (r.pct / total) * SENTIMENT_CIRC, vis = Math.max(len - 2, 0);
+          const seg = (
+            <circle
+              key={r.name}
+              className="seg"
+              r={SENTIMENT_R}
+              cx={85}
+              cy={85}
+              fill="none"
+              stroke={color}
+              strokeWidth={20}
+              strokeDasharray={`${vis} ${SENTIMENT_CIRC - vis}`}
+              strokeDashoffset={-off}
+              transform="rotate(-90 85 85)"
+            >
+              <title>{`${r.name}: ${r.pct}%`}</title>
+            </circle>
+          );
+          off += len;
+          return seg;
+        })}
+        <text className="center" x={85} y={82} textAnchor="middle">
+          {lead.pct}%
+        </text>
+        <text className="center-l" x={85} y={100} textAnchor="middle">
+          {String(lead.name).slice(0, 14)}
+        </text>
+      </svg>
+      <div className="legend">
+        {rows.map((r) => (
+          <span key={r.name}>
+            <span className="n">
+              <i style={{ background: SENTIMENT_COLOR[r.tone] || SENTIMENT_COLOR.neu }} />
+              {r.name}
+            </span>
+            <span className="v">
+              {r.pct}%{r.count != null ? ` · ${r.count}` : ""}
+            </span>
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/** Generic multi-category donut (unlike SentimentDonut, colors aren't tone-locked
+ * to pos/neg/neutral) — for splits like "share of conversation by pillar/topic". */
+export function CategoryDonut({ rows, colors }) {
+  if (!rows?.length) return null;
+  const total = rows.reduce((a, r) => a + (Number(r.pct) || 0), 0) || 1;
+  const lead = rows.reduce((a, r) => (Number(r.pct) > Number(a.pct) ? r : a), rows[0]);
+  let off = 0;
+  return (
+    <div className="donut">
+      <svg viewBox="0 0 170 170" role="img" aria-label={rows.map((r) => `${r.name} ${r.pct}%`).join(", ")}>
+        {rows.map((r, i) => {
+          const color = colors?.[i % (colors.length || 1)] || SENTIMENT_COLOR.neu;
+          const len = (r.pct / total) * SENTIMENT_CIRC, vis = Math.max(len - 2, 0);
+          const seg = (
+            <circle
+              key={r.name}
+              className="seg"
+              r={SENTIMENT_R}
+              cx={85}
+              cy={85}
+              fill="none"
+              stroke={color}
+              strokeWidth={20}
+              strokeDasharray={`${vis} ${SENTIMENT_CIRC - vis}`}
+              strokeDashoffset={-off}
+              transform="rotate(-90 85 85)"
+            >
+              <title>{`${r.name}: ${r.pct}%`}</title>
+            </circle>
+          );
+          off += len;
+          return seg;
+        })}
+        <text className="center" x={85} y={82} textAnchor="middle">
+          {lead.pct}%
+        </text>
+        <text className="center-l" x={85} y={100} textAnchor="middle">
+          {truncateLabel(lead.name, 16)}
+        </text>
+      </svg>
+      <div className="legend">
+        {rows.map((r, i) => (
+          <span key={r.name}>
+            <span className="n">
+              <i style={{ background: colors?.[i % (colors.length || 1)] || SENTIMENT_COLOR.neu }} />
+              {r.name}
+            </span>
+            <span className="v">
+              {r.pct}%{r.count != null ? ` · ${r.count}` : ""}
+            </span>
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+const PCT_KEYS = new Set(["competitor_share", "brand_share", "gap"]);
+
+/** Plain HTML table for the whitespace/gap rows — no sorting, no interaction. */
+export function MatrixTable({ rows, columns }) {
+  if (!rows?.length || !columns?.length) return null;
+  return (
+    <table className="matrix-table">
+      <thead>
+        <tr>
+          {columns.map((c) => (
+            <th key={c.key}>{c.label}</th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {rows.map((row, i) => (
+          // eslint-disable-next-line react/no-array-index-key -- rows have no stable id
+          <tr key={row.topic || i}>
+            {columns.map((c) => {
+              const v = row[c.key];
+              return <td key={c.key}>{PCT_KEYS.has(c.key) && v != null && v !== "" ? `${v}%` : v}</td>;
+            })}
+          </tr>
+        ))}
+      </tbody>
+    </table>
   );
 }
 

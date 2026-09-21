@@ -28,6 +28,30 @@ export const TIER1_LENSES = [
     image: IMG('1451187580459-43490279c0fa'),
   },
   {
+    key: 'social_research',
+    label: 'Social Research',
+    description: 'Brand perception, competitive and cultural landscape, occasions, motivations and cultural spaces — a full social research read on your brand.',
+    image: IMG('1553877522-43269d4ea984'),
+  },
+  {
+    key: 'social_listening',
+    label: 'Social Listening',
+    description: 'Overall expressions, conversation settings, occasion usage and a deep dive on your brand’s top conversation pillar.',
+    image: IMG('1519389950473-47ba0277781c'),
+  },
+  {
+    key: 'social_audit',
+    label: 'Social Audit',
+    description: 'Conversation landscape across fixed research pillars, each with its own themes, sentiment, top engaging conversations and influencer voices.',
+    image: IMG('1503676260728-1c00da094a0b'),
+  },
+  {
+    key: 'pr_research',
+    label: 'PR Research',
+    description: 'Editorial coverage compared before and after a key shift — sentiment, themes, top authors and publications, and audience segments.',
+    image: IMG('1504711434969-e33886168f5c'),
+  },
+  {
     key: 'advanced_metrics',
     label: 'Advanced Metrics',
     description: 'Track emerging themes and shifting audience priorities to reveal where conversations are heading before your competitors do.',
@@ -205,6 +229,18 @@ export const TIER2_LENSES = {
   ],
   llm_audit: [
     { label: 'Congruence & Content Intelligence', description: 'Sources and voices driving the brand narrative across LLMs, how each LLM interprets it, and the gap to brand intent.', route: 'congruence', image: IMG('1677442136019-21780ecad995') },
+  ],
+  social_research: [
+    { label: 'Social Research', description: 'The full six-part social research read on your brand.', route: 'socialresearch', image: IMG('1553877522-43269d4ea984') },
+  ],
+  social_listening: [
+    { label: 'Social Listening', description: 'Overall expressions, conversation settings, occasion usage and an expression deep dive.', route: 'sociallistening', image: IMG('1519389950473-47ba0277781c') },
+  ],
+  social_audit: [
+    { label: 'Social Audit', description: 'Conversation landscape, three research pillars, top engaging conversations, influencer voices and whitespaces.', route: 'socialaudit', image: IMG('1503676260728-1c00da094a0b') },
+  ],
+  pr_research: [
+    { label: 'PR Research', description: 'Editorial analysis, key authors and publications, and audience profile, compared across two periods.', route: 'prresearch', image: IMG('1504711434969-e33886168f5c') },
   ],
 }
 

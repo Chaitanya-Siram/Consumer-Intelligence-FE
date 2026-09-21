@@ -48,6 +48,10 @@ import ShiftingAudiencePrioritiesScreen from "./screens/ShiftingAudiencePrioriti
 import PerceptionAnalysisScreen from "./screens/PerceptionAnalysisScreen.jsx";
 import DominantNarrativesScreen from "./screens/DominantNarrativesScreen.jsx";
 import BrandPerceptionScreen from "./screens/BrandPerceptionScreen.jsx";
+import PrResearchScreen from "./screens/PrResearchScreen.jsx";
+import SocialAuditScreen from "./screens/SocialAuditScreen.jsx";
+import SocialListeningScreen from "./screens/SocialListeningScreen.jsx";
+import SocialResearchScreen from "./screens/SocialResearchScreen.jsx";
 import AudienceExpectationScreen from "./screens/AudienceExpectationScreen.jsx";
 import BrandMessagingScreen from "./screens/BrandMessagingScreen.jsx";
 import BrandPerformanceScreen from "./screens/BrandPerformanceScreen.jsx";
@@ -1343,6 +1347,67 @@ function BrandPerceptionRoute() {
   );
 }
 
+// Social Research (Tier 1 pillar with a single Tier-2 screen, 7 tabs).
+function SocialResearchRoute() {
+  return (
+    <CIDashboardRoute activeTab="social_research">
+      {({ chartsData, chartsLoading, chartsError, onBack }) => (
+        <SocialResearchScreen
+          chartsData={chartsData}
+          chartsLoading={chartsLoading}
+          chartsError={chartsError}
+          onBack={onBack}
+        />
+      )}
+    </CIDashboardRoute>
+  );
+}
+
+function SocialListeningRoute() {
+  return (
+    <CIDashboardRoute activeTab="social_listening">
+      {({ chartsData, chartsLoading, chartsError, onBack }) => (
+        <SocialListeningScreen
+          chartsData={chartsData}
+          chartsLoading={chartsLoading}
+          chartsError={chartsError}
+          onBack={onBack}
+        />
+      )}
+    </CIDashboardRoute>
+  );
+}
+
+function SocialAuditRoute() {
+  return (
+    <CIDashboardRoute activeTab="social_audit">
+      {({ chartsData, chartsLoading, chartsError, onBack }) => (
+        <SocialAuditScreen
+          chartsData={chartsData}
+          chartsLoading={chartsLoading}
+          chartsError={chartsError}
+          onBack={onBack}
+        />
+      )}
+    </CIDashboardRoute>
+  );
+}
+
+function PrResearchRoute() {
+  return (
+    <CIDashboardRoute activeTab="pr_research">
+      {({ chartsData, chartsLoading, chartsError, onBack }) => (
+        <PrResearchScreen
+          chartsData={chartsData}
+          chartsLoading={chartsLoading}
+          chartsError={chartsError}
+          onBack={onBack}
+        />
+      )}
+    </CIDashboardRoute>
+  );
+}
+
 // Whitespace & Gap Analysis → three Tier 2 storyboards.
 function WgRoute({ activeTab, Screen }) {
   return (
@@ -1714,6 +1779,70 @@ export default function App() {
             element={
               <ProtectedRoute>
                 <BrandPerceptionRoute />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/:projectId/sessions/:sessionId/social-research"
+            element={
+              <ProtectedRoute>
+                <SocialResearchRoute />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/:projectId/sessions/:sessionId/social-research/:tab"
+            element={
+              <ProtectedRoute>
+                <SocialResearchRoute />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/:projectId/sessions/:sessionId/social-listening"
+            element={
+              <ProtectedRoute>
+                <SocialListeningRoute />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/:projectId/sessions/:sessionId/social-listening/:tab"
+            element={
+              <ProtectedRoute>
+                <SocialListeningRoute />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/:projectId/sessions/:sessionId/social-audit"
+            element={
+              <ProtectedRoute>
+                <SocialAuditRoute />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/:projectId/sessions/:sessionId/social-audit/:tab"
+            element={
+              <ProtectedRoute>
+                <SocialAuditRoute />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/:projectId/sessions/:sessionId/pr-research"
+            element={
+              <ProtectedRoute>
+                <PrResearchRoute />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/:projectId/sessions/:sessionId/pr-research/:tab"
+            element={
+              <ProtectedRoute>
+                <PrResearchRoute />
               </ProtectedRoute>
             }
           />
