@@ -18,17 +18,37 @@
  * Chart, which is the same instance react-chartjs-2 draws with.
  */
 import Chart from "chart.js/auto";
+import { countryIso, flagUrl } from "../../utils/countryFlags.jsx";
 import { platformLogoUrl } from "./PlatformIcon.jsx";
 
 const PAD = "  ";
 const MAX_ICON = 16;
 
 const brandLogos = new Map();
+const session = { brand: null, competitors: [] };
+
+/** The session's primary brand and its competitors, as named in the charts payload. */
+export function sessionBrands() {
+  return session;
+}
+
+/** Fired after logos are registered, so components drawn before the charts payload arrived can redraw. */
+export const LOGOS_REGISTERED_EVENT = "ci-logos-registered";
 
 /** Register every `meta.logos` map in a charts payload (any lens). */
 export function registerBrandLogos(chartsData) {
+  registerLogoMaps(chartsData);
+  if (typeof window !== "undefined") window.dispatchEvent(new Event(LOGOS_REGISTERED_EVENT));
+}
+
+function registerLogoMaps(chartsData) {
   if (!chartsData || typeof chartsData !== "object") return;
   for (const story of Object.values(chartsData)) {
+    const meta = story?.meta;
+    if (meta?.brand) session.brand = meta.brand;
+    if (Array.isArray(meta?.competitors) && meta.competitors.length) {
+      session.competitors = meta.competitors.map((c) => (typeof c === "string" ? c : c?.name)).filter(Boolean);
+    }
     const logos = story?.meta?.logos;
     if (!logos || typeof logos !== "object") continue;
     for (const [brand, url] of Object.entries(logos)) {
@@ -53,6 +73,8 @@ function iconFor(label, explicit) {
   if (explicit && explicit[text]) return explicit[text];
   const brand = brandLogos.get(text.toLowerCase());
   if (brand) return brand;
+  const country = countryIso(text);
+  if (country) return flagUrl(country);
   return platformLogoUrl(text);
 }
 

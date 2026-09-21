@@ -3,8 +3,8 @@
  * and influencer cards) that don't already exist generically in blocks.jsx /
  * sr-blocks.jsx. Class names here are the contract with sa.css.
  */
-import BrandLogo from "./BrandLogo.jsx";
-import BannerMedia from "./bannerMedia.jsx";
+import BrandLogo, { avatarSrc } from "./BrandLogo.jsx";
+import BannerMedia, { bannerTopic } from "./bannerMedia.jsx";
 import { Rich, SecHead, AppendixColumns, JumpCards } from "./sr-blocks.jsx";
 
 export { Rich, SecHead, AppendixColumns, JumpCards };
@@ -16,7 +16,7 @@ export { Rich, SecHead, AppendixColumns, JumpCards };
 export function SaBanner({ banner = {}, variant = "b-navy", brand, logos }) {
   return (
     <div className={`tbanner ${variant}`}>
-      <BannerMedia image={banner.image} topic={banner.eyebrow || banner.headline} />
+      <BannerMedia image={banner.image} topic={bannerTopic(banner)} />
       <div className="banner-tint" />
       <div className="banner-inner">
         {brand ? (
@@ -87,7 +87,7 @@ export function InfluencerCards({ influencers, logos }) {
         <div className="card influencer-card" key={inf.author}>
           <div className="influencer-head">
             <div className="influencer-id">
-              <BrandLogo brand={inf.author} logos={logos} photoUrl={inf.photo_url} size={36} rounded={999} />
+              <BrandLogo brand={inf.author} logos={logos} photoUrl={avatarSrc(inf)} size={36} rounded={999} />
               <div>
                 <div className="influencer-name">{inf.author}</div>
                 <div className="influencer-meta">

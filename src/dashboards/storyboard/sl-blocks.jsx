@@ -9,7 +9,7 @@
  * sharing Rich/SecHead with every other lens-blocks file.
  */
 import BrandLogo from "./BrandLogo.jsx";
-import BannerMedia, { useBannerImage } from "./bannerMedia.jsx";
+import BannerMedia, { bannerTopic, useBannerImage } from "./bannerMedia.jsx";
 import { Rich, SecHead } from "./pa-blocks.jsx";
 import { AppendixColumns, JumpCards } from "./sr-blocks.jsx";
 
@@ -30,7 +30,7 @@ function CardThumb({ topic }) {
 export function SlBanner({ banner = {}, variant = "b-purple", brand, logos }) {
   return (
     <div className={`tbanner ${variant}`}>
-      <BannerMedia image={banner.image} topic={banner.eyebrow || banner.headline} />
+      <BannerMedia image={banner.image} topic={bannerTopic(banner)} />
       <div className="banner-tint" />
       <div className="banner-inner">
         {brand ? (

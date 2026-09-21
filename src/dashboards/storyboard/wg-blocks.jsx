@@ -7,6 +7,7 @@
  * with a merged logo map (logos.js). Class names are the contract with wg.css.
  * `Rich`, `SecHead`, `SummaryPanel` are shared with pa-blocks.
  */
+import { FlagText } from "../../utils/countryFlags.jsx";
 import BrandLogo from "./BrandLogo.jsx";
 import BannerMedia from "./bannerMedia.jsx";
 import { Rich } from "./pa-blocks.jsx";
@@ -28,13 +29,13 @@ export function WgBanner({ banner = {}, variant = "b-purple" }) {
             {banner.eyebrow}
           </div>
         ) : null}
-        <div className="b-title disp">{banner.headline}</div>
-        {banner.sub ? <div className="b-sub">{banner.sub}</div> : null}
+        <div className="b-title disp"><FlagText text={banner.headline} size={24} /></div>
+        {banner.sub ? <div className="b-sub"><FlagText text={banner.sub} /></div> : null}
         {banner.stats?.length ? (
           <div className="b-stats">
             {banner.stats.map((s) => (
               <div className="b-stat" key={s.label}>
-                <div className="v">{s.value}</div>
+                <div className="v"><FlagText text={s.value} size={26} /></div>
                 <div className="l">{s.label}</div>
               </div>
             ))}

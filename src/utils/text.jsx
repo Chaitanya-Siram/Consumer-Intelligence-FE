@@ -19,6 +19,7 @@
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { cn } from "../lib/utils";
+import { isFlagSrc, withCountryFlags } from "./countryFlags.jsx";
 
 function parseCssRules(val) {
   if (!val) return {};
@@ -93,6 +94,14 @@ export function Rich({
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         components={{
+          // Flags added by withCountryFlags sit inline at text size; any other image renders as authored.
+          img: ({ src, alt }) =>
+            isFlagSrc(src) ? (
+              <img src={src} alt="" width="16" height="16" loading="lazy" referrerPolicy="no-referrer" style={{ display: "inline-block", width: "1.05em", height: "1.05em", margin: "0 0.15em 0 0.25em", verticalAlign: "-0.15em" }} />
+            ) : (
+              <img src={src} alt={alt} loading="lazy" />
+            ),
+
           h1: ({ children }) => (
             <h1
               className={cn("text-3xl font-bold mb-6", className)}
@@ -171,7 +180,7 @@ export function Rich({
           hr: () => <hr className={cn("my-8 border-gray-200")} />,
         }}
       >
-        {text}
+        {withCountryFlags(text)}
       </ReactMarkdown>
     </div>
   );

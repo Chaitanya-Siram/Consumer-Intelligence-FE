@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 
 import { Rich } from "../../utils/text.jsx";
+import { FlagText } from "../../utils/countryFlags.jsx";
 import { BannerContext } from "./bannerMedia.jsx";
+import CaptureLayer from "./CaptureLayer.jsx";
 import "./storyboard-base.css";
 
 /**
@@ -143,6 +145,7 @@ export default function StoryboardShell({
     <BannerContext.Provider value={bannerContext || {}}>
     <div className={`sb-lens ${scope}`}>
       {progress ? <ScrollProgress /> : null}
+      <CaptureLayer />
 
       <div className="nav-wrap">
         <div className="nav-inner">
@@ -166,7 +169,7 @@ export default function StoryboardShell({
                 onClick={() => onTab(tab.id)}
               >
                 <span className="tdot" />
-                {tab.label}
+                <FlagText text={tab.label} />
               </button>
             ))}
           </div>

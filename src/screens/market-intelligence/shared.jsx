@@ -14,6 +14,7 @@ import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 import am5geodata_worldLow from "@amcharts/amcharts5-geodata/worldLow";
 
 import StoryBrandLogo from "../../dashboards/storyboard/BrandLogo.jsx";
+import { countryIso } from "../../utils/countryFlags.jsx";
 import { brandLogoUrl } from "../../dashboards/storyboard/chartAxisIcons.js";
 
 export { default as PlatformIcon } from "../../dashboards/storyboard/PlatformIcon.jsx";
@@ -106,7 +107,7 @@ export function RegionFlag({ iso, size = 20 }) {
 export function RegionLabel({ name, iso, size = 20, style }) {
   return (
     <span style={{ display: "inline-flex", alignItems: "center", gap: 6, ...style }}>
-      <RegionFlag iso={iso} size={size} />
+      <RegionFlag iso={iso || countryIso(name)} size={size} />
       <span>{name}</span>
     </span>
   );

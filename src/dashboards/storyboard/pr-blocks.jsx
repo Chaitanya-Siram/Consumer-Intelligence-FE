@@ -3,8 +3,8 @@
  * selector) that don't already exist generically in blocks.jsx / sr-blocks.jsx.
  * Class names here are the contract with pr.css.
  */
-import BrandLogo from "./BrandLogo.jsx";
-import BannerMedia from "./bannerMedia.jsx";
+import BrandLogo, { avatarSrc } from "./BrandLogo.jsx";
+import BannerMedia, { bannerTopic } from "./bannerMedia.jsx";
 import { AppendixColumns, JumpCards, Rich, SecHead, ThemeShareCards } from "./sr-blocks.jsx";
 
 export { AppendixColumns, JumpCards, Rich, SecHead, ThemeShareCards };
@@ -36,7 +36,7 @@ export function RankTable({ rows, columns, logos }) {
               <td key={c.key}>
                 {c.logo ? (
                   <span className="rank-name">
-                    <BrandLogo brand={row[c.logoKey || c.key]} logos={logos} photoUrl={c.key === "name" ? row.photo_url : null} size={20} rounded={c.round ?? 6} />
+                    <BrandLogo brand={row[c.logoKey || c.key]} logos={logos} photoUrl={c.key === "name" ? avatarSrc(row) : null} size={20} rounded={c.round ?? 6} />
                     {row[c.key]}
                   </span>
                 ) : (
@@ -55,7 +55,7 @@ export function RankTable({ rows, columns, logos }) {
 export function PrBanner({ banner = {}, variant = "b-navy", brand, logos }) {
   return (
     <div className={`tbanner ${variant}`}>
-      <BannerMedia image={banner.image} topic={banner.eyebrow || banner.headline} />
+      <BannerMedia image={banner.image} topic={bannerTopic(banner)} />
       <div className="banner-tint" />
       <div className="banner-inner">
         {brand ? (

@@ -2,6 +2,12 @@ import { create } from 'zustand'
 
 export const useThemes = create((set) => {
   const initialTheme = typeof window !== 'undefined' ? (localStorage.getItem('theme') || 'light') : 'light';
+  // setDark/toggleTheme both apply data-theme, but nothing applied it for this
+  // initial read — a page load (or deep link) after a prior toggle rendered in
+  // light CSS while the toggle UI itself already showed dark. Match on load too.
+  if (typeof window !== 'undefined') {
+    document.documentElement.setAttribute('data-theme', initialTheme);
+  }
   return {
     dark: initialTheme === 'dark',
     setDark: (isDark) => {
