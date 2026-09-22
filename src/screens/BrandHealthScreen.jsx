@@ -23,6 +23,7 @@ import {
   TrendLine,
 } from "../dashboards/storyboard/health-charts.jsx";
 import BrandLogo from "../dashboards/storyboard/BrandLogo.jsx";
+import { useVerifiedImage } from "../dashboards/storyboard/bannerMedia.jsx";
 import { Rich } from "../utils/text.jsx";
 import ivWordmark from "../assets/images/infovision-wordmark.png";
 import "../dashboards/storyboard/health.css";
@@ -93,12 +94,14 @@ function Card({ title, sub, className = "", onAsk, children }) {
  * overlay so the banner carries the brand's own imagery, not a bare gradient.
  */
 function TabHeroImg({ src }) {
-  if (!src) return null;
+  const [failed, setFailed] = useState(false);
+  if (!src || failed) return null;
   return (
     <img
       src={src}
       alt=""
       aria-hidden="true"
+      onError={() => setFailed(true)}
       style={{
         position: "absolute",
         inset: 0,
@@ -109,6 +112,16 @@ function TabHeroImg({ src }) {
       }}
     />
   );
+}
+
+/** A dimension card's photo strip: a CSS `background-image` has no error
+ * event of its own, so a dead link (a CDN that rotated its asset, a host
+ * that blocks hotlinking) would otherwise just show nothing with no way to
+ * fall back — this verifies the image loads before trusting it, and falls
+ * back to the card's own gradient when it doesn't. */
+function DimIcon({ image, gradient }) {
+  const url = useVerifiedImage(image);
+  return <div className="dim-nav-icon" style={url ? { backgroundImage: `url(${url})` } : { background: gradient }} />;
 }
 
 /** The panel a card's Insights button opens. */
@@ -382,14 +395,7 @@ export default function BrandHealthScreen({ chartsData, chartsLoading, chartsErr
                     >
                       {/* The photo belongs on the icon strip, not the card: the body
                           below it stays white so the score stays legible. */}
-                      <div
-                        className="dim-nav-icon"
-                        style={
-                          d.image
-                            ? { backgroundImage: `url(${d.image})` }
-                            : { background: `linear-gradient(135deg, ${d.color}, ${d.color}bb)` }
-                        }
-                      />
+                      <DimIcon image={d.image} gradient={`linear-gradient(135deg, ${d.color}, ${d.color}bb)`} />
                       <div className="dim-nav-score">{d.score}</div>
                       <div className="dim-nav-name">{d.name}</div>
                       {(() => {
@@ -419,14 +425,7 @@ export default function BrandHealthScreen({ chartsData, chartsLoading, chartsErr
                       role="button"
                       tabIndex={0}
                     >
-                      <div
-                        className="dim-nav-icon"
-                        style={
-                          d.image
-                            ? { backgroundImage: `url(${d.image})` }
-                            : { background: `linear-gradient(135deg, ${d.color}, ${d.color}bb)` }
-                        }
-                      />
+                      <DimIcon image={d.image} gradient={`linear-gradient(135deg, ${d.color}, ${d.color}bb)`} />
                       <div className="dim-nav-score">{d.score}</div>
                       <div className="dim-nav-name">{d.name}</div>
                       {(() => {
@@ -452,17 +451,9 @@ export default function BrandHealthScreen({ chartsData, chartsLoading, chartsErr
                     role="button"
                     tabIndex={0}
                   >
-                    <div
-                      className="dim-nav-icon"
-                      style={
-                        dimensions.find((d) => d.image)
-                          ? {
-                              backgroundImage: `url(${
-                                [...dimensions].reverse().find((d) => d.image).image
-                              })`,
-                            }
-                          : { background: "linear-gradient(135deg,#1c7c9c,#1c7c9cbb)" }
-                      }
+                    <DimIcon
+                      image={[...dimensions].reverse().find((d) => d.image)?.image}
+                      gradient="linear-gradient(135deg,#1c7c9c,#1c7c9cbb)"
                     />
                     <div className="dim-nav-score">{competitive.tracked}</div>
                     <div className="dim-nav-name">Competitors Tracked</div>
@@ -482,13 +473,9 @@ export default function BrandHealthScreen({ chartsData, chartsLoading, chartsErr
                     role="button"
                     tabIndex={0}
                   >
-                    <div
-                      className="dim-nav-icon"
-                      style={
-                        dimensions.find((d) => d.image)
-                          ? { backgroundImage: `url(${dimensions.find((d) => d.image).image})` }
-                          : { background: "linear-gradient(135deg,#702082,#702082bb)" }
-                      }
+                    <DimIcon
+                      image={dimensions.find((d) => d.image)?.image}
+                      gradient="linear-gradient(135deg,#702082,#702082bb)"
                     />
                     <div className="dim-nav-score">
                       {competitive.rank ? `#${competitive.rank}` : "\u2014"}

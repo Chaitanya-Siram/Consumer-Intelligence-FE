@@ -49,7 +49,7 @@ export default function CongruenceContentScreen({ chartsData, chartsLoading, cha
         <WgBanner banner={overview?.banner} variant={BANNER_VARIANT.t1} />
         <div className="sec">
           <SecHead eyebrow="HOW IT WORKS" title="Brand content, as perceived by different LLMs" note={overview?.note} />
-          <Flow inputs={overview?.inputs} llms={meta.llms} datasets={overview?.datasets} />
+          <Flow inputs={overview?.inputs} llms={meta.llms} datasets={overview?.datasets} logos={logos} />
         </div>
         <div className="sec">
           <SecHead eyebrow="INSIGHTS FRAMEWORK" title="Three stages, from sources to the delta" note="Each stage is a tab above. Questions, method and deliverables per stage." />
@@ -71,7 +71,7 @@ export default function CongruenceContentScreen({ chartsData, chartsLoading, cha
             <div className="stack">
               <div className="card lg">
                 <div className="card-title">Source types</div>
-                <BarList rows={analysis?.source_types} color="var(--c1)" />
+                <BarList rows={analysis?.source_types} logos={logos} color="var(--c1)" />
               </div>
               {analysis?.concentration ? (
                 <div className="card">

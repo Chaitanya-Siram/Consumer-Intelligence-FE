@@ -24,6 +24,7 @@ import { prettyFileName } from "../utils/files.js";
 import { chartsWsUrl } from "../api/charts.js";
 import {
   ciWsUrl,
+  MI_LENS_KEYS,
   sessionHasCI,
   sessionHasMI,
 } from "../api/consumerIntelligence.js";
@@ -1601,16 +1602,29 @@ export default function ReviewScreen({
           return;
         }
         switch (msg.type) {
-          case "start":
+          case "start": {
             setJob((j) => ({ ...j, totalArticles: msg.total_articles || 0 }));
+            // `msg.lenses` is the backend's fully-expanded CI lens-key list (one Tier 1
+            // pillar can expand to several, e.g. brand_intelligence -> 4 keys), so its
+            // length overcounts what the user actually picked. Count the distinct Tier 1
+            // selections from the workflow itself instead — same source DashboardsScreen
+            // already reads for its "one card per Tier 1 pillar" count.
+            // Media Intelligence lenses live in the same workflow but are built by
+            // a different stream, so they are not part of this "consumer-intelligence" count.
+            const tier1Count = new Set(
+              (session?.workflow?.nodes || [])
+                .filter((n) => n.type === "analysis" && n.data?.lens && !MI_LENS_KEYS.includes(n.data.lens))
+                .map((n) => n.data.lens),
+            ).size;
             push(
               kind === "ci"
-                ? `Building ${(msg.lenses || []).length} consumer-intelligence lens${(msg.lenses || []).length === 1 ? "" : "es"} across ${msg.total_articles} articles…`
+                ? `Building ${tier1Count} consumer-intelligence lens${tier1Count === 1 ? "" : "es"} across ${msg.total_articles} articles…`
                 : isCharts
                   ? `Crunching ${msg.total_articles} articles across ${(msg.dashboards || []).length} dashboards…`
                 : `Tagging ${msg.total_articles} articles…`,
             );
             break;
+          }
           case "batch": // tagging only
             setJob((j) => ({
               ...j,

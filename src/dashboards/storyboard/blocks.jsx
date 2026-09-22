@@ -533,11 +533,16 @@ function safePostUrl(url) {
 /** "In their words" shows the five strongest posts; the backend already orders them. */
 const TOP_POSTS = 5;
 
-export function Quotes({ quotes, logos }) {
+/** `initial` posts are shown; with `expandable`, a button reveals the rest. */
+export function Quotes({ quotes, logos, initial = TOP_POSTS, expandable = false }) {
+  const [showAll, setShowAll] = useState(false);
   if (!quotes?.length) return null;
+  const hidden = quotes.length - initial;
+  const shown = expandable && showAll ? quotes : quotes.slice(0, initial);
   return (
+    <>
     <div className="vb-grid reveal d1">
-      {quotes.slice(0, TOP_POSTS).map((quote) => {
+      {shown.map((quote) => {
         const postUrl = safePostUrl(quote.url);
         const hasEvidence = quote.embed || quote.screenshot_key || quote.preview || quote.platform;
         return (
@@ -551,6 +556,12 @@ export function Quotes({ quotes, logos }) {
         );
       })}
     </div>
+    {expandable && hidden > 0 ? (
+      <button type="button" className="vb-more" aria-expanded={showAll} onClick={() => setShowAll((open) => !open)}>
+        {showAll ? "Show fewer posts" : `Show ${hidden} more post${hidden === 1 ? "" : "s"}`}
+      </button>
+    ) : null}
+    </>
   );
 }
 

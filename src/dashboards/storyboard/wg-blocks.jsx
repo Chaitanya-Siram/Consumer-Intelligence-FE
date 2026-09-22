@@ -77,7 +77,19 @@ export function BarList({ rows, logos, color = "var(--c1)", compact = false }) {
       {rows.map((r) => (
         <div className="row" key={r.name} title={`${r.name}: ${r.pct}%`}>
           <div className={`lbl${r.is_brand ? " hl" : ""}`}>
-            {logos && !/^others?$/i.test(r.name) ? <BrandLogo brand={r.name} logos={logos} size={20} rounded={6} /> : null}
+            {logos && r.sources?.length ? (
+              // A category ("News & trade press") has no logo of its own: show the
+              // icons of the outlets it is made of, overlapped like an avatar stack.
+              <span className="lbl-icons" style={{ display: "inline-flex", flexShrink: 0 }}>
+                {r.sources.map((source, i) => (
+                  <span key={source} title={source} style={{ display: "inline-flex", marginLeft: i ? -7 : 0, borderRadius: 999, boxShadow: "0 0 0 2px var(--surface, #fff)" }}>
+                    <BrandLogo brand={source} logos={logos} size={20} rounded={999} />
+                  </span>
+                ))}
+              </span>
+            ) : logos && !/^others?$/i.test(r.name) ? (
+              <BrandLogo brand={r.name} logos={logos} size={20} rounded={6} />
+            ) : null}
             {r.name}
           </div>
           <div className="track">

@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { tier1Label, tier1Image, tier2Options } from "../workflow/tierLensData.js";
 import { tileFor } from "../components/Icons.jsx";
 import { paths } from "../router/nav.js";
+import { useStockImage } from "../dashboards/storyboard/bannerMedia.jsx";
+import { hasSavedGraph, restoreNodes } from "../workflow/workflowUtils.js";
 
 // Tier 2 gallery for one of the "Our Core Offering: Intelligent Architecture"
 // Tier 1 lenses. Most sub-lenses are UI/navigation only for now — there is no
@@ -10,6 +12,23 @@ import { paths } from "../router/nav.js";
 // and a "coming soon" toast. A sub-lens carrying a `route` (e.g. under Brand
 // Intelligence, or Network Map Analysis) is real: it opens the existing
 // charts-backed dashboard instead, optionally on a specific `slide`.
+// A real DuckDuckGo (then Pexels) photo for this sub-lens's own label
+// replaces the static bundled/Unsplash fallback once resolved. Its own
+// component so the hook is called once per card, not a variable number of
+// times inside the gallery's .map().
+function Tier2CardArt({ image, query }) {
+  const resolved = useStockImage(query, image);
+  if (!resolved) return null;
+  return (
+    <img
+      src={resolved}
+      alt=""
+      loading="lazy"
+      style={{ width: "100%", height: "100%", objectFit: "cover" }}
+    />
+  );
+}
+
 export default function IntelLensScreen({
   tier1Key,
   selectedTier2,
@@ -24,12 +43,28 @@ export default function IntelLensScreen({
   const title = tier1Label(tier1Key);
   const image = tier1Image(tier1Key);
   const allTier2 = tier2Options(tier1Key);
-  // A cold deep-link (no navigation state) has no selection to filter by —
-  // show every sub-lens under the pillar rather than an empty page.
+  // Prefer the navigation-state selection (set on every click from the
+  // Dashboards screen). A cold deep-link (a refresh, a bookmark, a direct
+  // URL) carries no state — fall back to the session's own saved workflow
+  // instead of showing every sub-lens, so a refreshed page still reflects
+  // only what was actually selected there.
+  const workflowTier2 = (() => {
+    const wf = session?.workflow;
+    if (!hasSavedGraph(wf)) return null;
+    const node = restoreNodes(wf).find(
+      (n) => n.type === "analysis" && n.data?.lens === tier1Key,
+    );
+    return Array.isArray(node?.data?.tier2) ? node.data.tier2 : null;
+  })();
+  const effectiveTier2 =
+    Array.isArray(selectedTier2) && selectedTier2.length ? selectedTier2 : workflowTier2;
   const tier2 =
-    Array.isArray(selectedTier2) && selectedTier2.length
-      ? allTier2.filter((t2) => selectedTier2.includes(t2.label))
+    Array.isArray(effectiveTier2) && effectiveTier2.length
+      ? allTier2.filter((t2) => effectiveTier2.includes(t2.label))
       : allTier2;
+  // Same brand source DashboardsScreen.jsx uses — sub-lens card photos
+  // should show this brand, not generic stock imagery for the topic alone.
+  const cardBrand = session?.brand_keywords?.[0] || project?.name || "";
 
   return (
     <div style={{ padding: "8px 4px 64px" }}>
@@ -151,12 +186,7 @@ export default function IntelLensScreen({
                     background: "var(--bg-2, #f1f5f9)",
                   }}
                 >
-                  <img
-                    src={cardImage}
-                    alt=""
-                    loading="lazy"
-                    style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                  />
+                  <Tier2CardArt image={cardImage} query={[cardBrand, t2.label].filter(Boolean).join(" ")} />
                   <div
                     style={{
                       position: "absolute",
