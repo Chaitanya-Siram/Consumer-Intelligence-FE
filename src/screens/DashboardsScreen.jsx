@@ -373,6 +373,14 @@ export default function DashboardsScreen({
     return list;
   }, [activeNodes, chartsData]);
 
+  // Media Intelligence cards: only the lenses this session's Analysis nodes
+  // selected (or that already have chart data). A session with no lens at
+  // all still shows the full catalogue, locked, so the page is never empty.
+  const miCards = useMemo(() => {
+    const chosen = DASHBOARDS.filter((d) => isLensAvailable(d.key));
+    return chosen.length || ciCards.length ? chosen : DASHBOARDS;
+  }, [isLensAvailable, ciCards]);
+
   const handleCiCardClick = (d) => {
     if (d.comingSoon) {
       setModalDashboard({ ...d, comingSoon: true });
@@ -645,7 +653,7 @@ export default function DashboardsScreen({
           {/* Dashboards Cards Section (Kept Intact) */}
           <section className="choose">
             <div className="landing-card-grid">
-              {DASHBOARDS.map((d) => {
+              {miCards.map((d) => {
                 const { fg, Icon } = TILES[d.tile];
                 const available = isLensAvailable(d.key);
                 const statValue =
