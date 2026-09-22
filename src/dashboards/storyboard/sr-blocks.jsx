@@ -15,7 +15,7 @@
 import { useState } from "react";
 
 import BrandLogo from "./BrandLogo.jsx";
-import BannerMedia, { bannerTopic, useBannerImage } from "./bannerMedia.jsx";
+import BannerMedia, { bannerTopic, useBannerImage, useVerifiedImage } from "./bannerMedia.jsx";
 import { Card, SentimentDonut } from "./blocks.jsx";
 import { Legendary, TrajectoryChart } from "./charts.jsx";
 import { Rich, SecHead } from "./pa-blocks.jsx";
@@ -28,7 +28,8 @@ export const CAT = ["var(--c1)", "var(--c2)", "var(--c3)", "var(--c4)", "var(--c
 /** Small photo standing in for the PPT's per-card image, resolved the same
  * way tab banners already are (Pexels by topic, cached, Unsplash fallback). */
 function CardThumb({ topic }) {
-  const url = useBannerImage({ topic });
+  const resolved = useBannerImage({ topic });
+  const url = useVerifiedImage(resolved);
   if (!url) return null;
   return <div className="card-thumb" style={{ backgroundImage: `url(${url})` }} aria-hidden="true" />;
 }

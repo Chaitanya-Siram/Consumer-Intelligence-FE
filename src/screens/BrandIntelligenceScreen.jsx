@@ -76,7 +76,12 @@ function emphasize(title, em) {
  *  template sizes an <img> and a <video> identically, so a video slots in
  *  without any layout change. */
 function LeaderMedia({ media, name }) {
-  if (!media?.url) return null;
+  // A source resolved at build time (brand_video/brand_hero/DuckDuckGo) can go
+  // dead later — the CDN rotates it, or the host blocks a real browser's
+  // request even though the backend's own fetch validated it fine. On a
+  // broken image, fail quietly to no media rather than a broken-image icon.
+  const [failed, setFailed] = useState(false);
+  if (!media?.url || failed) return null;
   const boxStyle = { width: "100%", height: 200, objectFit: "cover", display: "block" };
   if (media.type === "youtube") {
     return (
@@ -90,9 +95,9 @@ function LeaderMedia({ media, name }) {
     );
   }
   if (media.type === "mp4" || media.type === "webm" || media.type === "video") {
-    return <video className="banner-video" src={media.url} controls muted playsInline style={boxStyle} />;
+    return <video className="banner-video" src={media.url} controls muted playsInline style={boxStyle} onError={() => setFailed(true)} />;
   }
-  return <img src={media.url} alt={name} loading="lazy" style={boxStyle} />;
+  return <img src={media.url} alt={name} loading="lazy" style={boxStyle} onError={() => setFailed(true)} />;
 }
 
 /** A brand's own site is far more often good for a YouTube clip than a raw
@@ -238,6 +243,10 @@ function SentimentSplit({ rows }) {
 
 function ThemePanel({ tab, active, image, logos }) {
   const leaders = tab.leaders || { items: [] };
+  // Same reasoning as LeaderMedia: a resolved URL can go dead after the build
+  // validated it. Drop it rather than show a broken-image icon.
+  const [imageFailed, setImageFailed] = useState(false);
+  const showImage = image && !imageFailed;
   return (
     <div className={`tab-panel ${active ? "active" : ""}`} style={{ paddingTop: "2rem" }}>
       <div
@@ -260,11 +269,12 @@ function ThemePanel({ tab, active, image, logos }) {
             </div>
           ) : null}
         </div>
-        {image ? (
+        {showImage ? (
           <img
             src={image}
             alt={tab.label}
             loading="lazy"
+            onError={() => setImageFailed(true)}
             style={{
               width: 340,
               height: 220,

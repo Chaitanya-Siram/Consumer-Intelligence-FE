@@ -146,6 +146,30 @@ export function useBannerImage({ image, topic }) {
   return url;
 }
 
+// url -> true/false once a real Image() probe has settled it; never re-probed.
+const verifiedCache = new Map();
+
+/** `url` once confirmed loadable, else null. For a CSS `background-image` —
+ * unlike <img>, it has no error event of its own, so a dead link (a CDN that
+ * rotated its asset, a host that blocks hotlinking) shows nothing at all
+ * with no way to notice or fall back. This probes with a real Image() first
+ * so the caller can render its own gradient/placeholder instead. */
+export function useVerifiedImage(url) {
+  const [ok, setOk] = useState(() => !!url && verifiedCache.get(url) === true);
+  useEffect(() => {
+    if (!url) { setOk(false); return undefined; }
+    const cached = verifiedCache.get(url);
+    if (cached !== undefined) { setOk(cached); return undefined; }
+    let live = true;
+    const probe = new Image();
+    probe.onload = () => { verifiedCache.set(url, true); if (live) setOk(true); };
+    probe.onerror = () => { verifiedCache.set(url, false); if (live) setOk(false); };
+    probe.src = url;
+    return () => { live = false; };
+  }, [url]);
+  return ok ? url : null;
+}
+
 const STOCK_SS_PREFIX = "sb_stock_image:";
 const stockImageMem = new Map(); // query -> resolved url, or null once tried and nothing found
 

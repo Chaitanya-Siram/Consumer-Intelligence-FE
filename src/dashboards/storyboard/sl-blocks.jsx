@@ -9,7 +9,7 @@
  * sharing Rich/SecHead with every other lens-blocks file.
  */
 import BrandLogo from "./BrandLogo.jsx";
-import BannerMedia, { bannerTopic, useBannerImage } from "./bannerMedia.jsx";
+import BannerMedia, { bannerTopic, useBannerImage, useVerifiedImage } from "./bannerMedia.jsx";
 import { Rich, SecHead } from "./pa-blocks.jsx";
 import { AppendixColumns, JumpCards } from "./sr-blocks.jsx";
 
@@ -20,7 +20,8 @@ export const CAT = ["var(--c1)", "var(--c2)", "var(--c3)", "var(--c4)", "var(--c
 /** Small photo standing in for a per-card image — same Pexels/Unsplash
  * resolution every other lens's banners and cards already use. */
 function CardThumb({ topic }) {
-  const url = useBannerImage({ topic });
+  const resolved = useBannerImage({ topic });
+  const url = useVerifiedImage(resolved);
   if (!url) return null;
   return <div className="card-thumb" style={{ backgroundImage: `url(${url})` }} aria-hidden="true" />;
 }
