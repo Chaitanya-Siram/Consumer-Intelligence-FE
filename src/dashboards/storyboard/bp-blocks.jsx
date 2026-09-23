@@ -167,9 +167,11 @@ export function Reasons({ reasons }) {
               {r.title}
               {r.pct != null ? <span className="pct">{r.pct}%</span> : null}
             </h5>
-            <p>
-              <Rich text={r.text} />
-            </p>
+            {r.text ? (
+              <p>
+                <Rich text={r.text} />
+              </p>
+            ) : null}
           </div>
         </div>
       ))}

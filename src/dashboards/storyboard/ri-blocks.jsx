@@ -41,7 +41,7 @@ export function SentimentBar({ s }) {
   return (
     <div className="sbar">
       <div style={{ width: `${s.pos}%`, background: TONE.pos }} title={`Positive ${s.pos}%`}>{s.pos >= 8 ? `${s.pos}%` : ""}</div>
-      <div className="neu" style={{ width: `${s.neu}%`, background: "var(--bg2)" }} title={`Neutral ${s.neu}%`}>{s.neu >= 8 ? `${s.neu}%` : ""}</div>
+      <div className="neu" style={{ width: `${s.neu}%`, background: "#c9cfda" }} title={`Neutral ${s.neu}%`}>{s.neu >= 8 ? `${s.neu}%` : ""}</div>
       <div style={{ width: `${s.neg}%`, background: TONE.neg }} title={`Negative ${s.neg}%`}>{s.neg >= 8 ? `${s.neg}%` : ""}</div>
     </div>
   );

@@ -100,8 +100,12 @@ export default function SocialListeningScreen({ chartsData, chartsLoading, chart
     appendix = {},
   } = story;
 
-  const tab = tabs.find((t) => t.id === activeTab) || tabs[0];
-  const otherTabs = tabs.filter((t) => t.id !== "overview");
+  // Expression Deep Dive only exists when the classifier produced something for it.
+  const hasLiteral = Boolean(expressionDeepDive.literal_vs_figurative?.length || expressionDeepDive.literal_vs_figurative_summary);
+  const hasDeepDive = hasLiteral || Boolean(expressionDeepDive.sentiment?.length) || Boolean(expressionDeepDive.figurative_settings?.length);
+  const visibleTabs = hasDeepDive ? tabs : tabs.filter((t) => t.id !== "expression_deep_dive");
+  const tab = visibleTabs.find((t) => t.id === activeTab) || visibleTabs[0];
+  const otherTabs = visibleTabs.filter((t) => t.id !== "overview");
 
   const pillarNames = (overallExpressions.pillars || []).map((p) => p.title);
   const oeActive = overallExpressions.pillar_breakdown?.[Math.min(oeIdx, (overallExpressions.pillar_breakdown?.length || 1) - 1)];
@@ -243,13 +247,15 @@ export default function SocialListeningScreen({ chartsData, chartsLoading, chart
           </div>
         ) : null}
         <div className="sec">
-          <div className="grid g2">
-            <Card title="Literal vs. figurative usage" className="lg">
-              <BarList rows={expressionDeepDive.literal_vs_figurative} />
-              {expressionDeepDive.literal_vs_figurative_summary ? (
-                <div className="comp-summary">{expressionDeepDive.literal_vs_figurative_summary}</div>
-              ) : null}
-            </Card>
+          <div className={hasLiteral ? "grid g2" : "grid"}>
+            {hasLiteral ? (
+              <Card title="Literal vs. figurative usage" className="lg">
+                <BarList rows={expressionDeepDive.literal_vs_figurative} />
+                {expressionDeepDive.literal_vs_figurative_summary ? (
+                  <div className="comp-summary">{expressionDeepDive.literal_vs_figurative_summary}</div>
+                ) : null}
+              </Card>
+            ) : null}
             <Card title="Sentiment" className="lg">
               <SentimentDonut rows={expressionDeepDive.sentiment} />
               {expressionDeepDive.sentiment_summary ? <div className="comp-summary">{expressionDeepDive.sentiment_summary}</div> : null}
@@ -300,7 +306,7 @@ export default function SocialListeningScreen({ chartsData, chartsLoading, chart
       bannerContext={{ brand: meta.brand }}
       brandName={brandName}
       subtitle="Social Listening"
-      tabs={tabs}
+      tabs={visibleTabs}
       active={tab.id}
       onTab={switchTab}
       footer={story.footer}

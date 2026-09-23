@@ -74,11 +74,30 @@ const LENSES = [
     stat: (s) => `${s.regional?.regions?.length || 0} markets covered` },
 ];
 
+// A lens whose component would only render its EmptyLens notice is left out of
+// the grid and the pager, so the reader never opens a blank page. Each predicate
+// mirrors the top-level guard inside that Lens component.
+const LENS_EMPTY = {
+  1: (s) => !s.channel_impact?.periods?.length,
+  2: (s) => !s.industry_trends?.categories?.length,
+  4: (s) => !s.volume_trendline?.months?.length,
+  5: (s) => !s.key_themes?.rows?.length,
+  6: (s) => !s.voice_of_user?.top_brands?.length && !s.voice_of_user?.product_trends?.length,
+  7: (s) => !s.brand_analysis?.share?.length,
+  8: (s) => !s.new_launches?.total,
+  9: (s) => !s.campaigns?.campaigns?.length,
+  10: (s) => !s.events?.events?.length,
+  11: (s) => !s.product_trends?.global?.length,
+  12: (s) => !s.regional?.regions?.length,
+};
+const visibleLenses = (story) => LENSES.filter((l) => !LENS_EMPTY[l.id]?.(story));
+
 const btn = { background: "#f1f5f9", border: "1px solid #e2e8f0", borderRadius: 8, padding: "7px 14px", color: "#334155", cursor: "pointer", fontSize: 13, fontFamily: "'Inter', sans-serif", fontWeight: 500 };
 
 function LensGrid({ story, onNavigate, onBack }) {
   const meta = story.meta;
   const brands = meta.brands?.length ? meta.brands : [meta.brand, ...(meta.competitors || [])].filter(Boolean);
+  const lenses = visibleLenses(story);
 
   return (
     <div style={{ minHeight: "100vh", background: "#f8fafc" }}>
@@ -100,7 +119,7 @@ function LensGrid({ story, onNavigate, onBack }) {
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
             <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, color: "#94a3b8" }}>
-              12 Intel Lenses · N={fmtCompact(meta.total_conversations)}
+              {lenses.length} Intel Lenses · N={fmtCompact(meta.total_conversations)}
             </span>
             <span style={{ background: "#dcfce7", color: "#15803d", fontSize: 11, fontWeight: 600, padding: "3px 10px", borderRadius: 20, border: "1px solid #bbf7d0" }}>● LIVE</span>
           </div>
@@ -145,7 +164,7 @@ function LensGrid({ story, onNavigate, onBack }) {
         </div>
 
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(310px, 1fr))", gap: 18 }}>
-          {LENSES.map((lens) => (
+          {lenses.map((lens, i) => (
             <button
               key={lens.id}
               type="button"
@@ -158,7 +177,7 @@ function LensGrid({ story, onNavigate, onBack }) {
                 <img src={lens.img} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                 <div style={{ position: "absolute", inset: 0, background: `linear-gradient(135deg, ${lens.color}22 0%, ${lens.color}55 100%)` }} />
                 <div style={{ position: "absolute", top: 10, left: 10, background: lens.color, color: "#fff", fontSize: 9, fontWeight: 700, letterSpacing: "0.14em", padding: "3px 8px", borderRadius: 4, fontFamily: "'JetBrains Mono', monospace" }}>{lens.tag}</div>
-                <div style={{ position: "absolute", top: 10, right: 10, background: "rgba(255,255,255,0.95)", color: lens.color, fontSize: 11, fontWeight: 700, padding: "2px 8px", borderRadius: 4, fontFamily: "'JetBrains Mono', monospace" }}>#{String(lens.id).padStart(2, "0")}</div>
+                <div style={{ position: "absolute", top: 10, right: 10, background: "rgba(255,255,255,0.95)", color: lens.color, fontSize: 11, fontWeight: 700, padding: "2px 8px", borderRadius: 4, fontFamily: "'JetBrains Mono', monospace" }}>#{String(i + 1).padStart(2, "0")}</div>
               </div>
               <div style={{ padding: "16px 18px 18px" }}>
                 <h3 style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: 19, fontWeight: 700, color: "#0f172a", margin: "0 0 5px", lineHeight: 1.2 }}>{lens.title}</h3>
@@ -177,10 +196,12 @@ function LensGrid({ story, onNavigate, onBack }) {
 }
 
 function LensDetail({ story, lensId, onHome, onNavigate }) {
-  const lens = LENSES.find((l) => l.id === lensId) || LENSES[0];
+  const lenses = visibleLenses(story);
+  const idx = Math.max(0, lenses.findIndex((l) => l.id === lensId));
+  const lens = lenses[idx] || LENSES[0];
   const { Component, color } = lens;
-  const prev = lens.id > 1 ? lens.id - 1 : null;
-  const next = lens.id < 12 ? lens.id + 1 : null;
+  const prev = idx > 0 ? lenses[idx - 1].id : null;
+  const next = idx < lenses.length - 1 ? lenses[idx + 1].id : null;
   const navBtn = (id, label, primary) => (
     <button
       type="button"
@@ -200,7 +221,7 @@ function LensDetail({ story, lensId, onHome, onNavigate }) {
           <button type="button" onClick={onHome} style={btn}>← Home</button>
           <div style={{ width: 1, height: 24, background: "#e2e8f0" }} />
           <div>
-            <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, color, letterSpacing: "0.12em" }}>LENS {String(lens.id).padStart(2, "0")} / 12</span>
+            <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, color, letterSpacing: "0.12em" }}>LENS {String(idx + 1).padStart(2, "0")} / {lenses.length}</span>
             <h2 style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: 20, fontWeight: 700, color: "#0f172a", margin: 0, letterSpacing: "0.02em" }}>{lens.title}</h2>
           </div>
         </div>
@@ -216,14 +237,14 @@ function LensDetail({ story, lensId, onHome, onNavigate }) {
 
       <div style={{ borderTop: "1px solid #e2e8f0", padding: "20px 48px", display: "flex", justifyContent: "space-between", alignItems: "center", background: "#fff" }}>
         <div style={{ display: "flex", gap: 6 }}>
-          {LENSES.map((l) => (
+          {lenses.map((l, i) => (
             <button
               type="button"
               key={l.id}
               onClick={() => onNavigate(l.id)}
               style={{ width: 30, height: 30, borderRadius: 6, border: l.id === lens.id ? `2px solid ${color}` : "1px solid #e2e8f0", background: l.id === lens.id ? `${color}15` : "#fff", color: l.id === lens.id ? color : "#94a3b8", fontSize: 11, fontWeight: 700, cursor: "pointer", fontFamily: "'JetBrains Mono', monospace" }}
             >
-              {l.id}
+              {i + 1}
             </button>
           ))}
         </div>

@@ -152,3 +152,6 @@
   --nav-bg:rgba(15,10,20,.9); --tab-active:#F1E9F6; --tab-active-fg:#0F0A14; --tab-active-dot:#5B1F73;
   --shadow-sm:0 1px 3px rgba(0,0,0,.45),0 1px 8px rgba(0,0,0,.32);
 }
+/* Cards hold only what the narrative filled: no column stretches to its neighbour's height. */
+.sb-bp .g4-8,.sb-bp .g5-7{align-items:start;}
+.sb-bp .g2,.sb-bp .g3{align-content:start;align-items:start;}

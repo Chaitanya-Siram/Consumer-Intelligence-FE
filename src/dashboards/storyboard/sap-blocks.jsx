@@ -31,7 +31,9 @@ export function IndexGauge({ index }) {
   const start = arc(0);
   const end = arc(frac);
   const full = arc(1);
-  const large = frac > 0.5 ? 1 : 0;
+  // The dial spans 180 degrees, so the filled arc is never the long way round;
+  // only a full dial (frac 1) needs the large-arc flag to disambiguate the semicircle.
+  const large = frac >= 1 ? 1 : 0;
   const delta = prior == null ? null : value - prior;
   return (
     <div className="gauge">
