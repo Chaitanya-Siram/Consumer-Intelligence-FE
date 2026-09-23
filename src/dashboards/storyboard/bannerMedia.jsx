@@ -155,19 +155,42 @@ const verifiedCache = new Map();
  * with no way to notice or fall back. This probes with a real Image() first
  * so the caller can render its own gradient/placeholder instead. */
 export function useVerifiedImage(url) {
-  const [ok, setOk] = useState(() => !!url && verifiedCache.get(url) === true);
-  useEffect(() => {
-    if (!url) { setOk(false); return undefined; }
+  return useVerifiedImageStatus(url) === "ok" ? url : null;
+}
+
+/** "ok" once `url` loaded, "failed" once it did not (or there is no url),
+ * "pending" while the probe is in flight. Callers that want a replacement
+ * photo need to tell a dead link from one still loading. */
+export function useVerifiedImageStatus(url) {
+  const [status, setStatus] = useState(() => {
+    if (!url) return "failed";
     const cached = verifiedCache.get(url);
-    if (cached !== undefined) { setOk(cached); return undefined; }
+    return cached === undefined ? "pending" : cached ? "ok" : "failed";
+  });
+  useEffect(() => {
+    if (!url) { setStatus("failed"); return undefined; }
+    const cached = verifiedCache.get(url);
+    if (cached !== undefined) { setStatus(cached ? "ok" : "failed"); return undefined; }
+    setStatus("pending");
     let live = true;
     const probe = new Image();
-    probe.onload = () => { verifiedCache.set(url, true); if (live) setOk(true); };
-    probe.onerror = () => { verifiedCache.set(url, false); if (live) setOk(false); };
+    probe.onload = () => { verifiedCache.set(url, true); if (live) setStatus("ok"); };
+    probe.onerror = () => { verifiedCache.set(url, false); if (live) setStatus("failed"); };
     probe.src = url;
     return () => { live = false; };
   }, [url]);
-  return ok ? url : null;
+  return status;
+}
+
+/** `image` once it proves loadable in this browser. When it is missing, or its
+ * host refuses the browser (hotlink protection, a rotated CDN asset), a stock
+ * photo for `query` takes its place, itself verified before use. null while
+ * probing or when nothing loads, so the caller still owns the last-resort look. */
+export function useVerifiedOrStockImage(image, query) {
+  const status = useVerifiedImageStatus(image);
+  const stock = useStockImage(status === "failed" ? query : null);
+  const stockOk = useVerifiedImage(stock);
+  return status === "ok" ? image : stockOk;
 }
 
 const STOCK_SS_PREFIX = "sb_stock_image:";

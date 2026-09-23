@@ -23,7 +23,7 @@ import {
   TrendLine,
 } from "../dashboards/storyboard/health-charts.jsx";
 import BrandLogo from "../dashboards/storyboard/BrandLogo.jsx";
-import { useVerifiedImage } from "../dashboards/storyboard/bannerMedia.jsx";
+import { useVerifiedOrStockImage } from "../dashboards/storyboard/bannerMedia.jsx";
 import { Rich } from "../utils/text.jsx";
 import ivWordmark from "../assets/images/infovision-wordmark.png";
 import "../dashboards/storyboard/health.css";
@@ -119,8 +119,10 @@ function TabHeroImg({ src }) {
  * that blocks hotlinking) would otherwise just show nothing with no way to
  * fall back — this verifies the image loads before trusting it, and falls
  * back to the card's own gradient when it doesn't. */
-function DimIcon({ image, gradient }) {
-  const url = useVerifiedImage(image);
+function DimIcon({ image, query, gradient }) {
+  // The resolved photo when this browser can load it, else a stock photo for the
+  // dimension's own label, so the strip is never a bare block of colour.
+  const url = useVerifiedOrStockImage(image, query);
   return <div className="dim-nav-icon" style={url ? { backgroundImage: `url(${url})` } : { background: gradient }} />;
 }
 
@@ -395,7 +397,7 @@ export default function BrandHealthScreen({ chartsData, chartsLoading, chartsErr
                     >
                       {/* The photo belongs on the icon strip, not the card: the body
                           below it stays white so the score stays legible. */}
-                      <DimIcon image={d.image} gradient={`linear-gradient(135deg, ${d.color}, ${d.color}bb)`} />
+                      <DimIcon image={d.image} query={`${story.meta?.brand || ""} ${d.name} customers`} gradient={`linear-gradient(135deg, ${d.color}, ${d.color}bb)`} />
                       <div className="dim-nav-score">{d.score}</div>
                       <div className="dim-nav-name">{d.name}</div>
                       {(() => {
@@ -425,7 +427,7 @@ export default function BrandHealthScreen({ chartsData, chartsLoading, chartsErr
                       role="button"
                       tabIndex={0}
                     >
-                      <DimIcon image={d.image} gradient={`linear-gradient(135deg, ${d.color}, ${d.color}bb)`} />
+                      <DimIcon image={d.image} query={`${story.meta?.brand || ""} ${d.name} customers`} gradient={`linear-gradient(135deg, ${d.color}, ${d.color}bb)`} />
                       <div className="dim-nav-score">{d.score}</div>
                       <div className="dim-nav-name">{d.name}</div>
                       {(() => {
